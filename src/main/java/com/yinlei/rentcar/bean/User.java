@@ -55,4 +55,21 @@ public class User {
 
         return Objects.hash(id, age, name);
     }
+
+    public User(Integer age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

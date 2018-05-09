@@ -17,7 +17,7 @@
 	 <section>
 			<div id="page-wrapper" class="sign-in-wrapper">
 				<div class="graphs">
-					<form class="layui-form">
+					<form class="layui-form" action="../user/register" method="post">
 					<div class="sign-up">
 						<h1>创建一个用户</h1>
 						<p class="creating">对于新用户，我们提供友好的新手指南、租车贴士以及售后服务。<br>Welcome new user!</p>
@@ -28,7 +28,7 @@
 							</div>
 							<div class="sign-up2">
 								
-									<input type="text" class="form-control" required name="phone" lay-verify="required|phone|number"/>
+									<input type="text" class="form-control" required name="phoneUser" lay-verify="required|phone|number"/>
 								
 							</div>
 							<div class="clearfix"> </div>
@@ -39,7 +39,7 @@
 							</div>
 							<div class="sign-up2">
 								
-									<input type="password" class="form-control"  required name="password" lay-verify="required|phone|number"/>
+									<input type="password" class="form-control"  required name="passwordUser" lay-verify="required"/>
 								
 							</div>
 							<div class="clearfix"> </div>
@@ -50,7 +50,7 @@
 							</div>
 							<div class="sign-up2">
 								
-									<input type="password" class="form-control"  required name="password2" lay-verify="required|phone|number"/>
+									<input type="password" class="form-control"  required name="passwordUser2" lay-verify="required"/>
 								
 							</div>
 							<div class="clearfix"> </div>
@@ -81,8 +81,11 @@
 		 
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    return false;
+		    //layer.msg(JSON.stringify(data.field));
+		    //当你在iframe页面关闭自身时
+			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.layer.close(index); //再执行关闭   
+		    return true;
 		  });
 		  
 		 

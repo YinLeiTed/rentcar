@@ -57,4 +57,22 @@ public class Otherservicetable {
 
         return Objects.hash(idOtherService, nameOtherService, priceOtherService);
     }
+
+    public Otherservicetable() {
+    }
+
+    public Otherservicetable(String nameOtherService, Integer priceOtherService) {
+
+        this.nameOtherService = nameOtherService;
+        this.priceOtherService = priceOtherService;
+    }
+
+    @Override
+    public String toString() {
+        return "Otherservicetable{" +
+                "idOtherService=" + idOtherService +
+                ", nameOtherService='" + nameOtherService + '\'' +
+                ", priceOtherService=" + priceOtherService +
+                '}';
+    }
 }

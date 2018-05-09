@@ -45,4 +45,19 @@ public class Brandcartable {
 
         return Objects.hash(idBrandCar, brandBrandCar);
     }
+
+    public Brandcartable() {
+    }
+
+    public Brandcartable(String brandBrandCar) {
+        this.brandBrandCar = brandBrandCar;
+    }
+
+    @Override
+    public String toString() {
+        return "Brandcartable{" +
+                "idBrandCar=" + idBrandCar +
+                ", brandBrandCar='" + brandBrandCar + '\'' +
+                '}';
+    }
 }

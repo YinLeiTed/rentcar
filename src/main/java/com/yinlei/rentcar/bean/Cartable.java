@@ -262,4 +262,56 @@ public class Cartable {
 
         return Objects.hash(idCar, licenseCar, carTypeCar, brandTypeCar, dailyRentCar, weeklyRentCar, monthlyRentCar, imgCar, carStoreCar, usePropertyCar, ownerCar, purchaseTimeCar, buyingUnitCar, engineDisplacementCar, fuelTankCapacityCar, colorCar, totalWeightCar, transmissionTypeCar, turboCar, maintenanceCycleCar);
     }
+
+    @Override
+    public String toString() {
+        return "Cartable{" +
+                "idCar=" + idCar +
+                ", licenseCar='" + licenseCar + '\'' +
+                ", carTypeCar='" + carTypeCar + '\'' +
+                ", brandTypeCar='" + brandTypeCar + '\'' +
+                ", dailyRentCar=" + dailyRentCar +
+                ", weeklyRentCar=" + weeklyRentCar +
+                ", monthlyRentCar=" + monthlyRentCar +
+                ", imgCar='" + imgCar + '\'' +
+                ", carStoreCar=" + carStoreCar +
+                ", usePropertyCar='" + usePropertyCar + '\'' +
+                ", ownerCar='" + ownerCar + '\'' +
+                ", purchaseTimeCar=" + purchaseTimeCar +
+                ", buyingUnitCar='" + buyingUnitCar + '\'' +
+                ", engineDisplacementCar=" + engineDisplacementCar +
+                ", fuelTankCapacityCar=" + fuelTankCapacityCar +
+                ", colorCar='" + colorCar + '\'' +
+                ", totalWeightCar=" + totalWeightCar +
+                ", transmissionTypeCar='" + transmissionTypeCar + '\'' +
+                ", turboCar='" + turboCar + '\'' +
+                ", maintenanceCycleCar=" + maintenanceCycleCar +
+                '}';
+    }
+
+    public Cartable(String licenseCar, String carTypeCar, String brandTypeCar, Integer dailyRentCar, Integer weeklyRentCar, Integer monthlyRentCar, String imgCar, Integer carStoreCar, String usePropertyCar, String ownerCar, Timestamp purchaseTimeCar, String buyingUnitCar, Integer engineDisplacementCar, Integer fuelTankCapacityCar, String colorCar, Integer totalWeightCar, String transmissionTypeCar, String turboCar, Integer maintenanceCycleCar) {
+        this.licenseCar = licenseCar;
+        this.carTypeCar = carTypeCar;
+        this.brandTypeCar = brandTypeCar;
+        this.dailyRentCar = dailyRentCar;
+        this.weeklyRentCar = weeklyRentCar;
+        this.monthlyRentCar = monthlyRentCar;
+        this.imgCar = imgCar;
+        this.carStoreCar = carStoreCar;
+        this.usePropertyCar = usePropertyCar;
+        this.ownerCar = ownerCar;
+        this.purchaseTimeCar = purchaseTimeCar;
+        this.buyingUnitCar = buyingUnitCar;
+        this.engineDisplacementCar = engineDisplacementCar;
+        this.fuelTankCapacityCar = fuelTankCapacityCar;
+        this.colorCar = colorCar;
+        this.totalWeightCar = totalWeightCar;
+        this.transmissionTypeCar = transmissionTypeCar;
+        this.turboCar = turboCar;
+        this.maintenanceCycleCar = maintenanceCycleCar;
+    }
+
+    public Cartable() {
+
+    }
 }

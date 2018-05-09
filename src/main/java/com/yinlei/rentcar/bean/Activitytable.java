@@ -69,4 +69,23 @@ public class Activitytable {
 
         return Objects.hash(idActivity, nameActivity, achieveActivity, subActivity);
     }
+
+    @Override
+    public String toString() {
+        return "Activitytable{" +
+                "idActivity=" + idActivity +
+                ", nameActivity='" + nameActivity + '\'' +
+                ", achieveActivity=" + achieveActivity +
+                ", subActivity=" + subActivity +
+                '}';
+    }
+
+    public Activitytable(String nameActivity, Integer achieveActivity, Integer subActivity) {
+        this.nameActivity = nameActivity;
+        this.achieveActivity = achieveActivity;
+        this.subActivity = subActivity;
+    }
+
+    public Activitytable() {
+    }
 }

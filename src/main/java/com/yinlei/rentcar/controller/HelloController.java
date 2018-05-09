@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
+@RequestMapping("/hello")
 public class HelloController {
     @RequestMapping("/hello")
     public String helloHtml(HashMap<String, Object> map) {

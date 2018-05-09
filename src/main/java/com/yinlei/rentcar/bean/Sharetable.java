@@ -69,4 +69,23 @@ public class Sharetable {
 
         return Objects.hash(idShare, userShare, contentShare, imagesShare);
     }
+
+    public Sharetable(Integer userShare, String contentShare, String imagesShare) {
+        this.userShare = userShare;
+        this.contentShare = contentShare;
+        this.imagesShare = imagesShare;
+    }
+
+    @Override
+    public String toString() {
+        return "Sharetable{" +
+                "idShare=" + idShare +
+                ", userShare=" + userShare +
+                ", contentShare='" + contentShare + '\'' +
+                ", imagesShare='" + imagesShare + '\'' +
+                '}';
+    }
+
+    public Sharetable() {
+    }
 }

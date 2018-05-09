@@ -81,4 +81,25 @@ public class Viptable {
 
         return Objects.hash(idVip, scoreVip, accountVip, nameVip, iconVip);
     }
+
+    public Viptable(Integer scoreVip, Integer accountVip, String nameVip, String iconVip) {
+        this.scoreVip = scoreVip;
+        this.accountVip = accountVip;
+        this.nameVip = nameVip;
+        this.iconVip = iconVip;
+    }
+
+    public Viptable() {
+    }
+
+    @Override
+    public String toString() {
+        return "Viptable{" +
+                "idVip=" + idVip +
+                ", scoreVip=" + scoreVip +
+                ", accountVip=" + accountVip +
+                ", nameVip='" + nameVip + '\'' +
+                ", iconVip='" + iconVip + '\'' +
+                '}';
+    }
 }

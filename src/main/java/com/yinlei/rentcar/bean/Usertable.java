@@ -221,4 +221,47 @@ public class Usertable {
         result = 31 * result + Arrays.hashCode(areaUser);
         return result;
     }
+
+    public Usertable() {
+    }
+
+    public Usertable(String nicknameUser, String phoneUser, String emailUser, String passwordUser, String idcardUser, byte[] sexUser, Date birthdayUser, byte[] provicneUser, byte[] cityUser, byte[] townUser, byte[] areaUser, Integer crimeUser, String crimeInfoUser, Integer amountUser, Integer scoreUser) {
+        this.nicknameUser = nicknameUser;
+        this.phoneUser = phoneUser;
+        this.emailUser = emailUser;
+        this.passwordUser = passwordUser;
+        this.idcardUser = idcardUser;
+        this.sexUser = sexUser;
+        this.birthdayUser = birthdayUser;
+        this.provicneUser = provicneUser;
+        this.cityUser = cityUser;
+        this.townUser = townUser;
+        this.areaUser = areaUser;
+        this.crimeUser = crimeUser;
+        this.crimeInfoUser = crimeInfoUser;
+        this.amountUser = amountUser;
+        this.scoreUser = scoreUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Usertable{" +
+                "idUser=" + idUser +
+                ", nicknameUser='" + nicknameUser + '\'' +
+                ", phoneUser='" + phoneUser + '\'' +
+                ", emailUser='" + emailUser + '\'' +
+                ", passwordUser='" + passwordUser + '\'' +
+                ", idcardUser='" + idcardUser + '\'' +
+                ", sexUser=" + Arrays.toString(sexUser) +
+                ", birthdayUser=" + birthdayUser +
+                ", provicneUser=" + Arrays.toString(provicneUser) +
+                ", cityUser=" + Arrays.toString(cityUser) +
+                ", townUser=" + Arrays.toString(townUser) +
+                ", areaUser=" + Arrays.toString(areaUser) +
+                ", crimeUser=" + crimeUser +
+                ", crimeInfoUser='" + crimeInfoUser + '\'' +
+                ", amountUser=" + amountUser +
+                ", scoreUser=" + scoreUser +
+                '}';
+    }
 }

@@ -57,4 +57,22 @@ public class Citytable {
 
         return Objects.hash(idCity, provinceIdCity, nameCity);
     }
+
+    public Citytable() {
+    }
+
+    public Citytable(Integer provinceIdCity, String nameCity) {
+
+        this.provinceIdCity = provinceIdCity;
+        this.nameCity = nameCity;
+    }
+
+    @Override
+    public String toString() {
+        return "Citytable{" +
+                "idCity=" + idCity +
+                ", provinceIdCity=" + provinceIdCity +
+                ", nameCity='" + nameCity + '\'' +
+                '}';
+    }
 }

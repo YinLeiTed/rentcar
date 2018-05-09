@@ -154,4 +154,38 @@ public class Ordertable {
 
         return Objects.hash(idOrder, orderIdOrder, userIdOrder, activityIdOrder, otherServiceIdOrder, getCarTimeOrder, returnCarTimeOrder, getCarIdOrder, returnCarIdOrder, stateOrder, payMethodOrder);
     }
+
+    @Override
+    public String toString() {
+        return "Ordertable{" +
+                "idOrder=" + idOrder +
+                ", orderIdOrder='" + orderIdOrder + '\'' +
+                ", userIdOrder=" + userIdOrder +
+                ", activityIdOrder='" + activityIdOrder + '\'' +
+                ", otherServiceIdOrder='" + otherServiceIdOrder + '\'' +
+                ", getCarTimeOrder=" + getCarTimeOrder +
+                ", returnCarTimeOrder=" + returnCarTimeOrder +
+                ", getCarIdOrder=" + getCarIdOrder +
+                ", returnCarIdOrder=" + returnCarIdOrder +
+                ", stateOrder='" + stateOrder + '\'' +
+                ", payMethodOrder='" + payMethodOrder + '\'' +
+                '}';
+    }
+
+    public Ordertable() {
+    }
+
+    public Ordertable(String orderIdOrder, Integer userIdOrder, String activityIdOrder, String otherServiceIdOrder, Timestamp getCarTimeOrder, Timestamp returnCarTimeOrder, Integer getCarIdOrder, Integer returnCarIdOrder, String stateOrder, String payMethodOrder) {
+
+        this.orderIdOrder = orderIdOrder;
+        this.userIdOrder = userIdOrder;
+        this.activityIdOrder = activityIdOrder;
+        this.otherServiceIdOrder = otherServiceIdOrder;
+        this.getCarTimeOrder = getCarTimeOrder;
+        this.returnCarTimeOrder = returnCarTimeOrder;
+        this.getCarIdOrder = getCarIdOrder;
+        this.returnCarIdOrder = returnCarIdOrder;
+        this.stateOrder = stateOrder;
+        this.payMethodOrder = payMethodOrder;
+    }
 }

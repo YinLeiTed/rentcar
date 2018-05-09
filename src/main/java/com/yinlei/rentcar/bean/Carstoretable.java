@@ -93,4 +93,27 @@ public class Carstoretable {
 
         return Objects.hash(idCarStore, nameCarStore, addressCarStore, phoneCarStore, startWorkCarStore, endWorkCarStore);
     }
+
+    public Carstoretable() {
+    }
+
+    public Carstoretable(String nameCarStore, String addressCarStore, String phoneCarStore, Integer startWorkCarStore, Integer endWorkCarStore) {
+        this.nameCarStore = nameCarStore;
+        this.addressCarStore = addressCarStore;
+        this.phoneCarStore = phoneCarStore;
+        this.startWorkCarStore = startWorkCarStore;
+        this.endWorkCarStore = endWorkCarStore;
+    }
+
+    @Override
+    public String toString() {
+        return "Carstoretable{" +
+                "idCarStore=" + idCarStore +
+                ", nameCarStore='" + nameCarStore + '\'' +
+                ", addressCarStore='" + addressCarStore + '\'' +
+                ", phoneCarStore='" + phoneCarStore + '\'' +
+                ", startWorkCarStore=" + startWorkCarStore +
+                ", endWorkCarStore=" + endWorkCarStore +
+                '}';
+    }
 }

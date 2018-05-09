@@ -45,4 +45,20 @@ public class Provincetable {
 
         return Objects.hash(idProvince, nameProvince);
     }
+
+    @Override
+    public String toString() {
+        return "Provincetable{" +
+                "idProvince=" + idProvince +
+                ", nameProvince='" + nameProvince + '\'' +
+                '}';
+    }
+
+    public Provincetable() {
+    }
+
+    public Provincetable(String nameProvince) {
+
+        this.nameProvince = nameProvince;
+    }
 }

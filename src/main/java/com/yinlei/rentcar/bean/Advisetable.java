@@ -69,4 +69,23 @@ public class Advisetable {
 
         return Objects.hash(idAdvise, userIdAdvise, contentAdvise, replyAdvise);
     }
+
+    public Advisetable() {
+    }
+
+    public Advisetable(Integer userIdAdvise, String contentAdvise, String replyAdvise) {
+        this.userIdAdvise = userIdAdvise;
+        this.contentAdvise = contentAdvise;
+        this.replyAdvise = replyAdvise;
+    }
+
+    @Override
+    public String toString() {
+        return "Advisetable{" +
+                "idAdvise=" + idAdvise +
+                ", userIdAdvise=" + userIdAdvise +
+                ", contentAdvise='" + contentAdvise + '\'' +
+                ", replyAdvise='" + replyAdvise + '\'' +
+                '}';
+    }
 }
