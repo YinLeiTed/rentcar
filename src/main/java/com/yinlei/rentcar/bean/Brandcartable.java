@@ -12,7 +12,7 @@ public class Brandcartable {
     private String brandBrandCar;
 
     @Id
-    @Column(name = "idBrandCar")
+    @Column(name = "idBrandCar", nullable = false)
     public int getIdBrandCar() {
         return idBrandCar;
     }
@@ -22,7 +22,7 @@ public class Brandcartable {
     }
 
     @Basic
-    @Column(name = "brandBrandCar")
+    @Column(name = "brandBrandCar", nullable = true, length = 50)
     public String getBrandBrandCar() {
         return brandBrandCar;
     }

@@ -31,7 +31,7 @@ public class Cartable {
     private Integer maintenanceCycleCar;
 
     @Id
-    @Column(name = "idCar")
+    @Column(name = "idCar", nullable = false)
     public int getIdCar() {
         return idCar;
     }
@@ -41,7 +41,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "licenseCar")
+    @Column(name = "licenseCar", nullable = true, length = 50)
     public String getLicenseCar() {
         return licenseCar;
     }
@@ -51,7 +51,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "carTypeCar")
+    @Column(name = "carTypeCar", nullable = true, length = 50)
     public String getCarTypeCar() {
         return carTypeCar;
     }
@@ -61,7 +61,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "brandTypeCar")
+    @Column(name = "brandTypeCar", nullable = true, length = 50)
     public String getBrandTypeCar() {
         return brandTypeCar;
     }
@@ -71,7 +71,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "dailyRentCar")
+    @Column(name = "dailyRentCar", nullable = true)
     public Integer getDailyRentCar() {
         return dailyRentCar;
     }
@@ -81,7 +81,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "weeklyRentCar")
+    @Column(name = "weeklyRentCar", nullable = true)
     public Integer getWeeklyRentCar() {
         return weeklyRentCar;
     }
@@ -91,7 +91,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "monthlyRentCar")
+    @Column(name = "monthlyRentCar", nullable = true)
     public Integer getMonthlyRentCar() {
         return monthlyRentCar;
     }
@@ -101,7 +101,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "imgCar")
+    @Column(name = "imgCar", nullable = true, length = 100)
     public String getImgCar() {
         return imgCar;
     }
@@ -111,7 +111,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "carStoreCar")
+    @Column(name = "carStoreCar", nullable = true)
     public Integer getCarStoreCar() {
         return carStoreCar;
     }
@@ -121,7 +121,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "usePropertyCar")
+    @Column(name = "usePropertyCar", nullable = true, length = 50)
     public String getUsePropertyCar() {
         return usePropertyCar;
     }
@@ -131,7 +131,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "ownerCar")
+    @Column(name = "ownerCar", nullable = true, length = 50)
     public String getOwnerCar() {
         return ownerCar;
     }
@@ -141,7 +141,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "purchaseTimeCar")
+    @Column(name = "purchaseTimeCar", nullable = true)
     public Timestamp getPurchaseTimeCar() {
         return purchaseTimeCar;
     }
@@ -151,7 +151,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "buyingUnitCar")
+    @Column(name = "buyingUnitCar", nullable = true, length = 50)
     public String getBuyingUnitCar() {
         return buyingUnitCar;
     }
@@ -161,7 +161,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "engineDisplacementCar")
+    @Column(name = "engineDisplacementCar", nullable = true)
     public Integer getEngineDisplacementCar() {
         return engineDisplacementCar;
     }
@@ -171,7 +171,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "fuelTankCapacityCar")
+    @Column(name = "fuelTankCapacityCar", nullable = true)
     public Integer getFuelTankCapacityCar() {
         return fuelTankCapacityCar;
     }
@@ -181,7 +181,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "colorCar")
+    @Column(name = "colorCar", nullable = true, length = 50)
     public String getColorCar() {
         return colorCar;
     }
@@ -191,7 +191,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "totalWeightCar")
+    @Column(name = "totalWeightCar", nullable = true)
     public Integer getTotalWeightCar() {
         return totalWeightCar;
     }
@@ -201,7 +201,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "transmissionTypeCar")
+    @Column(name = "transmissionTypeCar", nullable = true, length = 50)
     public String getTransmissionTypeCar() {
         return transmissionTypeCar;
     }
@@ -211,7 +211,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "turboCar")
+    @Column(name = "turboCar", nullable = true, length = 50)
     public String getTurboCar() {
         return turboCar;
     }
@@ -221,7 +221,7 @@ public class Cartable {
     }
 
     @Basic
-    @Column(name = "maintenanceCycleCar")
+    @Column(name = "maintenanceCycleCar", nullable = true)
     public Integer getMaintenanceCycleCar() {
         return maintenanceCycleCar;
     }

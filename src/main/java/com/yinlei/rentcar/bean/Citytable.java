@@ -13,7 +13,7 @@ public class Citytable {
     private String nameCity;
 
     @Id
-    @Column(name = "idCity")
+    @Column(name = "idCity", nullable = false)
     public int getIdCity() {
         return idCity;
     }
@@ -23,7 +23,7 @@ public class Citytable {
     }
 
     @Basic
-    @Column(name = "provinceIdCity")
+    @Column(name = "provinceIdCity", nullable = true)
     public Integer getProvinceIdCity() {
         return provinceIdCity;
     }
@@ -33,7 +33,7 @@ public class Citytable {
     }
 
     @Basic
-    @Column(name = "nameCity")
+    @Column(name = "nameCity", nullable = true, length = 100)
     public String getNameCity() {
         return nameCity;
     }

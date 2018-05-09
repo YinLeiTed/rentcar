@@ -12,7 +12,7 @@ public class Provincetable {
     private String nameProvince;
 
     @Id
-    @Column(name = "idProvince")
+    @Column(name = "idProvince", nullable = false)
     public int getIdProvince() {
         return idProvince;
     }
@@ -22,7 +22,7 @@ public class Provincetable {
     }
 
     @Basic
-    @Column(name = "nameProvince")
+    @Column(name = "nameProvince", nullable = true, length = 50)
     public String getNameProvince() {
         return nameProvince;
     }

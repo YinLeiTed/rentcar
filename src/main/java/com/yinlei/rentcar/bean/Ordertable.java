@@ -22,7 +22,7 @@ public class Ordertable {
     private String payMethodOrder;
 
     @Id
-    @Column(name = "idOrder")
+    @Column(name = "idOrder", nullable = false)
     public int getIdOrder() {
         return idOrder;
     }
@@ -32,7 +32,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "orderIdOrder")
+    @Column(name = "orderIdOrder", nullable = true, length = 50)
     public String getOrderIdOrder() {
         return orderIdOrder;
     }
@@ -42,7 +42,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "userIdOrder")
+    @Column(name = "userIdOrder", nullable = true)
     public Integer getUserIdOrder() {
         return userIdOrder;
     }
@@ -52,7 +52,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "activityIdOrder")
+    @Column(name = "activityIdOrder", nullable = true, length = 250)
     public String getActivityIdOrder() {
         return activityIdOrder;
     }
@@ -62,7 +62,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "otherServiceIdOrder")
+    @Column(name = "otherServiceIdOrder", nullable = true, length = 250)
     public String getOtherServiceIdOrder() {
         return otherServiceIdOrder;
     }
@@ -72,7 +72,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "getCarTimeOrder")
+    @Column(name = "getCarTimeOrder", nullable = true)
     public Timestamp getGetCarTimeOrder() {
         return getCarTimeOrder;
     }
@@ -82,7 +82,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "returnCarTimeOrder")
+    @Column(name = "returnCarTimeOrder", nullable = true)
     public Timestamp getReturnCarTimeOrder() {
         return returnCarTimeOrder;
     }
@@ -92,7 +92,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "getCarIdOrder")
+    @Column(name = "getCarIdOrder", nullable = true)
     public Integer getGetCarIdOrder() {
         return getCarIdOrder;
     }
@@ -102,7 +102,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "returnCarIdOrder")
+    @Column(name = "returnCarIdOrder", nullable = true)
     public Integer getReturnCarIdOrder() {
         return returnCarIdOrder;
     }
@@ -112,7 +112,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "stateOrder")
+    @Column(name = "stateOrder", nullable = true, length = 50)
     public String getStateOrder() {
         return stateOrder;
     }
@@ -122,7 +122,7 @@ public class Ordertable {
     }
 
     @Basic
-    @Column(name = "payMethodOrder")
+    @Column(name = "payMethodOrder", nullable = true, length = 50)
     public String getPayMethodOrder() {
         return payMethodOrder;
     }

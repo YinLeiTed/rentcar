@@ -14,7 +14,7 @@ public class Activitytable {
     private Integer subActivity;
 
     @Id
-    @Column(name = "idActivity")
+    @Column(name = "idActivity", nullable = false)
     public int getIdActivity() {
         return idActivity;
     }
@@ -24,7 +24,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "nameActivity")
+    @Column(name = "nameActivity", nullable = true, length = 50)
     public String getNameActivity() {
         return nameActivity;
     }
@@ -34,7 +34,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "achieveActivity")
+    @Column(name = "achieveActivity", nullable = true)
     public Integer getAchieveActivity() {
         return achieveActivity;
     }
@@ -44,7 +44,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "subActivity")
+    @Column(name = "subActivity", nullable = true)
     public Integer getSubActivity() {
         return subActivity;
     }

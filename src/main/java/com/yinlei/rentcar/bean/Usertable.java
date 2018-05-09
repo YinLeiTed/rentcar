@@ -28,7 +28,7 @@ public class Usertable {
     private Integer scoreUser;
 
     @Id
-    @Column(name = "idUser")
+    @Column(name = "idUser", nullable = false)
     public int getIdUser() {
         return idUser;
     }
@@ -38,7 +38,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "nicknameUser")
+    @Column(name = "nicknameUser", nullable = true, length = 50)
     public String getNicknameUser() {
         return nicknameUser;
     }
@@ -48,7 +48,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "phoneUser")
+    @Column(name = "phoneUser", nullable = true, length = 11)
     public String getPhoneUser() {
         return phoneUser;
     }
@@ -58,7 +58,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "emailUser")
+    @Column(name = "emailUser", nullable = true, length = 50)
     public String getEmailUser() {
         return emailUser;
     }
@@ -68,7 +68,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "passwordUser")
+    @Column(name = "passwordUser", nullable = true, length = 20)
     public String getPasswordUser() {
         return passwordUser;
     }
@@ -78,7 +78,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "idcardUser")
+    @Column(name = "idcardUser", nullable = true, length = 20)
     public String getIdcardUser() {
         return idcardUser;
     }
@@ -88,7 +88,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "sexUser")
+    @Column(name = "sexUser", nullable = true)
     public byte[] getSexUser() {
         return sexUser;
     }
@@ -98,7 +98,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "birthdayUser")
+    @Column(name = "birthdayUser", nullable = true)
     public Date getBirthdayUser() {
         return birthdayUser;
     }
@@ -108,7 +108,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "provicneUser")
+    @Column(name = "provicneUser", nullable = true)
     public byte[] getProvicneUser() {
         return provicneUser;
     }
@@ -118,7 +118,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "cityUser")
+    @Column(name = "cityUser", nullable = true)
     public byte[] getCityUser() {
         return cityUser;
     }
@@ -128,7 +128,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "townUser")
+    @Column(name = "townUser", nullable = true)
     public byte[] getTownUser() {
         return townUser;
     }
@@ -138,7 +138,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "areaUser")
+    @Column(name = "areaUser", nullable = true)
     public byte[] getAreaUser() {
         return areaUser;
     }
@@ -148,7 +148,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "crimeUser")
+    @Column(name = "crimeUser", nullable = true)
     public Integer getCrimeUser() {
         return crimeUser;
     }
@@ -158,7 +158,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "crimeInfoUser")
+    @Column(name = "crimeInfoUser", nullable = true, length = 250)
     public String getCrimeInfoUser() {
         return crimeInfoUser;
     }
@@ -168,7 +168,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "amountUser")
+    @Column(name = "amountUser", nullable = true)
     public Integer getAmountUser() {
         return amountUser;
     }
@@ -178,7 +178,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "scoreUser")
+    @Column(name = "scoreUser", nullable = true)
     public Integer getScoreUser() {
         return scoreUser;
     }

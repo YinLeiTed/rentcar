@@ -13,7 +13,7 @@ public class Otherservicetable {
     private Integer priceOtherService;
 
     @Id
-    @Column(name = "idOtherService")
+    @Column(name = "idOtherService", nullable = false)
     public int getIdOtherService() {
         return idOtherService;
     }
@@ -23,7 +23,7 @@ public class Otherservicetable {
     }
 
     @Basic
-    @Column(name = "nameOtherService")
+    @Column(name = "nameOtherService", nullable = true, length = 50)
     public String getNameOtherService() {
         return nameOtherService;
     }
@@ -33,7 +33,7 @@ public class Otherservicetable {
     }
 
     @Basic
-    @Column(name = "priceOtherService")
+    @Column(name = "priceOtherService", nullable = true)
     public Integer getPriceOtherService() {
         return priceOtherService;
     }

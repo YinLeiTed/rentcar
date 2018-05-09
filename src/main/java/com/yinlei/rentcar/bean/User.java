@@ -1,9 +1,6 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +10,8 @@ public class User {
     private String name;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -23,7 +21,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "age")
+    @Column(name = "age", nullable = true)
     public Integer getAge() {
         return age;
     }
@@ -33,7 +31,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }

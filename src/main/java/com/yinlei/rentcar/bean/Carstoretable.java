@@ -16,7 +16,7 @@ public class Carstoretable {
     private Integer endWorkCarStore;
 
     @Id
-    @Column(name = "idCarStore")
+    @Column(name = "idCarStore", nullable = false)
     public int getIdCarStore() {
         return idCarStore;
     }
@@ -26,7 +26,7 @@ public class Carstoretable {
     }
 
     @Basic
-    @Column(name = "nameCarStore")
+    @Column(name = "nameCarStore", nullable = true, length = 50)
     public String getNameCarStore() {
         return nameCarStore;
     }
@@ -36,7 +36,7 @@ public class Carstoretable {
     }
 
     @Basic
-    @Column(name = "addressCarStore")
+    @Column(name = "addressCarStore", nullable = true, length = 100)
     public String getAddressCarStore() {
         return addressCarStore;
     }
@@ -46,7 +46,7 @@ public class Carstoretable {
     }
 
     @Basic
-    @Column(name = "phoneCarStore")
+    @Column(name = "phoneCarStore", nullable = true, length = 50)
     public String getPhoneCarStore() {
         return phoneCarStore;
     }
@@ -56,7 +56,7 @@ public class Carstoretable {
     }
 
     @Basic
-    @Column(name = "startWorkCarStore")
+    @Column(name = "startWorkCarStore", nullable = true)
     public Integer getStartWorkCarStore() {
         return startWorkCarStore;
     }
@@ -66,7 +66,7 @@ public class Carstoretable {
     }
 
     @Basic
-    @Column(name = "endWorkCarStore")
+    @Column(name = "endWorkCarStore", nullable = true)
     public Integer getEndWorkCarStore() {
         return endWorkCarStore;
     }

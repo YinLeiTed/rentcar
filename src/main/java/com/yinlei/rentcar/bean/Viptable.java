@@ -15,7 +15,7 @@ public class Viptable {
     private String iconVip;
 
     @Id
-    @Column(name = "idVIP")
+    @Column(name = "idVIP", nullable = false)
     public int getIdVip() {
         return idVip;
     }
@@ -25,7 +25,7 @@ public class Viptable {
     }
 
     @Basic
-    @Column(name = "scoreVIP")
+    @Column(name = "scoreVIP", nullable = true)
     public Integer getScoreVip() {
         return scoreVip;
     }
@@ -35,7 +35,7 @@ public class Viptable {
     }
 
     @Basic
-    @Column(name = "accountVIP")
+    @Column(name = "accountVIP", nullable = true)
     public Integer getAccountVip() {
         return accountVip;
     }
@@ -45,7 +45,7 @@ public class Viptable {
     }
 
     @Basic
-    @Column(name = "nameVIP")
+    @Column(name = "nameVIP", nullable = true, length = 50)
     public String getNameVip() {
         return nameVip;
     }
@@ -55,7 +55,7 @@ public class Viptable {
     }
 
     @Basic
-    @Column(name = "iconVIP")
+    @Column(name = "iconVIP", nullable = true, length = 250)
     public String getIconVip() {
         return iconVip;
     }

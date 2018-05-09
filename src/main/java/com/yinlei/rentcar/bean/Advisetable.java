@@ -14,7 +14,7 @@ public class Advisetable {
     private String replyAdvise;
 
     @Id
-    @Column(name = "idAdvise")
+    @Column(name = "idAdvise", nullable = false)
     public int getIdAdvise() {
         return idAdvise;
     }
@@ -24,7 +24,7 @@ public class Advisetable {
     }
 
     @Basic
-    @Column(name = "userIdAdvise")
+    @Column(name = "userIdAdvise", nullable = true)
     public Integer getUserIdAdvise() {
         return userIdAdvise;
     }
@@ -34,7 +34,7 @@ public class Advisetable {
     }
 
     @Basic
-    @Column(name = "contentAdvise")
+    @Column(name = "contentAdvise", nullable = true, length = -1)
     public String getContentAdvise() {
         return contentAdvise;
     }
@@ -44,7 +44,7 @@ public class Advisetable {
     }
 
     @Basic
-    @Column(name = "replyAdvise")
+    @Column(name = "replyAdvise", nullable = true, length = 250)
     public String getReplyAdvise() {
         return replyAdvise;
     }

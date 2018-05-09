@@ -14,7 +14,7 @@ public class Sharetable {
     private String imagesShare;
 
     @Id
-    @Column(name = "idShare")
+    @Column(name = "idShare", nullable = false)
     public int getIdShare() {
         return idShare;
     }
@@ -24,7 +24,7 @@ public class Sharetable {
     }
 
     @Basic
-    @Column(name = "userShare")
+    @Column(name = "userShare", nullable = true)
     public Integer getUserShare() {
         return userShare;
     }
@@ -34,7 +34,7 @@ public class Sharetable {
     }
 
     @Basic
-    @Column(name = "contentShare")
+    @Column(name = "contentShare", nullable = true, length = -1)
     public String getContentShare() {
         return contentShare;
     }
@@ -44,7 +44,7 @@ public class Sharetable {
     }
 
     @Basic
-    @Column(name = "imagesShare")
+    @Column(name = "imagesShare", nullable = true, length = -1)
     public String getImagesShare() {
         return imagesShare;
     }
