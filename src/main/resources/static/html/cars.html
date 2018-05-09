@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cars</title>
+<link rel="stylesheet" href="../css3/bootstrap.min.css">
+<link rel="stylesheet" href="../css3/bootstrap-select.css">
+<link href="../css3/style.css" rel="stylesheet" type="text/css" media="all" />
+<!--价格样式-->
+<link rel="stylesheet" type="text/css" href="../css3/jquery-ui1.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<script type="text/javascript" src="../js3/jquery.min.js"></script>
+
+<script src="../js3/bootstrap.min.js"></script>
+<script src="../js3/bootstrap-select.js"></script>
+
+<link href="../css3/jquery.uls.css" rel="stylesheet"/>
+<link href="../css3/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="../css3/jquery.uls.lcd.css" rel="stylesheet"/>
+
+<script type="text/javascript" src="../layui/layui.js" ></script>
+<link rel="stylesheet" href="../layui/css/layui.css" />
+<script type="text/javascript" src="../js/area.js" ></script>
+<script type="text/javascript" src="../js/iframe.js" ></script>
+  <style>
+  	.layui-form-select dl dd{
+  		padding: 0 10px;
+	    line-height: 36px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 80px;
+	    float: left;
+  	}
+  	.layui-form-select dl dt{
+  		padding: 0 10px;
+	    line-height: 36px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 100%;
+	    float: left;
+  	}
+  	.term {
+	    padding: 12px 0 5px;
+	    background: #f5f5f5;
+	    border: 1px solid #ccc;
+	}
+  </style>
+	
+<script type="text/javascript">
+$(document).ready(function () {    
+var elem=$('#container ul');      
+	$('#viewcontrols a').on('click',function(e) {
+		if ($(this).hasClass('gridview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('list').addClass('grid');
+				$('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+				$('#viewcontrols .gridview').addClass('active');
+				$('#viewcontrols .listview').removeClass('active');
+				elem.fadeIn(1000);
+			});						
+		}
+		else if($(this).hasClass('listview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('grid').addClass('list');
+				$('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+				$('#viewcontrols .gridview').removeClass('active');
+				$('#viewcontrols .listview').addClass('active');
+				elem.fadeIn(1000);
+			});									
+		}
+	});
+});
+</script>
+</head>
+<body onload="IFrameResize('myframe')">
+<div class="header" style="margin-top: 20px;">
+    <div class="container">
+    	<form class="layui-form term">
+		<div class="layui-form-item">
+		    <label class="layui-form-label" style="width: 90px;">取车地点</label>
+		    <div class="layui-input-inline" style="width: 300px;">
+		      <select id="province" name="province" required lay-verify="required" lay-search>
+		        	
+		      </select>     
+		    </div>
+		    <div class="layui-input-inline">
+		      <select id="city" name="city"  required lay-verify="required" lay-search>
+		      	<option value="">请选择门店</option>
+		      </select>
+		    </div>
+		    
+		    <label class="layui-form-label" style="width: 160px;">取车时间~还车时间</label>
+		     <div class="layui-input-inline">
+		        <input type="text" name="time" class="layui-input" id="time" style="width: 300px;" required lay-verify="required">
+		      </div>
+		    
+		    
+		</div>
+		<div class="layui-form-item">   
+		    <label class="layui-form-label" style="width: 90px;">还车地点</label>
+		    <div class="layui-input-inline" style="width: 300px;">
+		      <select id="province2" name="province" required lay-verify="required" lay-search>
+		        	
+		      </select>     
+		    </div>
+		    <div class="layui-input-inline">
+		      <select id="city2" name="city2"  required lay-verify="required" lay-search>
+		      	<option value="">请选择门店</option>
+		      </select>
+		    </div>
+		    
+		     <div class="layui-input-inline left">
+		      <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 30px;">查询</button>
+		    </div>
+		</div>
+		
+		
+	</form>
+    </div>
+	
+	<script>
+		
+		layui.use(['form','laydate'], function(){
+		  form = layui.form,laydate = layui.laydate;
+		  	  
+		  area_init($("#province"));
+		  area_init($("#province2"));
+		  
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		  
+		  //日期时间范围
+		  laydate.render({
+		    elem: '#time'
+		    ,type: 'datetime'
+		    ,range: '~'
+		    ,calendar: true
+		  });
+		});
+	</script>
+	<!-- Cars -->
+	<div class="total-ads main-grid-border">
+		<div class="container">
+			
+			
+			<div class="ads-grid">
+				<div class="side-bar col-md-3">
+					
+				
+				<div class="range">
+					<h3 class="sear-head">Price range</h3>
+							<ul class="dropdown-menu6">
+								<li>
+									                
+									<div id="slider-range"></div>							
+										<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+									</li>			
+							</ul>
+							<!---->
+							<script type="text/javascript" src="../js3/jquery-ui.js"></script>
+							<script type='text/javascript'>//<![CDATA[ 
+							$(window).load(function(){
+							 $( "#slider-range" ).slider({
+										range: true,
+										min: 0,
+										max: 9000,
+										values: [ 50, 6000 ],
+										slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+										}
+							 });
+							$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+							});//]]>  
+
+							</script>
+							
+				</div>
+				<div class="brand-select">
+					<h3 class="sear-head">Brand name</h3>
+					  <select class="selectpicker" data-live-search="true">
+					  <option data-tokens="All">All</option>
+					  <option data-tokens="Audi">Audi</option>
+					  <option data-tokens="Bentley">Bentley</option>
+					  <option data-tokens="BMW">BMW</option>
+					  <option data-tokens="Chevrolet">Chevrolet</option>
+				
+					</select>
+				</div>
+				<div class="featured-ads">
+				</div>
+				</div>
+				<div class="ads-display col-md-9">
+					<div class="wrapper">					
+					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+					 
+					  <div id="myTabContent" class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+						   <div>
+												<div id="container">
+								<div class="view-controls-list" id="viewcontrols">
+									<label>view :</label>
+									<a class="gridview"><i class="glyphicon glyphicon-th"></i></a>
+									<a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
+								</div>
+								
+								<div class="clearfix"></div>
+							<ul class="list">
+								<a href="single.html">
+									<li>
+									<img src="../image3/c1.jpg" title="" alt="" />
+									<section class="list-left">
+									<h5 class="title">There are many variations of passages of Lorem Ipsum</h5>
+									<span class="adprice">$290/d</span>
+									<span class="adprice">$290/s</span>
+									<span class="adprice">$290/s</span>
+									<p class="catpath">Cars » Other Vehicles</p>
+									</section>
+									<section class="list-right">
+									<span class="date">Today, 17:55</span>
+									<span class="cityname">City name</span>
+									</section>
+									<div class="clearfix"></div>
+									</li> 
+									
+								</a>
+								<a href="single.html">
+									<li>
+									<img src="../image3/c2.jpg" title="" alt="" />
+									<section class="list-left">
+									<h5 class="title">It is a long established fact that a reader</h5>
+									<span class="adprice">$310</span>
+									<p class="catpath">Cars » Other Vehicles</p>
+									</section>
+									<section class="list-right">
+									<span class="date">Today, 17:45</span>
+									<span class="cityname">City name</span>
+									</section>
+									<div class="clearfix"></div>
+									</li> 
+									
+								</a>
+								
+								
+								
+								<div class="clearfix"></div>
+								
+								
+							
+								
+							</ul>
+						</div>
+							</div>
+						</div>
+						
+					  </div>
+					</div>
+				</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>	
+	</div>
+
+</body>
+</html>

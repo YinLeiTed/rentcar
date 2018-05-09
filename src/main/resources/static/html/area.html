@@ -1,0 +1,101 @@
+<html> 
+<head> 
+<meta charset="UTF-8">
+<title>请选择ABCDEFGHI_select横排效果</title> 
+<script type="text/javascript" src="../js/main2.js" ></script>
+<script type="text/javascript" src="../js/area.js" ></script>
+<style>
+  	.layui-form-select dl dd{
+  		padding: 0 10px;
+	    line-height: 36px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 60px;
+	    float: left;
+  	}
+  	.layui-form-select dl dt{
+  		padding: 0 10px;
+	    line-height: 36px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 100%;
+	    float: left;
+  	}
+  	.term {
+	    padding: 12px 0 5px;
+	    background: #f5f5f5;
+	    border: 1px solid #ccc;
+	}
+  </style>
+</head> 
+<body  onload="IFrameResize('myframe')"> 
+	<form class="layui-form term">
+		<div class="layui-form-item">
+		    <label class="layui-form-label">取车地点</label>
+		    <div class="layui-input-inline" style="width: 300px;">
+		      <select id="province" name="province" lay-verify="required" lay-search>
+		        	
+		      </select>     
+		    </div>
+		    <div class="layui-input-inline">
+		      <select id="city" name="city">
+		      	<option value="">请选择门店</option>
+		      </select>
+		    </div>
+		    
+		    <label class="layui-form-label" style="width: 145px;">取车时间~还车时间</label>
+		     <div class="layui-input-inline">
+		        <input type="text" name="time" class="layui-input" id="time" style="width: 300px;">
+		      </div>
+		    
+		    
+		</div>
+		<div class="layui-form-item">   
+		    <label class="layui-form-label">还车地点</label>
+		    <div class="layui-input-inline" style="width: 300px;">
+		      <select id="province2" name="province" lay-verify="required" lay-search>
+		        	
+		      </select>     
+		    </div>
+		    <div class="layui-input-inline">
+		      <select id="city" name="city">
+		      	<option value="">请选择门店</option>
+		      </select>
+		    </div>
+		    
+		     <div class="layui-input-inline left">
+		      <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 43px;">查询</button>
+		    </div>
+		</div>
+		
+		
+	</form>
+	<script>
+		
+		layui.use(['form','laydate'], function(){
+		  form = layui.form,laydate = layui.laydate;
+		  
+		  
+		  
+		  area_init($("#province"));
+		  area_init($("#province2"));
+		  
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		  
+		  //日期时间范围
+		  laydate.render({
+		    elem: '#time'
+		    ,type: 'datetime'
+		    ,range: '~'
+		    ,calendar: true
+		  });
+		});
+	</script>
+</body> 
+</html>

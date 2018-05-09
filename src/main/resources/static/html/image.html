@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+
+		<script type="text/javascript" src="../js/main2.js" ></script>
+		<style>
+			.layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+			.layui-timeline-title em{
+				font-size: 15px;
+			}
+			.layui-timeline-content img{	
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body onload="IFrameResize('myframe')">
+		
+		
+	    <form class="layui-form layui-form-pane" action="/upload2" style="padding: 5px;">
+	    	<div class="layui-form-item layui-form-text">
+			    <label class="layui-form-label">发布体验内容+人车合影</label>
+			    <div class="layui-input-block">
+			      <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+			    </div>
+			</div>
+			<div class="layui-upload">
+			  <div class="layui-form-item">
+			  	<button type="button" class="layui-btn layui-btn-normal" id="testList">选择图片</button> 
+			    
+			    <!--<button type="button" class="layui-btn" id="testListAction">上传图片</button>-->
+			    <button class="layui-btn" lay-submit lay-filter="demo2" id="testListAction">提交</button>
+			  </div>
+			 
+			  <div id="uploadlist" class="layui-upload-list layui-hide">
+			    <table class="layui-table">
+			      <thead>
+			        <tr><th>文件名</th>
+			        <th>大小</th>
+			        <th>状态</th>
+			        <th>操作</th>
+			      </tr></thead>
+			      <tbody id="demoList"></tbody>
+			    </table>
+			     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 150px;">
+		
+			    <div class="layui-upload-list" id="demo22"></div>
+			  </blockquote>
+			  </div>
+			  <!--<button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+			</div> 
+	    	
+			
+		</form>
+		
+		<div class="layui-elem-quote">
+		  <p>精彩评论</p>
+		</div>
+	        <ul class="layui-timeline" id="content" style="padding: 5px;">
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+			    <div class="layui-timeline-content layui-text">
+			      <h3 class="layui-timeline-title">8月18日&nbsp;<em>——157****7103</em></h3>
+			      <p>
+			        layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+			        <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+			        <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+			      </p>
+			      <img src="../image3/1.png"/>
+			      <img src="../image3/1 - 副本.jpg"/>
+			      <img src="../img/1.jpg"/>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+			    <div class="layui-timeline-content layui-text">
+			      <h3 class="layui-timeline-title">8月16日<em>TED</em></h3>
+			      <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
+			      <ul>
+			        <li>《登高》</li>
+			        <li>《茅屋为秋风所破歌》</li>
+			      </ul>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+			    <div class="layui-timeline-content layui-text">
+			      <h3 class="layui-timeline-title">8月15日</h3>
+			      <p>
+			        中国人民抗日战争胜利72周年
+			        <br>常常在想，尽管对这个国家有这样那样的抱怨，但我们的确生在了最好的时代
+			        <br>铭记、感恩
+			        <br>所有为中华民族浴血奋战的英雄将士
+			        <br>永垂不朽
+			      </p>
+			    </div>
+			  </li>
+			  <li class="layui-timeline-item">
+			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+			    <div class="layui-timeline-content layui-text">
+			      <div class="layui-timeline-title">过去</div>
+			    </div>
+			  </li>
+			</ul>
+	    
+		
+		<script>
+			layui.use(['form','upload'], function(){
+			  var $ = layui.jquery
+			  ,upload = layui.upload
+			  ,form=layui.form;
+	  
+
+			   //多文件列表示例
+			  var demoListView = $('#demoList')
+			  ,uploadListIns = upload.render({
+			    elem: '#testList'
+			    ,url: '/upload/'
+			    ,accept: 'file'
+			    ,multiple: true
+			    ,auto: false
+			    ,bindAction: '#testListAction'
+			    ,choose: function(obj){   
+			    	$("#uploadlist").removeClass('layui-hide');
+			      var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+			      //读取本地文件
+			      obj.preview(function(index, file, result){
+			        var tr = $(['<tr id="upload-'+ index +'">'
+			          ,'<td>'+ file.name +'</td>'
+			          ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+			          ,'<td>等待上传</td>'
+			          ,'<td>'
+			            ,'<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+			            ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+			          ,'</td>'
+			        ,'</tr>'].join(''));
+			        
+			        //单个重传
+			        tr.find('.demo-reload').on('click', function(){
+			          obj.upload(index, file);
+			        });
+			        
+			        //删除
+			        tr.find('.demo-delete').on('click', function(){
+			          delete files[index]; //删除对应的文件
+			          tr.remove();
+			          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+			        });
+			        
+			        demoListView.append(tr);
+			        $('#demo22').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+			      });
+			    }
+			    ,done: function(res, index, upload){
+			      if(res.code == 0){ //上传成功
+			        var tr = demoListView.find('tr#upload-'+ index)
+			        ,tds = tr.children();
+			        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+			        tds.eq(3).html(''); //清空操作
+			        return delete this.files[index]; //删除文件队列已经上传成功的文件
+			      }
+			      this.error(index, upload);
+			    }
+			    ,error: function(index, upload){
+			      var tr = demoListView.find('tr#upload-'+ index)
+			      ,tds = tr.children();
+			      tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+			      tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+			    }
+			  });
+			 
+			  //监听提交
+			  form.on('submit(demo2)', function(data){
+			    layer.msg(JSON.stringify(data.field));
+			    $("#uploadlist").addClass('layui-hide');
+			    return false;
+			  });
+			  
+			  
+			  
+			  
+			  
+			 
+			  
+			  
+			  
+			  
+			});
+			</script>
+	</body>
+</html>

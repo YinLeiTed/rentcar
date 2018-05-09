@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>login</title>
+		<link rel="stylesheet" href="../css3/bootstrap.min.css">
+		<link href="../css3/style.css" rel="stylesheet" type="text/css" media="all" />
+		<script type="text/javascript" src="../js3/jquery.min.js"></script>
+
+		<script src="../js3/bootstrap.min.js"></script>	
+			
+		<script type="text/javascript" src="../layui/layui.js" ></script>
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<script type="text/javascript" src="../js/iframe.js" ></script>
+	</head>
+	<body  onload="IFrameResize('myframe')">
+	 <section>
+			<div id="page-wrapper" class="sign-in-wrapper">
+				<div class="graphs">
+					<form class="layui-form">
+					<div class="sign-up">
+						<h1>创建一个用户</h1>
+						<p class="creating">对于新用户，我们提供友好的新手指南、租车贴士以及售后服务。<br>Welcome new user!</p>
+						<h2>个人信息</h2>
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>手机号* :</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="text" class="form-control" required name="phone" lay-verify="required|phone|number"/>
+								
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>密码* :</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="password" class="form-control"  required name="password" lay-verify="required|phone|number"/>
+								
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sign-u">
+							<div class="sign-up1">
+								<h4>确认密码* :</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="password" class="form-control"  required name="password2" lay-verify="required|phone|number"/>
+								
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sub_home">
+							<div class="sub_home_left">
+								<button class="layui-btn" lay-submit lay-filter="formDemo" >注&nbsp;&nbsp;册</button>
+							</div>
+							<div class="sub_home_right">
+								<p>返回&nbsp;<a href="index.html" target="_parent">主页</a></p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		
+	</section>
+		
+		<script>
+		
+		
+		layui.use(['form'], function(){
+		  form = layui.form;
+		  	  
+		 
+		 
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		  
+		 
+		});
+	</script>
+	</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7d6f32689374efcc8e28869ada8480b1</title>
+		<script type="text/javascript" src="../js/main2.js" ></script>
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    	<script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=7d6f32689374efcc8e28869ada8480b1&plugin=AMap.AdvancedInfoWindow"></script>
+		<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+		 <!-- UI组件库 1.0 -->
+	    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+	    <!-- 预加载iconfont的js -->
+	    <script src="../js/my-iconfont.js"></script>
+	    <script type="text/javascript" src="../js/area2.js" ></script>
+	    <link rel="stylesheet" href="../css/poi.css" />
+		<style type="text/css">
+			
+	        .info-title {
+	            color: white;
+	            font-size: 14px;
+	            background-color:blue;
+	            line-height: 26px;
+	            padding: 0px 0 0 6px;
+	            font-weight: lighter;
+	            letter-spacing: 1px
+	        }
+	        .info-content {
+	            font: 12px Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial;
+	            padding: 4px;
+	            color: #666666;
+	            line-height: 23px;
+	        }
+	        .info-content img {
+	            float: left;
+	            margin: 3px;
+	        }
+	         #panel {
+	            position: absolute;
+	            background-color: white;
+	            max-height: 100%;
+	            overflow-y: auto;
+	            top: 10px;
+	            right: 10px;
+	            width: 320px;
+	            height: 100%;
+	        }
+	        .layui-form-select dl dd{
+		  		padding: 0 10px;
+			    line-height: 36px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    width: 60px;
+			    float: left;
+		  	}
+		  	.layui-form-select dl dt{
+		  		padding: 0 10px;
+			    line-height: 36px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    width: 100%;
+			    float: left;
+		  	}
+	    </style>
+	</head>
+	<body  onload="IFrameResize('myframe')"  style="height: 700px;">
+		<div id="container"></div>
+		<div id="panel">
+			<div>
+				<form class="layui-form">
+					<select id="province" class="" name="province" lay-filter="province" lay-search>
+		        	
+		      		</select>  
+				</form>	         
+		    </div>
+		    <div  id="panelcontent"  class="amap-pl-pc">
+		    	<div class="amap_lib_placeSearch">
+		    		<div class="amap_lib_placeSearch_list">
+		    			<ul class="amap_lib_placeSearch_ul">
+		    				<li class="poibox" onclick="openOPI(1)">
+		    					<div class="amap_lib_placeSearch_poi poibox-icon">1</div>
+		    					<div class="poi-img" style="background-image:url(//store.is.autonavi.com/showpic/b17b795bb1b1a83cab09c4474edad770?operate=merge&amp;w=90&amp;h=56&amp;position=5)"></div>
+		    					<h3 class="poi-title">
+		    						<span class="poi-name">四海一家(重庆店)</span>
+		    					</h3>
+		    					<div class="poi-info">
+		    						<p class="poi-addr">地址：嘴文华街东路重庆大剧院B2层</p>
+		    						<p class="poi-tel">电话：023-61883339;023-61883338</p>
+		    					</div>
+		    					<div class="clear"></div>
+		    				</li>
+		    				<li class="poibox"  onclick="openOPI(2)">
+		    					<div class="amap_lib_placeSearch_poi poibox-icon">2</div>
+		    					<div class="poi-img" style="background-image:url(//store.is.autonavi.com/showpic/b17b795bb1b1a83cab09c4474edad770?operate=merge&amp;w=90&amp;h=56&amp;position=5)"></div>
+		    					<h3 class="poi-title">
+		    						<span class="poi-name">四海一家(重庆店)</span>
+		    					</h3>
+		    					<div class="poi-info">
+		    						<p class="poi-addr">地址：嘴文华街东路重庆大剧院B2层</p>
+		    						<p class="poi-tel">电话：023-61883339;023-61883338</p>
+		    					</div>
+		    					<div class="clear"></div>
+		    				</li>
+		    				
+		    			</ul>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<script type="text/javascript">
+			layui.use(['form','layer','table'], function(){
+		 	 	form = layui.form,
+		 	 	table=layui.table,
+		 	 	layer=layui.layer;
+		 	 	area_init($("#province"));
+		 	 	//初始化城市
+		 	 	map.setCity("东城区");
+		 	 	
+		 	 	form.on('select(province)', function(data){
+				  map.setCity(data.value);
+				  //console.log(data.value); //得到被选中的值
+				}); 
+				
+				
+		  	});
+		  	//根据位置打开不同坐标
+		  	function openOPI(number){
+		  		
+		  		infoWindow.open(map, lnglats[number]);
+		  		//console.log(number+"---"+lnglats[number])
+		  	}
+		  	
+		  	
+			var map = new AMap.Map("container", {resizeEnable: true, zoom: 8});
+			//鼠标点击获取经纬度
+			var clickEventListener = map.on('click', function(e) {
+				layer.msg(e.lnglat.getLng() + ',' + e.lnglat.getLat());
+				console.log("经纬度："+e.lnglat.getLng() + ',' + e.lnglat.getLat());
+		    });
+		    
+		    var content='<div class="info-title">极速租车</div><div class="info-content">' +
+		            '<img style="height: 100px;" src="../img/1.jpg">' +
+		            '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br/>' +
+		            '<a target="_blank" href = "http://mobile.amap.com/">点击下载高德地图</a></div>';
+		    var lnglats = [
+		        [116.368904, 39.923423],
+		        [116.382122, 39.921176],
+		        [116.387271, 39.922501],
+		        [116.398258, 39.914600]
+		    ];
+				   
+		    var infoWindow = new AMap.AdvancedInfoWindow({offset: new AMap.Pixel(0, 0)});
+		    //初始化地图对象，加载地图
+		     AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
+
+		        if (!SvgMarker.supportSvg) {
+		            alert('当前环境不支持SVG');
+		        }
+		            
+				    
+				    for (var i = 0, marker; i < lnglats.length; i++) {
+				       
+				        var marker = new SvgMarker(
+				            new SvgMarker.Shape.IconFont({
+				                symbolJs: '../js/my-iconfont.js',
+				                icon: 'icon-mapmarkerradius',
+				                size: 50,
+				                offset: [-25, -35],
+				                fillColor: 'green',
+				                
+				            }), {
+				                map: map,
+				                //iconLabel: ''+(i+1),
+				                position: lnglats[i],
+				                showPositionPoint: {
+				                    color: 'orange'
+				                }
+				            });
+				        //marker.content = i;
+				        marker.on('click', markerClick);
+				        marker.emit('click', {target: marker});
+				    }
+	        });
+		    function markerClick(e) {
+		        //infoWindow.setContent(e.target.content+content);
+		        infoWindow.setContent(content);
+		        infoWindow.open(map, e.target.getPosition());
+		    }
+		    map.setFitView();
+		</script>
+	</body>
+</html>

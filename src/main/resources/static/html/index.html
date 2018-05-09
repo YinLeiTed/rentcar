@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script type="text/javascript" src="../js/main.js" ></script>
+		<link rel="stylesheet" href="../css3/style.css" />
+		<style>
+			a{ text-decoration:none} 
+			a:link,a:hover{
+				text-decoration: none;
+			}
+			#login a:hover{
+				text-decoration: underline;
+			}
+			.footer-logo{
+			    font-family: 'Ubuntu Condensed', sans-serif;
+			    font-size: 40px;
+			    color: #01a185;
+			}
+			.footer-logo span{
+			    font-family: 'Ubuntu Condensed', sans-serif;
+			    font-size: 40px;
+			    color: #f3c500;
+			}
+			#loginAndRegister  a {
+				   display: inline;
+				   padding: 0 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<ul class="layui-nav" lay-filter="">
+			  <li class="layui-nav-item">
+			  	<div class="footer-logo">
+					<span>Fa</span>rent
+				</div>
+			  </li>
+			  <li class="layui-nav-item layui-this"><a id="main1">主页</a></li>
+			  <li class="layui-nav-item"><a id="main2">自主租车</a></li>
+			  <li class="layui-nav-item"><a id="main3">营业网点</a></li>
+			  <li class="layui-nav-item"><a id="main4">体验分享</a></li>
+			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide" lay-unselect="">
+			    <a href="#"><img src="../image3/user.png" class="layui-nav-img">我门</a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="javascript:;">修改信息</a></dd>
+			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+			      <dd><a href="javascript:;">安全管理</a></dd>
+			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+			      <dd><a href="javascript:;">退了</a></dd>
+			    </dl>
+			  </li>
+			  <li id="loginAndRegister" class="layui-nav-item layui-layout-right" style="margin-right: 20px;">
+			  	<a id="login">登录</a>&nbsp;|&nbsp;<a id="register">注册</a>
+			  </li>
+			
+			  
+			</ul>
+		</header>
+		
+		
+		<script>
+			
+			$("#my").click(function(){
+				$("#login").removeClass('layui-hide');
+				$(this).addClass('layui-hide')
+			})
+			
+			
+		    $(function(){
+				$("#myframe").attr("src", "carousel.html")
+			})
+			$("#main1").click(function() {
+				$("#myframe").attr("src", "carousel.html")
+			})
+			$("#main2").click(function() {
+				$("#myframe").attr("src", "cars.html")
+			})
+			$("#main3").click(function() {
+				$("#myframe").attr("src", "map.html")
+			})
+			$("#main4").click(function() {
+				$("#myframe").attr("src", "image.html")
+			})
+		
+			
+		</script>
+	    	
+	  		
+	  		
+	  		
+	  <div id="my" class="layui-anim-upbit">
+	  	<iframe id="myframe"  width="100%" height="100%" scrolling="no" src=""></iframe>
+	  </div>	
+	  
+	  <!--iframe高度自适应-->
+	  <script type="text/javascript">
+	    var testFrame = document.getElementById('myframe');
+	    testFrame.addEventListener('load', function() {
+	      testFrame.height = getHeight(testFrame.contentDocument);;
+	    });
+	    
+	  </script>
+		<!--footer section start-->	
+		    
+		<footer>
+			<div class="footer-top">
+					
+				
+				<div class="container">
+
+					<div class="foo-grids">
+						<div class="col-md-2 col-md-offset-1 footer-grid">
+							<h4 class="footer-head">新手指南</h4>
+							<ul>
+								<li><a href="#">注册新用户</a></li>						
+								<li><a href="#">预订演示</a></li>
+								<li><a href="#">取消或修改订单</a></li>
+							</ul>
+						</div>
+						<div class="col-md-2 footer-grid">
+							<h4 class="footer-head">租车贴士</h4>
+							<ul>
+								<li><a href="#">租车流程</a></li>						
+								<li><a href="#">精彩活动</a></li>
+								<li><a href="#">接送服务</a></li>
+							</ul>
+						</div>
+						<div class="col-md-2 footer-grid">
+							<h4 class="footer-head">售后服务</h4>
+							<ul>
+								<li><a href="#">建议专区</a></li>	
+							</ul>
+						</div>
+						<div class="col-md-2 footer-grid">
+							<h4 class="footer-head">会员服务</h4>
+							<ul>
+								<li><a href="#">忘记密码</a></li>
+								<li><a href="#">等级说明</a></li>	
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid">
+							<h4 class="footer-head">联系我们</h4>
+							<span class="hq">我们的信息</span>
+							<address>
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-map-marker"></span></li>
+									<li>重庆市沙坪坝区大学城极速租车</li>
+									<div class="clearfix"></div>
+								</ul>	
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-earphone"></span></li>
+									<li>+86 15736267103</li>
+									<div class="clearfix"></div>
+								</ul>	
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-envelope"></span></li>
+									<li><a href="mailto:mr.ted.yin@gmail.com">mr.ted.yin@gmail.com</a></li>
+									<div class="clearfix"></div>
+								</ul>						
+							</address>
+						</div>
+						<div class="clearfix"></div>
+					</div>						
+				</div>	
+			</div>	
+			<div class="footer-bottom text-center">
+			<div class="container">
+				<div class="footer-logo">
+					<a href="index.html"><span>Fa</span>rent</a>
+				</div>				
+				<p>Copyright &copy; 2018.极速租车 All rights reserved</p>	
+			</div>
+		</div>
+		</footer>
+        <!--footer section end-->
+        
+        
+        <script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use(['element','layer'], function(){
+			  var element = layui.element;
+			  
+				$("#login").click(function(){	
+					layeropen('登录','login.html',['500px', '690px'])
+				})
+				$("#register").click(function(){	
+					layeropen('注册','register.html',['500px', '690px'])
+				})
+			  //…
+			});
+			function layeropen(mytitle,mycontent,myarea){
+				layer.open({
+					  type: 2
+					  ,title:mytitle
+					  ,content: mycontent
+					  ,area: myarea
+					  ,resize:true
+        			  ,maxmin: true//放大缩小
+        			  ,shade: 0    //最小化后可以，继续操作
+					  ,success: function(layero, index){
+							
+					  }
+					  ,end:function(){
+//					  		$("#my").removeClass('layui-hide');
+//							$("#login").addClass('layui-hide')
+				
+					  }
+					  ,zIndex: layer.zIndex //重点1
+				      ,success: function(layero){
+				          layer.setTop(layero); //重点2
+				       }
+				}); 
+			}
+		</script>
+	</body>
+</html>
