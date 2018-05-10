@@ -78,10 +78,10 @@
 		    <div  id="panelcontent"  class="amap-pl-pc">
 		    	<div class="amap_lib_placeSearch">
 		    		<div class="amap_lib_placeSearch_list">
-		    			<ul class="amap_lib_placeSearch_ul">
-		    				<li class="poibox" onclick="openOPI(1)">
+		    			<ul class="amap_lib_placeSearch_ul" id="mycontent">
+		    				<!--<li class="poibox" onclick="openOPI(1)">
 		    					<div class="amap_lib_placeSearch_poi poibox-icon">1</div>
-		    					<div class="poi-img" style="background-image:url(//store.is.autonavi.com/showpic/b17b795bb1b1a83cab09c4474edad770?operate=merge&amp;w=90&amp;h=56&amp;position=5)"></div>
+		    					<div class="poi-img"><img style="height: 50px;" src="../img/1.jpg"></div>
 		    					<h3 class="poi-title">
 		    						<span class="poi-name">四海一家(重庆店)</span>
 		    					</h3>
@@ -90,20 +90,7 @@
 		    						<p class="poi-tel">电话：023-61883339;023-61883338</p>
 		    					</div>
 		    					<div class="clear"></div>
-		    				</li>
-		    				<li class="poibox"  onclick="openOPI(2)">
-		    					<div class="amap_lib_placeSearch_poi poibox-icon">2</div>
-		    					<div class="poi-img" style="background-image:url(//store.is.autonavi.com/showpic/b17b795bb1b1a83cab09c4474edad770?operate=merge&amp;w=90&amp;h=56&amp;position=5)"></div>
-		    					<h3 class="poi-title">
-		    						<span class="poi-name">四海一家(重庆店)</span>
-		    					</h3>
-		    					<div class="poi-info">
-		    						<p class="poi-addr">地址：嘴文华街东路重庆大剧院B2层</p>
-		    						<p class="poi-tel">电话：023-61883339;023-61883338</p>
-		    					</div>
-		    					<div class="clear"></div>
-		    				</li>
-		    				
+		    				</li>-->
 		    			</ul>
 		    		</div>
 		    	</div>
@@ -116,15 +103,74 @@
 		 	 	layer=layui.layer;
 		 	 	area_init($("#province"));
 		 	 	//初始化城市
-		 	 	map.setCity("东城区");
+		 	 	map.setCity("沙坪坝区");
 		 	 	
 		 	 	form.on('select(province)', function(data){
-				  map.setCity(data.value);
-				  //console.log(data.value); //得到被选中的值
+				 	map.setCity(data.value);
+                    result=myajax("../CarStoreTable/getlocations/"+data.value,"get");
+                    lnglats=result.locations;
+                    
+                    setContent($("#mycontent"),result.all);
+                    //console.log(result); //得到被选中的值
+                    
+                    AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
+
+				        if (!SvgMarker.supportSvg) {
+				            alert('当前环境不支持SVG');
+				        }
+						    for (var i = 0, marker; i < lnglats.length; i++) {
+						        var marker = new SvgMarker(
+						            new SvgMarker.Shape.IconFont({
+						                symbolJs: '../js/my-iconfont.js',
+						                icon: 'icon-mapmarkerradius',
+						                size: 50,
+						                offset: [-25, -35],
+						                fillColor: 'green',
+						                
+						            }), {
+						                map: map,
+						                //iconLabel: ''+(i+1),
+						                position: lnglats[i],
+						                showPositionPoint: {
+						                    color: 'orange'
+						                }
+						            });
+						        marker.content = '<div class="info-title">'+result.all[i].nameCarStore+'</div><div class="info-content">' +
+									            '<img style="height: 100px;" src="'+result.all[i].imageCarStore+'">' +
+									            '地址：'+result.all[i].addressCarStore+'<br/>' +
+									            '电话：'+result.all[i].phoneCarStore+'<br/>' +
+									            '时间：'+result.all[i].startWorkCarStore+':00-'+result.all[i].endWorkCarStore+':00' +
+									            '<a target="_blank" href = "http://mobile.amap.com/" style="margin-left: 155px;color: #0d81e8;text-decoration: underline;">进入店铺</a></div>';
+						        marker.on('click', markerClick);
+						        marker.emit('click', {target: marker});
+						    }
+			        });
 				}); 
 				
 				
 		  	});
+		  	
+		  	function setContent(aim,contents)
+		  	{
+		  		aim.empty();
+		  		for(var i in contents)
+		  		{
+					var j=i;
+		  			aim.append('<li class="poibox" onclick="openOPI('+(i)+')">'
+		    					+'<div class="amap_lib_placeSearch_poi poibox-icon">'+(++j)+'</div>'
+		    					+'<div class="poi-img"><img style="height: 100px;" src="'+contents[i].imageCarStore+'"></div>'
+		    					+'<h3 class="poi-title">'
+		    					+	'<span class="poi-name">'+contents[i].nameCarStore+'</span>'
+		    					+'</h3>'
+		    					+'<div class="poi-info">'
+		    					+	'<p class="poi-addr">地址：'+contents[i].addressCarStore+'</p>'
+		    					+	'<p class="poi-tel">电话：'+contents[i].phoneCarStore+'</p>'
+		    					+	'<p class="poi-tel">时间：'+contents[i].startWorkCarStore+':00-'+contents[i].endWorkCarStore+':00</p>'
+		    					+'</div>'
+		    					+'<div class="clear"></div>'
+		    					+'</li>');
+		  		}
+		  	}
 		  	//根据位置打开不同坐标
 		  	function openOPI(number){
 		  		
@@ -140,52 +186,15 @@
 				console.log("经纬度："+e.lnglat.getLng() + ',' + e.lnglat.getLat());
 		    });
 		    
-		    var content='<div class="info-title">极速租车</div><div class="info-content">' +
-		            '<img style="height: 100px;" src="../img/1.jpg">' +
-		            '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br/>' +
-		            '<a target="_blank" href = "http://mobile.amap.com/">点击下载高德地图</a></div>';
-		    var lnglats = [
-		        [116.368904, 39.923423],
-		        [116.382122, 39.921176],
-		        [116.387271, 39.922501],
-		        [116.398258, 39.914600]
-		    ];
-				   
+		    var content;
+		    var lnglats;
+			var result;	   
 		    var infoWindow = new AMap.AdvancedInfoWindow({offset: new AMap.Pixel(0, 0)});
 		    //初始化地图对象，加载地图
-		     AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
-
-		        if (!SvgMarker.supportSvg) {
-		            alert('当前环境不支持SVG');
-		        }
-		            
-				    
-				    for (var i = 0, marker; i < lnglats.length; i++) {
-				       
-				        var marker = new SvgMarker(
-				            new SvgMarker.Shape.IconFont({
-				                symbolJs: '../js/my-iconfont.js',
-				                icon: 'icon-mapmarkerradius',
-				                size: 50,
-				                offset: [-25, -35],
-				                fillColor: 'green',
-				                
-				            }), {
-				                map: map,
-				                //iconLabel: ''+(i+1),
-				                position: lnglats[i],
-				                showPositionPoint: {
-				                    color: 'orange'
-				                }
-				            });
-				        //marker.content = i;
-				        marker.on('click', markerClick);
-				        marker.emit('click', {target: marker});
-				    }
-	        });
+		    
 		    function markerClick(e) {
-		        //infoWindow.setContent(e.target.content+content);
-		        infoWindow.setContent(content);
+		        infoWindow.setContent(e.target.content);
+		        //infoWindow.setContent(content);
 		        infoWindow.open(map, e.target.getPosition());
 		    }
 		    map.setFitView();

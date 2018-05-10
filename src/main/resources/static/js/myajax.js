@@ -1,22 +1,28 @@
-function myajax(myaddress,mydata,myresult){
+function myajax(myaddress,mydata,mytype){
+    var mydata;
 	$.ajax({
-         type: "post",
+         type: mytype,
          url: myaddress,
          data: mydata,
+         async:false,
          dataType: "json",
          success: function(data){
-            myresult=data;
+             mydata=data;
       	}
     });
+    return mydata;
 }
-function myajax(myaddress,myresult){
-	$.ajax({
-         type: "post",
+function myajax(myaddress,mytype){
+    var mydata;
+    $.ajax({
+         type: mytype,
          url: myaddress,
          dataType: "json",
+         async:false,
          success: function(data){
-            myresult=data;
+             mydata=data;
       	}
     });
+    return mydata;
 }
 	

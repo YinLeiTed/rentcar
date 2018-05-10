@@ -3,6 +3,8 @@ package com.yinlei.rentcar.service;
 
 import com.yinlei.rentcar.bean.CarStoreTable;
 import com.yinlei.rentcar.repository.CarStoreTableRepository;
+import com.yinlei.rentcar.repository.LocationTableRepository;
+import com.yinlei.rentcar.tools.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -17,6 +21,8 @@ import java.util.Optional;
 public class CarStoreTableService {
     @Autowired
     private CarStoreTableRepository dao;
+    @Autowired
+    private LocationTableRepository dao2;
     private Optional<CarStoreTable> u;
 
     public Long getCount(){
@@ -47,5 +53,13 @@ public class CarStoreTableService {
 
     public void update(CarStoreTable u) {
         dao.save(u);
+    }
+
+    public Map getLocations(String address) {
+        HashMap<String, Object> map=new HashMap<>();
+
+        map.put("locations",Location.alterLocations(dao2.findAllById(dao.findAllByAddressCarStore(address))));
+        map.put("all",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%"));
+        return map;
     }
 }

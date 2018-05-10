@@ -1,12 +1,9 @@
 package com.yinlei.rentcar.controller;
 
-import com.yinlei.rentcar.repository.CarStoreTableRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -19,8 +16,6 @@ import java.util.Map;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @Autowired
-    private CarStoreTableRepository dao;
 
     @RequestMapping("/hello")
     public String helloHtml(HashMap<String, Object> map) {
@@ -28,14 +23,7 @@ public class HelloController {
         return "/index";
     }
 
-    @RequestMapping("/image")
-    @ResponseBody
-    public Map imageHtml() {
-        HashMap<String, Object> map=new HashMap<>();
-        map.put("all",dao.findAllByAddressCarStore("沙坪坝区"));
-        map.put("intall",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%沙坪坝区%"));
-        return map;
-    }
+
 
     @RequestMapping("upload")
     public String fileUpload(@RequestParam("images") MultipartFile file){

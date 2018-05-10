@@ -35,6 +35,17 @@
 						</div>
 						<div class="sign-u">
 							<div class="sign-up1">
+								<h4>身份证* :</h4>
+							</div>
+							<div class="sign-up2">
+								
+									<input type="text" class="form-control" required name="idcardUser" lay-verify="required|identity"/>
+								
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="sign-u">
+							<div class="sign-up1">
 								<h4>密码* :</h4>
 							</div>
 							<div class="sign-up2">
@@ -50,7 +61,7 @@
 							</div>
 							<div class="sign-up2">
 								
-									<input type="password" class="form-control"  required name="passwordUser2" lay-verify="required"/>
+									<input type="password" class="form-control"  required name="passwordUser2" lay-verify="pass"/>
 								
 							</div>
 							<div class="clearfix"> </div>
@@ -77,8 +88,14 @@
 		layui.use(['form'], function(){
 		  form = layui.form;
 		  	  
-		 
-		 
+		 //重复密码验证
+		 form.verify({
+		  pass: function(value, item){ //value：表单的值、item：表单的DOM对象
+		    if($("input[name='passwordUser']").val()!=value){
+		      return '两次密码必须相同';
+		    }
+		  }
+		});  
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
 		    //layer.msg(JSON.stringify(data.field));
