@@ -1,15 +1,13 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-public class Usertable {
+@Table(name = "user_table", schema = "rent_car", catalog = "")
+public class UserTable {
     private int idUser;
     private String nicknameUser;
     private String phoneUser;
@@ -28,7 +26,7 @@ public class Usertable {
     private Integer scoreUser;
 
     @Id
-    @Column(name = "idUser", nullable = false)
+    @Column(name = "id_user", nullable = false)
     public int getIdUser() {
         return idUser;
     }
@@ -38,7 +36,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "nicknameUser", nullable = true, length = 50)
+    @Column(name = "nickname_user", nullable = true, length = 50)
     public String getNicknameUser() {
         return nicknameUser;
     }
@@ -48,7 +46,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "phoneUser", nullable = true, length = 11)
+    @Column(name = "phone_user", nullable = true, length = 11)
     public String getPhoneUser() {
         return phoneUser;
     }
@@ -58,7 +56,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "emailUser", nullable = true, length = 50)
+    @Column(name = "email_user", nullable = true, length = 50)
     public String getEmailUser() {
         return emailUser;
     }
@@ -68,7 +66,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "passwordUser", nullable = true, length = 20)
+    @Column(name = "password_user", nullable = true, length = 20)
     public String getPasswordUser() {
         return passwordUser;
     }
@@ -78,7 +76,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "idcardUser", nullable = true, length = 20)
+    @Column(name = "idcard_user", nullable = true, length = 20)
     public String getIdcardUser() {
         return idcardUser;
     }
@@ -88,7 +86,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "sexUser", nullable = true)
+    @Column(name = "sex_user", nullable = true)
     public byte[] getSexUser() {
         return sexUser;
     }
@@ -98,7 +96,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "birthdayUser", nullable = true)
+    @Column(name = "birthday_user", nullable = true)
     public Date getBirthdayUser() {
         return birthdayUser;
     }
@@ -108,7 +106,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "provicneUser", nullable = true)
+    @Column(name = "provicne_user", nullable = true)
     public byte[] getProvicneUser() {
         return provicneUser;
     }
@@ -118,7 +116,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "cityUser", nullable = true)
+    @Column(name = "city_user", nullable = true)
     public byte[] getCityUser() {
         return cityUser;
     }
@@ -128,7 +126,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "townUser", nullable = true)
+    @Column(name = "town_user", nullable = true)
     public byte[] getTownUser() {
         return townUser;
     }
@@ -138,7 +136,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "areaUser", nullable = true)
+    @Column(name = "area_user", nullable = true)
     public byte[] getAreaUser() {
         return areaUser;
     }
@@ -148,7 +146,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "crimeUser", nullable = true)
+    @Column(name = "crime_user", nullable = true)
     public Integer getCrimeUser() {
         return crimeUser;
     }
@@ -158,7 +156,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "crimeInfoUser", nullable = true, length = 250)
+    @Column(name = "crime_info_user", nullable = true, length = 250)
     public String getCrimeInfoUser() {
         return crimeInfoUser;
     }
@@ -168,7 +166,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "amountUser", nullable = true)
+    @Column(name = "amount_user", nullable = true)
     public Integer getAmountUser() {
         return amountUser;
     }
@@ -178,7 +176,7 @@ public class Usertable {
     }
 
     @Basic
-    @Column(name = "scoreUser", nullable = true)
+    @Column(name = "score_user", nullable = true)
     public Integer getScoreUser() {
         return scoreUser;
     }
@@ -191,23 +189,23 @@ public class Usertable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Usertable usertable = (Usertable) o;
-        return idUser == usertable.idUser &&
-                Objects.equals(nicknameUser, usertable.nicknameUser) &&
-                Objects.equals(phoneUser, usertable.phoneUser) &&
-                Objects.equals(emailUser, usertable.emailUser) &&
-                Objects.equals(passwordUser, usertable.passwordUser) &&
-                Objects.equals(idcardUser, usertable.idcardUser) &&
-                Arrays.equals(sexUser, usertable.sexUser) &&
-                Objects.equals(birthdayUser, usertable.birthdayUser) &&
-                Arrays.equals(provicneUser, usertable.provicneUser) &&
-                Arrays.equals(cityUser, usertable.cityUser) &&
-                Arrays.equals(townUser, usertable.townUser) &&
-                Arrays.equals(areaUser, usertable.areaUser) &&
-                Objects.equals(crimeUser, usertable.crimeUser) &&
-                Objects.equals(crimeInfoUser, usertable.crimeInfoUser) &&
-                Objects.equals(amountUser, usertable.amountUser) &&
-                Objects.equals(scoreUser, usertable.scoreUser);
+        UserTable userTable = (UserTable) o;
+        return idUser == userTable.idUser &&
+                Objects.equals(nicknameUser, userTable.nicknameUser) &&
+                Objects.equals(phoneUser, userTable.phoneUser) &&
+                Objects.equals(emailUser, userTable.emailUser) &&
+                Objects.equals(passwordUser, userTable.passwordUser) &&
+                Objects.equals(idcardUser, userTable.idcardUser) &&
+                Arrays.equals(sexUser, userTable.sexUser) &&
+                Objects.equals(birthdayUser, userTable.birthdayUser) &&
+                Arrays.equals(provicneUser, userTable.provicneUser) &&
+                Arrays.equals(cityUser, userTable.cityUser) &&
+                Arrays.equals(townUser, userTable.townUser) &&
+                Arrays.equals(areaUser, userTable.areaUser) &&
+                Objects.equals(crimeUser, userTable.crimeUser) &&
+                Objects.equals(crimeInfoUser, userTable.crimeInfoUser) &&
+                Objects.equals(amountUser, userTable.amountUser) &&
+                Objects.equals(scoreUser, userTable.scoreUser);
     }
 
     @Override
@@ -220,48 +218,5 @@ public class Usertable {
         result = 31 * result + Arrays.hashCode(townUser);
         result = 31 * result + Arrays.hashCode(areaUser);
         return result;
-    }
-
-    public Usertable() {
-    }
-
-    public Usertable(String nicknameUser, String phoneUser, String emailUser, String passwordUser, String idcardUser, byte[] sexUser, Date birthdayUser, byte[] provicneUser, byte[] cityUser, byte[] townUser, byte[] areaUser, Integer crimeUser, String crimeInfoUser, Integer amountUser, Integer scoreUser) {
-        this.nicknameUser = nicknameUser;
-        this.phoneUser = phoneUser;
-        this.emailUser = emailUser;
-        this.passwordUser = passwordUser;
-        this.idcardUser = idcardUser;
-        this.sexUser = sexUser;
-        this.birthdayUser = birthdayUser;
-        this.provicneUser = provicneUser;
-        this.cityUser = cityUser;
-        this.townUser = townUser;
-        this.areaUser = areaUser;
-        this.crimeUser = crimeUser;
-        this.crimeInfoUser = crimeInfoUser;
-        this.amountUser = amountUser;
-        this.scoreUser = scoreUser;
-    }
-
-    @Override
-    public String toString() {
-        return "Usertable{" +
-                "idUser=" + idUser +
-                ", nicknameUser='" + nicknameUser + '\'' +
-                ", phoneUser='" + phoneUser + '\'' +
-                ", emailUser='" + emailUser + '\'' +
-                ", passwordUser='" + passwordUser + '\'' +
-                ", idcardUser='" + idcardUser + '\'' +
-                ", sexUser=" + Arrays.toString(sexUser) +
-                ", birthdayUser=" + birthdayUser +
-                ", provicneUser=" + Arrays.toString(provicneUser) +
-                ", cityUser=" + Arrays.toString(cityUser) +
-                ", townUser=" + Arrays.toString(townUser) +
-                ", areaUser=" + Arrays.toString(areaUser) +
-                ", crimeUser=" + crimeUser +
-                ", crimeInfoUser='" + crimeInfoUser + '\'' +
-                ", amountUser=" + amountUser +
-                ", scoreUser=" + scoreUser +
-                '}';
     }
 }

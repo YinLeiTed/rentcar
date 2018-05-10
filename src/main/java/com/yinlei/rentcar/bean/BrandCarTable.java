@@ -1,18 +1,16 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Brandcartable {
+@Table(name = "brand_car_table", schema = "rent_car", catalog = "")
+public class BrandCarTable {
     private int idBrandCar;
     private String brandBrandCar;
 
     @Id
-    @Column(name = "idBrandCar", nullable = false)
+    @Column(name = "id_brand_car", nullable = false)
     public int getIdBrandCar() {
         return idBrandCar;
     }
@@ -22,7 +20,7 @@ public class Brandcartable {
     }
 
     @Basic
-    @Column(name = "brandBrandCar", nullable = true, length = 50)
+    @Column(name = "brand_brand_car", nullable = true, length = 50)
     public String getBrandBrandCar() {
         return brandBrandCar;
     }
@@ -35,7 +33,7 @@ public class Brandcartable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Brandcartable that = (Brandcartable) o;
+        BrandCarTable that = (BrandCarTable) o;
         return idBrandCar == that.idBrandCar &&
                 Objects.equals(brandBrandCar, that.brandBrandCar);
     }
@@ -44,20 +42,5 @@ public class Brandcartable {
     public int hashCode() {
 
         return Objects.hash(idBrandCar, brandBrandCar);
-    }
-
-    public Brandcartable() {
-    }
-
-    public Brandcartable(String brandBrandCar) {
-        this.brandBrandCar = brandBrandCar;
-    }
-
-    @Override
-    public String toString() {
-        return "Brandcartable{" +
-                "idBrandCar=" + idBrandCar +
-                ", brandBrandCar='" + brandBrandCar + '\'' +
-                '}';
     }
 }

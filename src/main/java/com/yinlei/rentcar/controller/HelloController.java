@@ -1,5 +1,7 @@
 package com.yinlei.rentcar.controller;
 
+import com.yinlei.rentcar.repository.CarStoreTableRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,10 +13,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/hello")
 public class HelloController {
+
+    @Autowired
+    private CarStoreTableRepository dao;
+
     @RequestMapping("/hello")
     public String helloHtml(HashMap<String, Object> map) {
         map.put("hello", "欢迎进入HTML页面");
@@ -22,8 +29,12 @@ public class HelloController {
     }
 
     @RequestMapping("/image")
-    public String imageHtml() {
-        return "/images";
+    @ResponseBody
+    public Map imageHtml() {
+        HashMap<String, Object> map=new HashMap<>();
+        map.put("all",dao.findAllByAddressCarStore("沙坪坝区"));
+        map.put("intall",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%沙坪坝区%"));
+        return map;
     }
 
     @RequestMapping("upload")

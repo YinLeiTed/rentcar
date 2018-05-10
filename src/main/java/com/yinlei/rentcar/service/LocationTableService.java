@@ -1,8 +1,8 @@
 package com.yinlei.rentcar.service;
 
 
-import com.yinlei.rentcar.bean.User;
-import com.yinlei.rentcar.repository.UserRepository;
+import com.yinlei.rentcar.bean.LocationTable;
+import com.yinlei.rentcar.repository.LocationTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,21 +10,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class UserService {
+public class LocationTableService {
     @Autowired
-    private UserRepository dao;
-    private Optional<User> u;
+    private LocationTableRepository dao;
+    private Optional<LocationTable> u;
 
     public Long getCount(){
         return dao.count();
     }
 
-    public void insert(User u) {
+    public void insert(LocationTable u) {
         dao.save(u);
     }
 
@@ -32,7 +31,7 @@ public class UserService {
         dao.deleteById(id);
     }
 
-    public User getById(Integer id) {
+    public LocationTable getById(Integer id) {
         u = dao.findById(id);
         if(u.isPresent())
         {
@@ -41,23 +40,12 @@ public class UserService {
         return null;
     }
 
-
-    public List<User> getByNameLike(String name) {
-        return dao.findAllByNameLike(name);
-    }
-    public List<User> getByAgeBetween(Integer age,Integer age2) {
-        return dao.findAllByAgeBetween(age,age2);
-    }
-    public List<User> getAllByName(String name) {
-        return dao.findAllByName(name);
-    }
-
-    public Page<User> getByPage(int page, int limit) {
+    public Page<LocationTable> getByPage(int page, int limit) {
         Pageable p=PageRequest.of(page,limit);
         return dao.findAll(p);
     }
 
-    public void update(User u) {
+    public void update(LocationTable u) {
         dao.save(u);
     }
 }

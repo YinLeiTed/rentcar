@@ -9,6 +9,14 @@ public class User {
     private Integer age;
     private String name;
 
+    public User(Integer age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public User() {
+    }
+
     @Id
     @Column(name = "id", nullable = false)
 //    @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -54,14 +62,6 @@ public class User {
     public int hashCode() {
 
         return Objects.hash(id, age, name);
-    }
-
-    public User(Integer age, String name) {
-        this.age = age;
-        this.name = name;
-    }
-
-    public User() {
     }
 
     @Override

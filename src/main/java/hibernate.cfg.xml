@@ -6,19 +6,20 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/rent_car</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping class="com.yinlei.rentcar.bean.Activitytable"/>
-        <mapping class="com.yinlei.rentcar.bean.Advisetable"/>
-        <mapping class="com.yinlei.rentcar.bean.Brandcartable"/>
-        <mapping class="com.yinlei.rentcar.bean.Carstoretable"/>
-        <mapping class="com.yinlei.rentcar.bean.Cartable"/>
-        <mapping class="com.yinlei.rentcar.bean.Citytable"/>
-        <mapping class="com.yinlei.rentcar.bean.Ordertable"/>
-        <mapping class="com.yinlei.rentcar.bean.Otherservicetable"/>
-        <mapping class="com.yinlei.rentcar.bean.Provincetable"/>
-        <mapping class="com.yinlei.rentcar.bean.Sharetable"/>
+        <mapping class="com.yinlei.rentcar.bean.ActivityTable"/>
+        <mapping class="com.yinlei.rentcar.bean.AdviseTable"/>
+        <mapping class="com.yinlei.rentcar.bean.BrandCarTable"/>
+        <mapping class="com.yinlei.rentcar.bean.CarStoreTable"/>
+        <mapping class="com.yinlei.rentcar.bean.CarTable"/>
+        <mapping class="com.yinlei.rentcar.bean.CityTable"/>
+        <mapping class="com.yinlei.rentcar.bean.LocationTable"/>
+        <mapping class="com.yinlei.rentcar.bean.OrderTable"/>
+        <mapping class="com.yinlei.rentcar.bean.OtherServiceTable"/>
+        <mapping class="com.yinlei.rentcar.bean.ProvinceTable"/>
+        <mapping class="com.yinlei.rentcar.bean.ShareTable"/>
         <mapping class="com.yinlei.rentcar.bean.User"/>
-        <mapping class="com.yinlei.rentcar.bean.Usertable"/>
-        <mapping class="com.yinlei.rentcar.bean.Viptable"/>
+        <mapping class="com.yinlei.rentcar.bean.UserTable"/>
+        <mapping class="com.yinlei.rentcar.bean.VipTable"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

@@ -1,19 +1,17 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Otherservicetable {
+@Table(name = "other_service_table", schema = "rent_car", catalog = "")
+public class OtherServiceTable {
     private int idOtherService;
     private String nameOtherService;
     private Integer priceOtherService;
 
     @Id
-    @Column(name = "idOtherService", nullable = false)
+    @Column(name = "id_other_service", nullable = false)
     public int getIdOtherService() {
         return idOtherService;
     }
@@ -23,7 +21,7 @@ public class Otherservicetable {
     }
 
     @Basic
-    @Column(name = "nameOtherService", nullable = true, length = 50)
+    @Column(name = "name_other_service", nullable = true, length = 50)
     public String getNameOtherService() {
         return nameOtherService;
     }
@@ -33,7 +31,7 @@ public class Otherservicetable {
     }
 
     @Basic
-    @Column(name = "priceOtherService", nullable = true)
+    @Column(name = "price_other_service", nullable = true)
     public Integer getPriceOtherService() {
         return priceOtherService;
     }
@@ -46,7 +44,7 @@ public class Otherservicetable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Otherservicetable that = (Otherservicetable) o;
+        OtherServiceTable that = (OtherServiceTable) o;
         return idOtherService == that.idOtherService &&
                 Objects.equals(nameOtherService, that.nameOtherService) &&
                 Objects.equals(priceOtherService, that.priceOtherService);
@@ -56,23 +54,5 @@ public class Otherservicetable {
     public int hashCode() {
 
         return Objects.hash(idOtherService, nameOtherService, priceOtherService);
-    }
-
-    public Otherservicetable() {
-    }
-
-    public Otherservicetable(String nameOtherService, Integer priceOtherService) {
-
-        this.nameOtherService = nameOtherService;
-        this.priceOtherService = priceOtherService;
-    }
-
-    @Override
-    public String toString() {
-        return "Otherservicetable{" +
-                "idOtherService=" + idOtherService +
-                ", nameOtherService='" + nameOtherService + '\'' +
-                ", priceOtherService=" + priceOtherService +
-                '}';
     }
 }

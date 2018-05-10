@@ -1,7 +1,7 @@
 package com.yinlei.rentcar.controller;
 
 import com.yinlei.rentcar.bean.User;
-import com.yinlei.rentcar.bean.Usertable;
+import com.yinlei.rentcar.bean.UserTable;
 import com.yinlei.rentcar.service.UserService;
 import com.yinlei.rentcar.tools.MyUUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String register(Usertable user){
+    public String register(UserTable user){
         System.out.println("\n\nuser:"+user+"\n\n");
         return user.toString();
     }

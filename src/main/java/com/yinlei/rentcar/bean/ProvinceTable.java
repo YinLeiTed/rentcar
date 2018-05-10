@@ -1,18 +1,16 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Provincetable {
+@Table(name = "province_table", schema = "rent_car", catalog = "")
+public class ProvinceTable {
     private int idProvince;
     private String nameProvince;
 
     @Id
-    @Column(name = "idProvince", nullable = false)
+    @Column(name = "id_province", nullable = false)
     public int getIdProvince() {
         return idProvince;
     }
@@ -22,7 +20,7 @@ public class Provincetable {
     }
 
     @Basic
-    @Column(name = "nameProvince", nullable = true, length = 50)
+    @Column(name = "name_province", nullable = true, length = 50)
     public String getNameProvince() {
         return nameProvince;
     }
@@ -35,7 +33,7 @@ public class Provincetable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Provincetable that = (Provincetable) o;
+        ProvinceTable that = (ProvinceTable) o;
         return idProvince == that.idProvince &&
                 Objects.equals(nameProvince, that.nameProvince);
     }
@@ -44,21 +42,5 @@ public class Provincetable {
     public int hashCode() {
 
         return Objects.hash(idProvince, nameProvince);
-    }
-
-    @Override
-    public String toString() {
-        return "Provincetable{" +
-                "idProvince=" + idProvince +
-                ", nameProvince='" + nameProvince + '\'' +
-                '}';
-    }
-
-    public Provincetable() {
-    }
-
-    public Provincetable(String nameProvince) {
-
-        this.nameProvince = nameProvince;
     }
 }

@@ -1,20 +1,18 @@
 package com.yinlei.rentcar.bean;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Activitytable {
+@Table(name = "activity_table", schema = "rent_car", catalog = "")
+public class ActivityTable {
     private int idActivity;
     private String nameActivity;
     private Integer achieveActivity;
     private Integer subActivity;
 
     @Id
-    @Column(name = "idActivity", nullable = false)
+    @Column(name = "id_activity", nullable = false)
     public int getIdActivity() {
         return idActivity;
     }
@@ -24,7 +22,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "nameActivity", nullable = true, length = 50)
+    @Column(name = "name_activity", nullable = true, length = 50)
     public String getNameActivity() {
         return nameActivity;
     }
@@ -34,7 +32,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "achieveActivity", nullable = true)
+    @Column(name = "achieve_activity", nullable = true)
     public Integer getAchieveActivity() {
         return achieveActivity;
     }
@@ -44,7 +42,7 @@ public class Activitytable {
     }
 
     @Basic
-    @Column(name = "subActivity", nullable = true)
+    @Column(name = "sub_activity", nullable = true)
     public Integer getSubActivity() {
         return subActivity;
     }
@@ -57,7 +55,7 @@ public class Activitytable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Activitytable that = (Activitytable) o;
+        ActivityTable that = (ActivityTable) o;
         return idActivity == that.idActivity &&
                 Objects.equals(nameActivity, that.nameActivity) &&
                 Objects.equals(achieveActivity, that.achieveActivity) &&
@@ -68,24 +66,5 @@ public class Activitytable {
     public int hashCode() {
 
         return Objects.hash(idActivity, nameActivity, achieveActivity, subActivity);
-    }
-
-    @Override
-    public String toString() {
-        return "Activitytable{" +
-                "idActivity=" + idActivity +
-                ", nameActivity='" + nameActivity + '\'' +
-                ", achieveActivity=" + achieveActivity +
-                ", subActivity=" + subActivity +
-                '}';
-    }
-
-    public Activitytable(String nameActivity, Integer achieveActivity, Integer subActivity) {
-        this.nameActivity = nameActivity;
-        this.achieveActivity = achieveActivity;
-        this.subActivity = subActivity;
-    }
-
-    public Activitytable() {
     }
 }
