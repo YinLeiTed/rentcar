@@ -11,7 +11,8 @@
 			
 		<script type="text/javascript" src="../layui/layui.js" ></script>
 		<link rel="stylesheet" href="../layui/css/layui.css" />
-		<!--<script type="text/javascript" src="../js/iframe.js" ></script>-->
+		<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+		<script type="text/javascript" src="../js/myajax.js" ></script>
 	</head>
 	<body>
 			 <section>
@@ -34,8 +35,8 @@
 								
 									<div class="log-input" style="margin-top: 20px;">
 										<div class="log-input-left">
-										   <input id="phone" type="text" class="user form-control" placeholder="手机号" name="phone" lay-verify="required|phone|number"/>
-										   <input id="email" type="text" class="email form-control layui-hide" placeholder="邮箱" name="email"/>
+										   <input id="phone" type="text" class="user form-control" placeholder="手机号" name="phoneUser" lay-verify="required|phone|number"/>
+										   <input id="email" type="text" class="email form-control layui-hide" placeholder="邮箱" name="emailUser"/>
 										</div>
 										
 										<div class="clearfix"> </div>
@@ -43,7 +44,7 @@
 									
 									<div class="log-input">
 										<div class="log-input-left">
-										   <input type="password" class="lock form-control" placeholder="密码" name="password" lay-verify="required"/>
+										   <input type="password" class="lock form-control" placeholder="密码" name="passwordUser" lay-verify="required"/>
 										</div>
 										
 										<div class="clearfix"> </div>
@@ -90,7 +91,19 @@
 		 
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-		    layer.msg(JSON.stringify(data.field));
+		    //layer.msg(JSON.stringify(data.field));
+		    var result=myajax2("../UserTable/login","post",data.field);
+		    if(result==undefined||result.msg==undefined){
+		    	//储存用户cookie
+		    	$.cookie("myuser", result.user, { expires: 1,path:'/'});
+		    	
+		    	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+				parent.layer.close(index); //再执行关闭   
+		    }
+		    else{
+		    	layer.msg(result.msg);
+		    }
+			
 		    return false;
 		  });
 		  

@@ -212,4 +212,26 @@ public class UserTable {
     public int hashCode() {
         return Objects.hash(getIdUser(), getNicknameUser(), getPhoneUser(), getEmailUser(), getPasswordUser(), getIdcardUser(), getSexUser(), getBirthdayUser(), getProvicneUser(), getCityUser(), getTownUser(), getAreaUser(), getCrimeUser(), getCrimeInfoUser(), getAmountUser(), getScoreUser());
     }
+
+    @Override
+    public String toString() {
+        return "UserTable{" +
+                "idUser=" + idUser +
+                ", nicknameUser='" + nicknameUser + '\'' +
+                ", phoneUser='" + phoneUser + '\'' +
+                ", emailUser='" + emailUser + '\'' +
+                ", passwordUser='" + passwordUser + '\'' +
+                ", idcardUser='" + idcardUser + '\'' +
+                ", sexUser='" + sexUser + '\'' +
+                ", birthdayUser=" + birthdayUser +
+                ", provicneUser='" + provicneUser + '\'' +
+                ", cityUser='" + cityUser + '\'' +
+                ", townUser='" + townUser + '\'' +
+                ", areaUser='" + areaUser + '\'' +
+                ", crimeUser=" + crimeUser +
+                ", crimeInfoUser='" + crimeInfoUser + '\'' +
+                ", amountUser=" + amountUser +
+                ", scoreUser=" + scoreUser +
+                '}';
+    }
 }

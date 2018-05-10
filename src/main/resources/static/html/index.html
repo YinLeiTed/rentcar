@@ -49,7 +49,7 @@
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
 			      <dd><a href="javascript:;">安全管理</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
-			      <dd><a href="javascript:;">退了</a></dd>
+			      <dd><a id="quit">退了</a></dd>
 			    </dl>
 			  </li>
 			  <li id="loginAndRegister" class="layui-nav-item layui-layout-right" style="margin-right: 20px;">
@@ -62,11 +62,6 @@
 		
 		
 		<script>
-			
-			$("#my").click(function(){
-				$("#login").removeClass('layui-hide');
-				$(this).addClass('layui-hide')
-			})
 			
 			
 		    $(function(){
@@ -182,7 +177,13 @@
 			//注意：导航 依赖 element 模块，否则无法进行功能性操作
 			layui.use(['element','layer'], function(){
 			  var element = layui.element;
-			  
+			  	$("#quit").click(function(){	
+					$("#loginAndRegister").removeClass('layui-hide');
+					$("#my").addClass('layui-hide')
+					
+					//退出登录
+					$.cookie("myuser", null, { expires: -1,path:'/'});
+				})
 				$("#login").click(function(){	
 					layeropen('登录','login.html',['500px', '690px'])
 				})
@@ -204,9 +205,13 @@
 							
 					  }
 					  ,end:function(){
-//					  		$("#my").removeClass('layui-hide');
-//							$("#login").addClass('layui-hide')
-				
+					  		
+							var myuser=$.cookie("myuser");
+							if(myuser!=undefined)
+							{
+								$("#my").removeClass('layui-hide');
+								$("#loginAndRegister").addClass('layui-hide')
+							}
 					  }
 					  ,zIndex: layer.zIndex //重点1
 				      ,success: function(layero){
