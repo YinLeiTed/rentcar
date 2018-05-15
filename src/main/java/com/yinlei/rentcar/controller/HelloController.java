@@ -25,7 +25,7 @@ public class HelloController {
 
 
 
-    @RequestMapping("upload")
+   /* @RequestMapping("upload")
     public String fileUpload(@RequestParam("images") MultipartFile file){
         if(file.isEmpty()){
             return "false";
@@ -51,7 +51,7 @@ public class HelloController {
             e.printStackTrace();
             return "false";
         }
-    }
+    }*/
 
 
 }

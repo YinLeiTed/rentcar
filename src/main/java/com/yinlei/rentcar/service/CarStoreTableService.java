@@ -4,7 +4,7 @@ package com.yinlei.rentcar.service;
 import com.yinlei.rentcar.bean.CarStoreTable;
 import com.yinlei.rentcar.repository.CarStoreTableRepository;
 import com.yinlei.rentcar.repository.LocationTableRepository;
-import com.yinlei.rentcar.tools.Location;
+import com.yinlei.rentcar.tools.MyLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +58,7 @@ public class CarStoreTableService {
     public Map getLocations(String address) {
         HashMap<String, Object> map=new HashMap<>();
 
-        map.put("locations",Location.alterLocations(dao2.findAllById(dao.findAllByAddressCarStore(address))));
+        map.put("locations",MyLocation.alterLocations(dao2.findAllById(dao.findAllByAddressCarStore(address))));
         map.put("all",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%"));
         return map;
     }

@@ -5,7 +5,7 @@ import com.yinlei.rentcar.bean.LocationTable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Location {
+public class MyLocation {
     //获取16位uuid
     public static List<Object> alterLocations(Iterable<LocationTable> list){
         List<Object> mylists=new ArrayList<>();

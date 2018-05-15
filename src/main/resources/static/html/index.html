@@ -43,7 +43,7 @@
 			  <li class="layui-nav-item"><a id="main3">营业网点</a></li>
 			  <li class="layui-nav-item"><a id="main4">体验分享</a></li>
 			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide" lay-unselect="">
-			    <a href="#"><img src="../image3/user.png" class="layui-nav-img">我门</a>
+			    <a href="#"><img src="../myimages/person.jpg" style="width: 25px;height: 25px" class="layui-nav-img">我门</a>
 			    <dl class="layui-nav-child">
 			      <dd><a href="javascript:;">修改信息</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
@@ -219,6 +219,14 @@
 				       }
 				}); 
 			}
+			$(function () {
+                var myuser=$.cookie("myuser");
+                if(myuser!=undefined)
+                {
+                    $("#my").removeClass('layui-hide');
+                    $("#loginAndRegister").addClass('layui-hide')
+                }
+            })
 		</script>
 	</body>
 </html>

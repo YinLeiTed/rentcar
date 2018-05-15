@@ -12,17 +12,18 @@
 			}
 			.layui-timeline-content img{	
 				height: 100px;
+				max-width: 300px;
 			}
 		</style>
 	</head>
 	<body onload="IFrameResize('myframe')">
 		
 		
-	    <form class="layui-form layui-form-pane" action="/upload2" style="padding: 5px;">
+	    <form class="layui-form layui-form-pane" id="myform">
 	    	<div class="layui-form-item layui-form-text">
 			    <label class="layui-form-label">发布体验内容+人车合影</label>
 			    <div class="layui-input-block">
-			      <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+			      <textarea name="contentShare" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
 			    </div>
 			</div>
 			<div class="layui-upload">
@@ -30,7 +31,8 @@
 			  	<button type="button" class="layui-btn layui-btn-normal" id="testList">选择图片</button> 
 			    
 			    <!--<button type="button" class="layui-btn" id="testListAction">上传图片</button>-->
-			    <button class="layui-btn" lay-submit lay-filter="demo2" id="testListAction">提交</button>
+			    <!--<button class="layui-btn" lay-submit lay-filter="demo2" id="testListAction">提交</button>-->
+				  <button class="layui-btn" lay-submit lay-filter="demo2">提交</button>
 			  </div>
 			 
 			  <div id="uploadlist" class="layui-upload-list layui-hide">
@@ -72,57 +74,44 @@
 			      <img src="../img/1.jpg"/>
 			    </div>
 			  </li>
+
 			  <li class="layui-timeline-item">
 			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
 			    <div class="layui-timeline-content layui-text">
-			      <h3 class="layui-timeline-title">8月16日<em>TED</em></h3>
-			      <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
-			      <ul>
-			        <li>《登高》</li>
-			        <li>《茅屋为秋风所破歌》</li>
-			      </ul>
-			    </div>
-			  </li>
-			  <li class="layui-timeline-item">
-			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-			    <div class="layui-timeline-content layui-text">
-			      <h3 class="layui-timeline-title">8月15日</h3>
-			      <p>
-			        中国人民抗日战争胜利72周年
-			        <br>常常在想，尽管对这个国家有这样那样的抱怨，但我们的确生在了最好的时代
-			        <br>铭记、感恩
-			        <br>所有为中华民族浴血奋战的英雄将士
-			        <br>永垂不朽
-			      </p>
-			    </div>
-			  </li>
-			  <li class="layui-timeline-item">
-			    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-			    <div class="layui-timeline-content layui-text">
-			      <div class="layui-timeline-title">过去</div>
+			      <div class="layui-timeline-title"><a id="addMore">加载更多</a></div>
 			    </div>
 			  </li>
 			</ul>
-	    
+		<div id="mypage"></div>
 		
 		<script>
-			layui.use(['form','upload'], function(){
+            var mycontent=null;
+            $(function(){
+                mycontent=myajax("../ShareTable//getShare0/0","get");
+                //console.log(mycontent)
+            })
+			layui.use(['laypage','form','upload','layer'], function(){
 			  var $ = layui.jquery
 			  ,upload = layui.upload
-			  ,form=layui.form;
+			  ,form=layui.form
+			  ,layer=layui.layer
+			  ,laypage = layui.laypage;
 	  
 
 			   //多文件列表示例
 			  var demoListView = $('#demoList')
 			  ,uploadListIns = upload.render({
 			    elem: '#testList'
-			    ,url: '/upload/'
-			    ,accept: 'file'
+			    ,url: '../ShareTable/upload/'
+				,field:'images'
+			    ,accept: 'images'
+				,acceptMime: 'image/*'
 			    ,multiple: true
 			    ,auto: false
 			    ,bindAction: '#testListAction'
-			    ,choose: function(obj){   
-			    	$("#uploadlist").removeClass('layui-hide');
+			    ,choose: function(obj){
+			      $("#uploadlist").removeClass('layui-hide');
+
 			      var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
 			      //读取本地文件
 			      obj.preview(function(index, file, result){
@@ -145,11 +134,16 @@
 			        tr.find('.demo-delete').on('click', function(){
 			          delete files[index]; //删除对应的文件
 			          tr.remove();
+
+						var myname=tr.find("td").eq(0).html();
+			          $('#demo22 img[alt="'+myname+'"]').remove();
+
 			          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
 			        });
 			        
 			        demoListView.append(tr);
 			        $('#demo22').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+					  IFrameResize('myframe')
 			      });
 			    }
 			    ,done: function(res, index, upload){
@@ -168,25 +162,75 @@
 			      tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
 			      tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
 			    }
+				  ,allDone: function(obj){ //当文件全部被提交后，才提交表单
+                      myresult=myajax2("../ShareTable/addShare","post",mydate);
+                      $("#uploadlist").addClass('layui-hide');
+				  }
 			  });
-			 
+			  var mydate=null;
+			  var myresult=null;
 			  //监听提交
 			  form.on('submit(demo2)', function(data){
-			    layer.msg(JSON.stringify(data.field));
-			    $("#uploadlist").addClass('layui-hide');
-			    return false;
+			    //layer.msg(JSON.stringify(data.field));
+                  var myuser=$.cookie("myuser");
+					mydate=data.field;
+                  if(myuser==undefined)
+                  {
+					  layer.msg("请先登录，再进行操作");
+                  }else {
+                      var mylength=$('#demo22 img').length;
+                      mydate["idUserShare"]=JSON.parse(myuser).idUser;
+                      mydate["phoneShare"]=JSON.parse(myuser).phoneUser;
+                      if(mylength==0){
+                          myresult=myajax2("../ShareTable/addShare","post",mydate);
+                      }else{
+                          uploadListIns.upload();
+                      }
+				  }
+					if(myresult.msg=="success")
+					{
+                        layer.msg("分享提交成功");
+					    $("#myform textarea[name='contentShare']").val("");
+					}
+                  return false;
 			  });
-			  
-			  
-			  
-			  
-			  
-			 
-			  
-			  
-			  
-			  
+
+                //执行一个laypage实例
+                laypage.render({
+                    elem: 'mypage'
+                    ,count: mycontent.all.totalElements
+					,limit:mycontent.all.size
+                    ,layout: ['prev', 'page', 'next','skip','count']
+                    ,jump: function(obj){
+                        var mypage=obj.curr-1;
+                        mycontent=myajax("../ShareTable//getShare0/"+mypage,"get");
+                        //console.log(mycontent.all.content)
+						setContent($("#content"),mycontent.all.content);
+                    }
+                });
 			});
+            function setContent(aim,contents)
+            {
+                aim.empty();
+                for(var i in contents)
+                {
+                    var s1='<li class="layui-timeline-item">'
+                        +'<i class="layui-icon layui-timeline-axis">&#xe63f;</i>'
+                        +'<div class="layui-timeline-content layui-text">'
+                        +'<h3 class="layui-timeline-title">'+contents[i].timeShare+'&nbsp;<em>——'+contents[i].phoneShare.replace(/^(\d{4})\d{4}(\d+)/,"$1****$2")+'</em></h3>'
+                        +'<p>'+contents[i].contentShare.replace(/(\r\n)|(\n)/g,'<br>')+'</p>';
+					var s2='';
+                    var s3='</div></li>';
+                    if(contents[i].imagesShare!="") {
+						var images=contents[i].imagesShare.split(" ");
+						for (var i in images)
+						{
+						    s2+='<img src="'+images[i]+'"/>';
+						}
+					}
+					aim.append(s1+s2+s3);
+                }
+            }
 			</script>
 	</body>
 </html>
