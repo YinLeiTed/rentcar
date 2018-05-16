@@ -20,6 +20,7 @@
         <mapping class="com.yinlei.rentcar.bean.User"/>
         <mapping class="com.yinlei.rentcar.bean.UserTable"/>
         <mapping class="com.yinlei.rentcar.bean.VipTable"/>
+        <mapping class="com.yinlei.rentcar.bean.AddressTable"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

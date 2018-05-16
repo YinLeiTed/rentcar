@@ -10,6 +10,7 @@ public class ActivityTable {
     private String nameActivity;
     private Integer achieveActivity;
     private Integer subActivity;
+    private String imageActivity;
 
     @Id
     @Column(name = "id_activity", nullable = false)
@@ -51,6 +52,16 @@ public class ActivityTable {
         this.subActivity = subActivity;
     }
 
+    @Basic
+    @Column(name = "image_activity", nullable = true, length = -1)
+    public String getImageActivity() {
+        return imageActivity;
+    }
+
+    public void setImageActivity(String imageActivity) {
+        this.imageActivity = imageActivity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,12 +70,13 @@ public class ActivityTable {
         return idActivity == that.idActivity &&
                 Objects.equals(nameActivity, that.nameActivity) &&
                 Objects.equals(achieveActivity, that.achieveActivity) &&
-                Objects.equals(subActivity, that.subActivity);
+                Objects.equals(subActivity, that.subActivity) &&
+                Objects.equals(imageActivity, that.imageActivity);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idActivity, nameActivity, achieveActivity, subActivity);
+        return Objects.hash(idActivity, nameActivity, achieveActivity, subActivity, imageActivity);
     }
 }

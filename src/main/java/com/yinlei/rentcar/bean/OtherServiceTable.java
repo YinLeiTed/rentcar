@@ -9,6 +9,7 @@ public class OtherServiceTable {
     private int idOtherService;
     private String nameOtherService;
     private Integer priceOtherService;
+    private String describeOtherService;
 
     @Id
     @Column(name = "id_other_service", nullable = false)
@@ -40,6 +41,16 @@ public class OtherServiceTable {
         this.priceOtherService = priceOtherService;
     }
 
+    @Basic
+    @Column(name = "describe_other_service", nullable = true, length = -1)
+    public String getDescribeOtherService() {
+        return describeOtherService;
+    }
+
+    public void setDescribeOtherService(String describeOtherService) {
+        this.describeOtherService = describeOtherService;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,12 +58,13 @@ public class OtherServiceTable {
         OtherServiceTable that = (OtherServiceTable) o;
         return idOtherService == that.idOtherService &&
                 Objects.equals(nameOtherService, that.nameOtherService) &&
-                Objects.equals(priceOtherService, that.priceOtherService);
+                Objects.equals(priceOtherService, that.priceOtherService) &&
+                Objects.equals(describeOtherService, that.describeOtherService);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idOtherService, nameOtherService, priceOtherService);
+        return Objects.hash(idOtherService, nameOtherService, priceOtherService, describeOtherService);
     }
 }

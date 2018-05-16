@@ -42,16 +42,19 @@
 			  <li class="layui-nav-item"><a id="main2">自主租车</a></li>
 			  <li class="layui-nav-item"><a id="main3">营业网点</a></li>
 			  <li class="layui-nav-item"><a id="main4">体验分享</a></li>
-			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide" lay-unselect="">
-			    <a href="#"><img src="../myimages/person.jpg" style="width: 25px;height: 25px" class="layui-nav-img">我门</a>
+			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide"  style="margin-right: 40px;">
+			    <a href="#"><img src="../img/vip3.png" style="width: 25px;height: 25px">我门</a>
 			    <dl class="layui-nav-child">
 			      <dd><a href="javascript:;">修改信息</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
-			      <dd><a href="javascript:;">安全管理</a></dd>
+			      <dd><a href="javascript:;">我的订单</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+				  <dd><a href="javascript:;">我的分享</a></dd>
+				  <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
 			      <dd><a id="quit">退了</a></dd>
 			    </dl>
 			  </li>
+
 			  <li id="loginAndRegister" class="layui-nav-item layui-layout-right" style="margin-right: 20px;">
 			  	<a id="login">登录</a>&nbsp;|&nbsp;<a id="register">注册</a>
 			  </li>
@@ -86,7 +89,7 @@
 	  		
 	  		
 	  		
-	  <div id="my" class="layui-anim-upbit">
+	  <div  class="layui-anim-upbit">
 	  	<iframe id="myframe"  width="100%" height="100%" scrolling="no" src=""></iframe>
 	  </div>	
 	  
@@ -118,22 +121,22 @@
 						<div class="col-md-2 footer-grid">
 							<h4 class="footer-head">租车贴士</h4>
 							<ul>
-								<li><a href="#">租车流程</a></li>						
-								<li><a href="#">精彩活动</a></li>
-								<li><a href="#">接送服务</a></li>
+								<li><a id="myrentcarprocess">租车流程</a></li>
+								<li><a id="myactivity">精彩活动</a></li>
+								<li><a id="myservice">接送服务</a></li>
 							</ul>
 						</div>
 						<div class="col-md-2 footer-grid">
 							<h4 class="footer-head">售后服务</h4>
 							<ul>
-								<li><a href="#">建议专区</a></li>	
+								<li><a id="myadvise">建议专区</a></li>
 							</ul>
 						</div>
 						<div class="col-md-2 footer-grid">
 							<h4 class="footer-head">会员服务</h4>
 							<ul>
-								<li><a href="#">忘记密码</a></li>
-								<li><a href="#">等级说明</a></li>	
+								<li><a id="mypassword">忘记密码</a></li>
+								<li><a id="myrank">等级说明</a></li>
 							</ul>
 						</div>
 						<div class="col-md-3 footer-grid">
@@ -185,12 +188,93 @@
 					$.cookie("myuser", null, { expires: -1,path:'/'});
 				})
 				$("#login").click(function(){	
-					layeropen('登录','login.html',['500px', '690px'])
+					layeropen('登录','login.html',['500px', '560px'])
 				})
+                $("#mypassword").click(function(){
+                    layeropen('忘记密码','password.html',['500px', '340px'])
+                })
 				$("#register").click(function(){	
-					layeropen('注册','register.html',['500px', '690px'])
+					layeropen('注册','register.html',['500px', '650px'])
 				})
-			  //…
+			    $("#myrank").click(function () {
+                    layer.open({
+                        type: 1
+                        ,title: '等级说明'
+                        ,closeBtn: false
+                        ,area: '350px;'
+                        ,shade: 0.8
+                        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,btn: ['OK']
+                        ,btnAlign: 'c'
+                        ,moveType: 1 //拖拽模式，0或者1
+                        ,content: '<div style="padding: 20px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">会员等级是极速租车为答谢广大客户长期以来的支持与厚爱的一项回馈服务 ^_^<br><br><br>· 凡客户在极速租车使用自驾服务，所消费金额均累计计入账户。<br><br>· 消费金额折扣比例，根据不同会员等级有所不同。<br><br>· 等级说明<br>' +
+                        '<br><img src="../img/vip1.png" style="width: 20px;height: 20px">普卡无折扣。<br>'+
+                        '<img src="../img/vip2.png" style="width: 18px;height: 18px" >银卡折扣0.9，累计消费金额达到5000元。<br>' +
+                        '<img src="../img/vip3.png" style="width: 18px;height: 18px" >金卡折扣0.8，累计消费金额达到20000元。<br>' +
+                        '<img src="../img/vip4.png" style="width: 20px;height: 20px" >钻卡折扣0.7，累计消费金额达到50000元。<br></div>'
+                    });
+                })
+				$("#myadvise").click(function () {
+                    layer.prompt({
+                        formType: 2,
+                        value: '请填写你的意见',
+                        title: '建议专区',
+                        area: ['400px', '100px'] //自定义文本域宽高
+                    }, function(value, index, elem){
+                        layer.msg(value); //得到value
+                        layer.close(index);
+                    });
+
+                })
+
+				$("#myactivity").click(function () {
+                    layer.photos({
+                        photos: {
+                            "title": "", //相册标题
+                            "id": 123, //相册id
+                            "start": 0, //初始显示的图片序号，默认0
+                            "data": [   //相册包含的图片，数组格式
+                                {
+                                    "alt": "活动1",
+                                    "pid": 666, //图片id
+                                    "src": "../img/1.jpg", //原图地址
+                                    "thumb": "" //缩略图地址
+                                },
+                                {
+                                    "alt": "活动2",
+                                    "pid": 666, //图片id
+                                    "src": "../img/2.png", //原图地址
+                                    "thumb": "" //缩略图地址
+                                },
+                                {
+                                    "alt": "活动3",
+                                    "pid": 666, //图片id
+                                    "src": "../img/3.png", //原图地址
+                                    "thumb": "" //缩略图地址
+                                },
+                                {
+                                    "alt": "活动4",
+                                    "pid": 666, //图片id
+                                    "src": "../img/4.png", //原图地址
+                                    "thumb": "" //缩略图地址
+                                },
+                                {
+                                    "alt": "活动5",
+                                    "pid": 666, //图片id
+                                    "src": "../img/5.jpg", //原图地址
+                                    "thumb": "" //缩略图地址
+                                },
+                                {
+                                    "alt": "图片名6",
+                                    "pid": 666, //图片id
+                                    "src": "../img/6.png", //原图地址
+                                    "thumb": "" //缩略图地址
+                                }
+                            ]
+                        }
+                        ,anim: 4
+                    });
+                })
 			});
 			function layeropen(mytitle,mycontent,myarea){
 				layer.open({
