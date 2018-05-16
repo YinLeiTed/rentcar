@@ -4952,30 +4952,30 @@ function area_init(myprovince){
 ]
 	myprovince.empty();
 	var province=myprovince;
-	province.append("<option value=''>"+"输入文字进行搜索"+"</option>");
+	province.append("<option value=''>"+"请选择城市（可搜索）"+"</option>");
 	//显示省市（注意直辖市）
 	for(var i in data){
 		//console.log(data[i].name)
-		province.append("<optgroup label="+data[i].name+">");
+		province.append("<option disabled value='"+data[i].name+"'>"+data[i].name+"</option>");
 		for(var j in data[i].city)
 		{
 			//console.log("  "+data[i].city[j].name)
 			if(data[i].city.length==1)
 			{
-				province.append("<optgroup label="+data[i].city[j].name+">");
+				province.append("<option disabled value='"+data[i].city[j].name+"'>"+data[i].city[j].name+"</option>");
 				for(var k in data[i].city[j].area)
 				{
 					//console.log("     "+data[i].city[j].area[k])
 					province.append("<option value="+data[i].city[j].area[k]+">"+data[i].city[j].area[k]+"</option>");
 				}
-				province.append("</optgroup>");
+				
 			}
 			else
 			{
 				province.append("<option value="+data[i].city[j].name+">"+data[i].city[j].name+"</option>");
 			}
 		}
-		province.append("</optgroup>");
+		
 	}
 	form.render();
 }

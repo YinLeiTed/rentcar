@@ -8,6 +8,8 @@ import java.util.Objects;
 @Table(name = "car_table", schema = "rent_car", catalog = "")
 public class CarTable {
     private int idCar;
+    private String nameCar;
+    private String describeCar;
     private String licenseCar;
     private String carTypeCar;
     private String brandTypeCar;
@@ -16,6 +18,8 @@ public class CarTable {
     private Integer monthlyRentCar;
     private String imgCar;
     private Integer idCarStoreCar;
+    private Integer idLocationCar;
+    private Integer usingCar;
     private String usePropertyCar;
     private String ownerCar;
     private Timestamp purchaseTimeCar;
@@ -27,7 +31,6 @@ public class CarTable {
     private String transmissionTypeCar;
     private String turboCar;
     private Integer maintenanceCycleCar;
-    private Integer idLocationCar;
 
     @Id
     @Column(name = "id_car", nullable = false)
@@ -37,6 +40,26 @@ public class CarTable {
 
     public void setIdCar(int idCar) {
         this.idCar = idCar;
+    }
+
+    @Basic
+    @Column(name = "name_car", nullable = true, length = 50)
+    public String getNameCar() {
+        return nameCar;
+    }
+
+    public void setNameCar(String nameCar) {
+        this.nameCar = nameCar;
+    }
+
+    @Basic
+    @Column(name = "describe_car", nullable = true, length = 250)
+    public String getDescribeCar() {
+        return describeCar;
+    }
+
+    public void setDescribeCar(String describeCar) {
+        this.describeCar = describeCar;
     }
 
     @Basic
@@ -117,6 +140,26 @@ public class CarTable {
 
     public void setIdCarStoreCar(Integer idCarStoreCar) {
         this.idCarStoreCar = idCarStoreCar;
+    }
+
+    @Basic
+    @Column(name = "id_location_car", nullable = true)
+    public Integer getIdLocationCar() {
+        return idLocationCar;
+    }
+
+    public void setIdLocationCar(Integer idLocationCar) {
+        this.idLocationCar = idLocationCar;
+    }
+
+    @Basic
+    @Column(name = "using_car", nullable = true)
+    public Integer getUsingCar() {
+        return usingCar;
+    }
+
+    public void setUsingCar(Integer usingCar) {
+        this.usingCar = usingCar;
     }
 
     @Basic
@@ -229,22 +272,14 @@ public class CarTable {
         this.maintenanceCycleCar = maintenanceCycleCar;
     }
 
-    @Basic
-    @Column(name = "id_location_car", nullable = true)
-    public Integer getIdLocationCar() {
-        return idLocationCar;
-    }
-
-    public void setIdLocationCar(Integer idLocationCar) {
-        this.idLocationCar = idLocationCar;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarTable carTable = (CarTable) o;
         return idCar == carTable.idCar &&
+                Objects.equals(nameCar, carTable.nameCar) &&
+                Objects.equals(describeCar, carTable.describeCar) &&
                 Objects.equals(licenseCar, carTable.licenseCar) &&
                 Objects.equals(carTypeCar, carTable.carTypeCar) &&
                 Objects.equals(brandTypeCar, carTable.brandTypeCar) &&
@@ -253,6 +288,8 @@ public class CarTable {
                 Objects.equals(monthlyRentCar, carTable.monthlyRentCar) &&
                 Objects.equals(imgCar, carTable.imgCar) &&
                 Objects.equals(idCarStoreCar, carTable.idCarStoreCar) &&
+                Objects.equals(idLocationCar, carTable.idLocationCar) &&
+                Objects.equals(usingCar, carTable.usingCar) &&
                 Objects.equals(usePropertyCar, carTable.usePropertyCar) &&
                 Objects.equals(ownerCar, carTable.ownerCar) &&
                 Objects.equals(purchaseTimeCar, carTable.purchaseTimeCar) &&
@@ -263,13 +300,12 @@ public class CarTable {
                 Objects.equals(totalWeightCar, carTable.totalWeightCar) &&
                 Objects.equals(transmissionTypeCar, carTable.transmissionTypeCar) &&
                 Objects.equals(turboCar, carTable.turboCar) &&
-                Objects.equals(maintenanceCycleCar, carTable.maintenanceCycleCar) &&
-                Objects.equals(idLocationCar, carTable.idLocationCar);
+                Objects.equals(maintenanceCycleCar, carTable.maintenanceCycleCar);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCar, licenseCar, carTypeCar, brandTypeCar, dailyRentCar, weeklyRentCar, monthlyRentCar, imgCar, idCarStoreCar, usePropertyCar, ownerCar, purchaseTimeCar, buyingUnitCar, engineDisplacementCar, fuelTankCapacityCar, colorCar, totalWeightCar, transmissionTypeCar, turboCar, maintenanceCycleCar, idLocationCar);
+        return Objects.hash(idCar, nameCar, describeCar, licenseCar, carTypeCar, brandTypeCar, dailyRentCar, weeklyRentCar, monthlyRentCar, imgCar, idCarStoreCar, idLocationCar, usingCar, usePropertyCar, ownerCar, purchaseTimeCar, buyingUnitCar, engineDisplacementCar, fuelTankCapacityCar, colorCar, totalWeightCar, transmissionTypeCar, turboCar, maintenanceCycleCar);
     }
 }

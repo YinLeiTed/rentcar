@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	    white-space: nowrap;
 	    overflow: hidden;
 	    text-overflow: ellipsis;
-	    width: 80px;
+	    width: 100px;
 	    float: left;
   	}
   	.layui-form-select dl dt{
@@ -46,6 +46,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	    width: 100%;
 	    float: left;
   	}
+	.layui-form-select dl dd.layui-disabled{
+		width: 100%;
+		font-size: 20px;
+		background-color: #36b5e7;
+	}
   	.term {
 	    padding: 12px 0 5px;
 	    background: #f5f5f5;
@@ -82,17 +87,17 @@ var elem=$('#container ul');
 <body onload="IFrameResize('myframe')">
 <div class="header" style="margin-top: 20px;">
     <div class="container">
-    	<form class="layui-form term">
+    	<form id="myform" class="layui-form term">
 		<div class="layui-form-item">
 		    <label class="layui-form-label" style="width: 90px;">取车地点</label>
-		    <div class="layui-input-inline" style="width: 300px;">
+		    <div class="layui-input-inline" style="width: 320px;">
 		      <select id="province" name="province" required lay-verify="required" lay-search>
 		        	
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
 		      <select id="city" name="city"  required lay-verify="required" lay-search>
-		      	<option value="">请选择门店</option>
+		      	<option value="">取车门店</option>
 		      </select>
 		    </div>
 		    
@@ -105,20 +110,20 @@ var elem=$('#container ul');
 		</div>
 		<div class="layui-form-item">   
 		    <label class="layui-form-label" style="width: 90px;">还车地点</label>
-		    <div class="layui-input-inline" style="width: 300px;">
+		    <div class="layui-input-inline" style="width: 320px;">
 		      <select id="province2" name="province" required lay-verify="required" lay-search>
 		        	
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
 		      <select id="city2" name="city2"  required lay-verify="required" lay-search>
-		      	<option value="">请选择门店</option>
+		      	<option value="">还车门店</option>
 		      </select>
 		    </div>
 		    
-		     <div class="layui-input-inline left">
+		     <!--<div class="layui-input-inline left">
 		      <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 30px;">查询</button>
-		    </div>
+		    </div>-->
 		</div>
 		
 		
@@ -126,10 +131,15 @@ var elem=$('#container ul');
     </div>
 	
 	<script>
-		
-		layui.use(['form','laydate'], function(){
-		  form = layui.form,laydate = layui.laydate;
-		  	  
+
+		layui.use(['form','laydate','layer'], function(){
+		  form = layui.form,laydate = layui.laydate,layer=layui.layer;
+
+			layer.msg('注意事项<br><br>1.查询相关车型时，可以选择取车门店；<br>2.点击汽车进行租车时，请填写取车地点<br>、还车地点、取车时间等相关信息；', {
+				time: 20000, //20s后自动关闭
+				btn: [ '知道了'],
+                btnAlign: 'c'
+			});
 		  area_init($("#province"));
 		  area_init($("#province2"));
 		  
@@ -158,7 +168,7 @@ var elem=$('#container ul');
 					
 				
 				<div class="range">
-					<h3 class="sear-head">Price range</h3>
+					<h3 class="sear-head">价格范围</h3>
 							<ul class="dropdown-menu6">
 								<li>
 									                
@@ -174,11 +184,12 @@ var elem=$('#container ul');
 										range: true,
 										min: 0,
 										max: 9000,
-										values: [ 50, 6000 ],
-										slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+										values: [ 0, 9000 ],
+										slide: function( event, ui ) {
+										    $( "#amount" ).val( "￥" + ui.values[ 0 ] + " - ￥" + ui.values[ 1 ] );
 										}
 							 });
-							$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+							$( "#amount" ).val( "￥" + $( "#slider-range" ).slider( "values", 0 ) + " - ￥" + $( "#slider-range" ).slider( "values", 1 ) );
 
 							});//]]>  
 
@@ -186,15 +197,18 @@ var elem=$('#container ul');
 							
 				</div>
 				<div class="brand-select">
-					<h3 class="sear-head">Brand name</h3>
-					  <select class="selectpicker" data-live-search="true">
-					  <option data-tokens="All">All</option>
-					  <option data-tokens="Audi">Audi</option>
-					  <option data-tokens="Bentley">Bentley</option>
-					  <option data-tokens="BMW">BMW</option>
-					  <option data-tokens="Chevrolet">Chevrolet</option>
-				
+					<h3 class="sear-head">汽车品牌</h3>
+					<select class="selectpicker" data-live-search="true">
+						<option data-tokens="All">所有品牌-ALL</option>
+						<option data-tokens="Audi">奥迪-Audi</option>
+						<option data-tokens="Bentley">宾利-Bentley</option>
+						<option data-tokens="BMW">宝马-BMW</option>
+						<option data-tokens="Chevrolet">雪佛兰-Chevrolet</option>
 					</select>
+				</div>
+
+				<div class="brand-select">
+					<button class="layui-btn layui-btn-fluid">查询相关车型</button>
 				</div>
 				<div class="featured-ads">
 				</div>
@@ -215,25 +229,24 @@ var elem=$('#container ul');
 								
 								<div class="clearfix"></div>
 							<ul class="list">
-								<a href="single.html">
+								<!--<a href="order.html">
 									<li>
 									<img src="../image3/c1.jpg" title="" alt="" />
 									<section class="list-left">
-									<h5 class="title">There are many variations of passages of Lorem Ipsum</h5>
-									<span class="adprice">$290/d</span>
-									<span class="adprice">$290/s</span>
-									<span class="adprice">$290/s</span>
-									<p class="catpath">Cars » Other Vehicles</p>
+									<h5 class="title">大众朗逸或同组车型</h5>
+									<span class="cityname">【随机分配如大众朗逸、标致308S、大众斯柯达明锐、现代朗动、大众宝来或类似车型】</span>
+									<p class="catpath">自动|5座</p>
 									</section>
 									<section class="list-right">
-									<span class="date">Today, 17:55</span>
-									<span class="cityname">City name</span>
+										<span class="adprice">￥100/天</span>
+										<span class="adprice">￥200/周</span>
+										<span class="adprice">￥400/月</span>
 									</section>
 									<div class="clearfix"></div>
 									</li> 
 									
-								</a>
-								<a href="single.html">
+								</a>-->
+								<a href="order.html">
 									<li>
 									<img src="../image3/c2.jpg" title="" alt="" />
 									<section class="list-left">
