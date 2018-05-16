@@ -2717,6 +2717,7 @@ span.adprice {
     width: 15%;
     float: right;
     text-align: right;
+	margin-top: -16px;
 }
 #container .list li .date{
 	float: right;

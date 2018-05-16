@@ -27,6 +27,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="../layui/css/layui.css" />
 <script type="text/javascript" src="../js/area.js" ></script>
 <script type="text/javascript" src="../js/iframe.js" ></script>
+	<script type="text/javascript" src='../js/jquery.cookie.js'></script>
+	<link rel="stylesheet" href="../css/order.css" />
   <style>
   	.layui-form-select dl dd{
   		padding: 0 10px;
@@ -50,6 +52,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		width: 100%;
 		font-size: 20px;
 		background-color: #36b5e7;
+	}
+	.layui-anim-upbit {
+		-webkit-animation-name: layui-upbit;
+		animation-name: layui-upbit;
+		width: 800px ;
 	}
   	.term {
 	    padding: 12px 0 5px;
@@ -86,6 +93,35 @@ var elem=$('#container ul');
 </head>
 <body onload="IFrameResize('myframe')">
 <div class="header" style="margin-top: 20px;">
+	<!--step2 progress-->
+	<div class="step2-progress-box2">
+		<div class="progress-percent2"></div>
+		<div class="progress-icon">
+			<span class="progress-firsticon">1</span>
+			<span class="progress-secondicon2">2</span>
+			<span class="progress-thirdicon">3</span>
+		</div>
+		<div class="progress-text">
+			<span class="progress-firsttext">挑选车型</span>
+			<span class="progress-secondtext2">填写与核对订单</span>
+			<span class="progress-thirdtext">成功提交</span>
+		</div>
+	</div>
+	<!--step2 订单状态-->
+	<!--<div class="step2-progress-box2">
+        <div class="progress-percent3"></div>
+        <div class="progress-icon">
+            <span class="progress-firsticon">1</span>
+            <span class="progress-secondicon">2</span>
+            <span class="progress-thirdicon3">3</span>
+        </div>
+        <div class="progress-text">
+            <span class="progress-firsttext">挑选车型</span>
+            <span class="progress-secondtext">填写与核对订单</span>
+            <span class="progress-thirdtext3">成功提交</span>
+        </div>
+    </div>-->
+
     <div class="container">
     	<form id="myform" class="layui-form term">
 		<div class="layui-form-item">
@@ -155,11 +191,27 @@ var elem=$('#container ul');
 		    ,type: 'datetime'
 		    ,range: '~'
 		    ,calendar: true
+			  ,min:0
+			  ,max:30
+			  ,done: function(value, date, endDate){
+				  var mydate=value.split(" ~ ");
+				  var date1=Date.parse(mydate[0])
+				  var date2=Date.parse(mydate[1])
+				  if(date1==date2)
+				      layer.msg("取车时间和还车时间不能相同")
+				  else
+				  {
+                      var day=Math.ceil((date2-date1)/(24 * 3600 * 1000));
+                      $.cookie("myday", day, { expires: 1,path:'/'});
+                      layer.msg("租车时间为："+day+"天");
+				  }
+			  }
 		  });
 		});
 	</script>
 	<!-- Cars -->
 	<div class="total-ads main-grid-border">
+
 		<div class="container">
 			
 			
@@ -229,9 +281,9 @@ var elem=$('#container ul');
 								
 								<div class="clearfix"></div>
 							<ul class="list">
-								<!--<a href="order.html">
+								<a href="order.html">
 									<li>
-									<img src="../image3/c1.jpg" title="" alt="" />
+									<img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" title="" alt="" />
 									<section class="list-left">
 									<h5 class="title">大众朗逸或同组车型</h5>
 									<span class="cityname">【随机分配如大众朗逸、标致308S、大众斯柯达明锐、现代朗动、大众宝来或类似车型】</span>
@@ -245,22 +297,23 @@ var elem=$('#container ul');
 									<div class="clearfix"></div>
 									</li> 
 									
-								</a>-->
+								</a>
 								<a href="order.html">
 									<li>
-									<img src="../image3/c2.jpg" title="" alt="" />
-									<section class="list-left">
-									<h5 class="title">It is a long established fact that a reader</h5>
-									<span class="adprice">$310</span>
-									<p class="catpath">Cars » Other Vehicles</p>
-									</section>
-									<section class="list-right">
-									<span class="date">Today, 17:45</span>
-									<span class="cityname">City name</span>
-									</section>
-									<div class="clearfix"></div>
-									</li> 
-									
+										<img src="https://image.1hai.cn/images/cartype/20170818/2d1c3c37-a73d-43a0-b44b-558b04c4eccd.jpg?v=478e07969b59431bb9c6251bfef193af" title="" alt="" />
+										<section class="list-left">
+											<h5 class="title">斯柯达速派或同组车型</h5>
+											<span class="cityname">【随机分配如一汽马自达全新阿特兹、大众斯柯达速派、标致508、标致508（非京牌）或类似车型】</span>
+											<p class="catpath">自动|5座</p>
+										</section>
+										<section class="list-right">
+											<span class="adprice">￥120/天</span>
+											<span class="adprice">￥220/周</span>
+											<span class="adprice">￥420/月</span>
+										</section>
+										<div class="clearfix"></div>
+									</li>
+
 								</a>
 								
 								

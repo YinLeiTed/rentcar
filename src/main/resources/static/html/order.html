@@ -25,391 +25,381 @@
 		<div class="step2-wrap">
 		    <div class="step2-box">
 		        <!--step2 left start-->
+		        
+		        <form id="myform" class="layui-form">
+		        	
 		        <div class="step2-box-left">
 		           
 		                <!--step2 车型门店信息 start-->
 		                
-		<div class="order-info-box">
-		    <div class="car-image-box">
-		        <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" alt="大众朗逸" />
-		        <span>租 期：<em>2.0</em>天</span>
-		    </div>
-		    <div class="store-info-box">
-		        <div class="car-name">
+					<div class="order-info-box">
+					    <div class="car-image-box">
+					        <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" alt="大众朗逸" />
+					        <span>租 期：<em>2</em>天</span>
+					    </div>
+					    <div class="store-info-box">
+					        <div class="car-name">
+					
+					            <a href="#" onclick="javascript :history.back(-1);" title="返回修改">返回修改</a>
+					
+					            大众朗逸或同组车型            <em onmouseover="javascript :$('.carmodel-box').removeClass('layui-hide')" onmouseleave="$('.carmodel-box').addClass('layui-hide')" class="sp-box sp-carmodel">车辆说明</em>
+					
+					        </div>
+					        <ul>
+					
+					            <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span></li>
+					            <li><span>取车门店：极速租车（大学城店）</span><span>还车门店：极速租车（大学城店）</span></li>
+					            <li><span>取车时间：2018-05-07 00:00:00</span><span>还车时间：2018-05-09 00:00:00</span></li>
+					            <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span></li>
+					            <li style="padding-top: 5px;"><span class="store-title">订单说明：</span></li>
+					            <li class="rule-toggle"><a data-method="notice" id="gz">退改规则</a>不限公里数，超时费按车辆租赁费及门店服务费均价÷6收取实际超期小时费 (部分0元活动订单，按照40元/小时进行收取)。</li>
+					                
+					        </ul>
+					    </div>
+					</div>
+					
+					
+					<div id="tggz"  class="layui-hide">
+					    <div class="book-rule" style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">
+					        <h3>一、普通车型退改规则</h3>
+					        <div class="ruleinfo">
+					            <ul>
+					                <li>
+					                    <p class="rule-lgbt">1、适用范围</p>
+					                    <ol style="color: #eb5c00;">
+					                        <li>a) 此规则仅限平日适用，春节、国庆等法定节假日请以具体公示的活动页为准；</li>
+					                        <li>b) 此规则仅限普通车型使用，高端车型请下拉查看具体规则。</li>
+					                    </ol>
+					                </li>
+					                <li>
+					                    <p class="rule-lgbt">2、订单取消</p>
+					                    <ol>
+					                        <li>a) 预订取车时间前48小时外取消订单，预付订单金额将全额退款。</li>
+					                        <li>b) 预订取车时间前48小时内取消订单，一嗨将收取最低一日日租金作为违约金，剩余已预付的订单金额将全部退还给客户。</li>
+					                        <li>c）天气不可抗力（比如洪水、地震等自然灾害）导致用户取消订单，不扣除违约金。</li>
+					                    </ol>
+					                </li>
+					                <li>
+					                    <p class="rule-lgbt">3、订单修改</p>
+					                    <ol>
+					                        <li>a) 订单支付完成后，允许修改订单信息；</li>
+					                        <li>b) 修改后订单金额可能发生变化，若修改后订单金额低于原来订单金额，差价将会在3-5个工作日原路径返还；若修改后订单金额高于原来订单金额，您可选择在线支付或取车时到店支付订单剩余金额。</li>
+					                    </ol>
+					                </li>
+					                <li>
+					                    <p class="rule-lgbt">4、续租</p>
+					                    <p>取车后增加租期，视为续租，续租部分按照非预付优惠价计算。</p>
+					                </li>
+					            </ul>
+					        </div>
+					
+					        <h3>二、高端车退改规则</h3>
+					        <div class="ruleinfo">
+					            <ul>
+					                <li>
+					                    <p class="rule-lgbt">1、订单取消</p>
+					                    <ol>
+					                        <li>a）若在取车前48-72小时取消，收取订单金额的15%作为违约金；</li>
+					                        <li>b）若在取车前24-48小时取消，收取订单金额的50%作为违约金；</li>
+					                        <li>c）若在取车前24小时内取消，收取订单金额100%作为违约金；</li>
+					                        <li>d）天气不可抗力（比如洪水、地震等自然灾害）导致用户取消订单，不扣除违约金。</li>
+					                    </ol>
+					                </li>
+					                <li>
+					                    <p class="rule-lgbt">2、订单修改</p>
+					                    <p>订单支付完成后，允许修改订单信息：</p>
+					                    <ol>
+					                        <li>a）若在取车前48-72小时修改，收取订单金额的10%作为改签费；</li>
+					                        <li>b）若在取车前24-48小时修改，收取订单金额的25%作为改签费；</li>
+					                        <li>c）若在取车前24小时内修改，收取订单金额50%作为改签费；</li>
+					                        <li>d）天气不可抗力（比如洪水、地震等自然灾害）导致用户修改订单，不扣除改签费。</li>
+					                    </ol>
+					                </li>
+					                <li>
+					                    <p class="rule-lgbt">3、提前还车</p>
+					                    <p>允许提前还车，但已预付的租金不退。</p>
+					                </li>
+					            </ul>
+					        </div>
+					    </div>
+					</div>
 		
-		            <a href="#" onclick="javascript :history.back(-1);" title="返回修改">返回修改</a>
 		
-		            大众朗逸或同组车型            <em class="sp-box sp-carmodel">车辆说明</em>
+					<div class="carmodel-box layui-hide" style="top: 110px; left: 591.3px;">
+					    <div class="carmodel-top"></div>
+					        <div class="carmodel-info">
+					            <h3>车型组说明</h3>
+					            <p>当您选择某个车型组时，您选择的是与所列举车型相类似的车型。</p>
+					            <p>例如：当您选择预订“舒适型车类似大众朗逸”时，表示您选择的是与大众朗逸相类似的舒适型车。</p>
+					            <p>需要注意的是，您在预订成功后，去门店取车时，取到的有可能是雪佛兰克鲁兹，也有可能是别克英朗GT，而不一定是大众朗逸。具体取到什么车型，要看您到门店取车时，您所预订的车型组相关车型的库存情况而定。</p>
+					        </div>
+					    <div class="carmodel-info">
+					        <h3>车辆颜色说明</h3>
+					        <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
+					    </div>
+					</div>
 		
-		        </div>
-		        <ul>
+					
 		
-		            <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span></li>
-		            <li><span>取车门店：八万人体育场店</span><span>还车门店：八万人体育场店</span></li>
-		            <li><span>取车时间：2018-05-07 18:00</span><span>还车时间：2018-05-09 18:00</span></li>
-		            <li><span>取车地址：上海徐汇区斜土路2899号甲（光启文化广场内，进来第一个入口左转）</span><span>还车地址：上海徐汇区斜土路2899号甲（光启文化广场内，进来第一个入口左转）</span></li>
-		            <li style="padding-top: 5px;"><span class="store-title">订单说明：</span></li>
-		            <li class="rule-toggle"><a href="javascript:void(0);" id="gz">退改规则</a>不限公里数，超时费按车辆租赁费及门店服务费均价÷6收取实际超期小时费 (部分0元活动订单，按照40元/小时进行收取)。</li>
-		                <li style="color: red;">温馨提示：<a href="http://www.1hai.cn/help/xxsm.aspx#clfs-SH" title="限行城市规则" style="color: red;" target="_blank">点击阅读限行城市规则</a></li>
-		        </ul>
-		    </div>
-		</div>
-		
-		<div id="tggz" style="display: none;">
-		    <div class="book-rule">
-		        <h3>一、普通车型退改规则</h3>
-		        <div class="ruleinfo">
-		            <ul>
-		                <li>
-		                    <p class="rule-lgbt">1、适用范围</p>
-		                    <ol style="color: #eb5c00;">
-		                        <li>a) 此规则仅限平日适用，春节、国庆等法定节假日请以具体公示的活动页为准；</li>
-		                        <li>b) 此规则仅限普通车型使用，高端车型请下拉查看具体规则。</li>
-		                    </ol>
-		                </li>
-		                <li>
-		                    <p class="rule-lgbt">2、订单取消</p>
-		                    <ol>
-		                        <li>a) 预订取车时间前48小时外取消订单，预付订单金额将全额退款。</li>
-		                        <li>b) 预订取车时间前48小时内取消订单，一嗨将收取最低一日日租金作为违约金，剩余已预付的订单金额将全部退还给客户。</li>
-		                        <li>c）天气不可抗力（比如洪水、地震等自然灾害）导致用户取消订单，不扣除违约金。</li>
-		                    </ol>
-		                </li>
-		                <li>
-		                    <p class="rule-lgbt">3、订单修改</p>
-		                    <ol>
-		                        <li>a) 订单支付完成后，允许修改订单信息；</li>
-		                        <li>b) 修改后订单金额可能发生变化，若修改后订单金额低于原来订单金额，差价将会在3-5个工作日原路径返还；若修改后订单金额高于原来订单金额，您可选择在线支付或取车时到店支付订单剩余金额。</li>
-		                    </ol>
-		                </li>
-		                <li>
-		                    <p class="rule-lgbt">4、续租</p>
-		                    <p>取车后增加租期，视为续租，续租部分按照非预付优惠价计算。</p>
-		                </li>
-		            </ul>
-		        </div>
-		
-		        <h3>二、高端车退改规则</h3>
-		        <div class="ruleinfo">
-		            <ul>
-		                <li>
-		                    <p class="rule-lgbt">1、订单取消</p>
-		                    <ol>
-		                        <li>a）若在取车前48-72小时取消，收取订单金额的15%作为违约金；</li>
-		                        <li>b）若在取车前24-48小时取消，收取订单金额的50%作为违约金；</li>
-		                        <li>c）若在取车前24小时内取消，收取订单金额100%作为违约金；</li>
-		                        <li>d）天气不可抗力（比如洪水、地震等自然灾害）导致用户取消订单，不扣除违约金。</li>
-		                    </ol>
-		                </li>
-		                <li>
-		                    <p class="rule-lgbt">2、订单修改</p>
-		                    <p>订单支付完成后，允许修改订单信息：</p>
-		                    <ol>
-		                        <li>a）若在取车前48-72小时修改，收取订单金额的10%作为改签费；</li>
-		                        <li>b）若在取车前24-48小时修改，收取订单金额的25%作为改签费；</li>
-		                        <li>c）若在取车前24小时内修改，收取订单金额50%作为改签费；</li>
-		                        <li>d）天气不可抗力（比如洪水、地震等自然灾害）导致用户修改订单，不扣除改签费。</li>
-		                    </ol>
-		                </li>
-		                <li>
-		                    <p class="rule-lgbt">3、提前还车</p>
-		                    <p>允许提前还车，但已预付的租金不退。</p>
-		                </li>
-		            </ul>
-		        </div>
-		    </div>
-		</div>
-		
-		<div id="GiftCard" style="display: none;">
-		    <div class="rule-giftcard">
-		        <h3>使用规则</h3>
-		        <ol>
-		            <li>
-		                <p>1、礼品E卡需在绑定之后才能使用，亦可转赠给他人，但转赠之后，您将不再拥有该"礼品E卡"。</p>
-		                <p>2、可在自驾租车中使用，专车接送、国际租车等业务待开。</p>
-		                <p>3、自驾租车中仅门店现付价格可使用礼品E卡支付，礼品E卡不可与线上任意优惠活动共享（含在线预付产品及打包产品），且提前还车不退钱。</p>
-		                <p>4、礼品E卡不可退。</p>
-		                <p>5、发票在购买卡时开取，使用礼品E卡支付的部分租金不可开取发票。</p>
-		                <p>6、礼品E卡自购买日起有效期3年。</p>
-		            </li>
-		        </ol>
-		    </div>
-		</div>
-		
-		<div class="carmodel-box" style="display: none;">
-		    <div class="carmodel-top"></div>
-		        <div class="carmodel-info">
-		            <h3>车型组说明</h3>
-		            <p>当您选择某个车型组时，您选择的是与所列举车型相类似的车型。</p>
-		            <p>例如：当您选择预订“舒适型车类似大众朗逸”时，表示您选择的是与大众朗逸相类似的舒适型车。</p>
-		            <p>需要注意的是，您在预订成功后，去门店取车时，取到的有可能是雪佛兰克鲁兹，也有可能是别克英朗GT，而不一定是大众朗逸。具体取到什么车型，要看您到门店取车时，您所预订的车型组相关车型的库存情况而定。</p>
-		        </div>
-		    <div class="carmodel-info">
-		        <h3>车辆颜色说明</h3>
-		        <p>车辆颜色请以门店为准，图片仅为车型示意图。</p>
-		    </div>
-		</div>
-		
-		<div id="Fan-prompt" style="display: none;">
-		    <div class="book-rule">
-		        <h3>返现说明</h3>
-		        <h4>(此规则仅平日适用，春节、国庆等法定节假日请以具体公布的活动页为准)</h4>
-		        <div class="ruleinfo">
-		            <ul>
-		                <li>
-		                    <p>1、返现活动仅限一嗨官网、APP、H5下单用户可用，预订带有【返】字样的车型订单，订单验证完成后，返现金额将在3个工作日内返还到您的一嗨余额账户，订单返现金额最终以还车时的“费用明细”中的返现金额为准，账户余额无有效期；</p>
-		                </li>
-		                <li>
-		                    <p>2、返现金额可用与一嗨租车官网PC、APP、H5端的自驾订单费用的抵扣或提现，提现时，请正常填写您的个人信息等，返现金额不支持转移、转赠；</p>
-		                </li>
-		                <li>
-		                    <p>3、需要开具发票的用户，请在下单时勾选需要发票/发票信息；</p>
-		                </li>
-		                <li>
-		                    <p>4、返现活动不与其他优惠共享。</p>
-		                </li>
-		            </ul>
-		        </div>
-		    </div>
-		</div>
-		
-		                <!--step2 车型门店信息 end-->
-		           
-		            <div class="payment-box">
-		                <div class="title">
-		                    支付方式
-		                </div>
-		                <div class="payment-list" id="orderPaymentList">
-		                    <ul>
-		                    	<li>
-		                    		<label>
-		                    			<input type="radio" checked="checked" class="ba-analysis" value="门店支付"/>
-		                    		</label>
-		                    	</li>
-		                    </ul>
-		                </div>
-		            </div>
-		            <!--step2 支付方式 end-->
-		            <!--step2 增值服务 start-->
-		            
-		<div class="service-box">
-		    <div class="title">
-		        其他服务
-		    </div>
-		    <div class="service-list">
-		        <ul>
-		            <li>
-		                <input name="" id="zdcx" value="指定车型"  type="checkbox" class="ba-analysis" data-ba-action="指定车型">
-		                <div class="service-name">
-		                    指定车型
-		                </div>
-		                <div class="service-price">
-		                    ￥10<i>/天</i>
-		                </div>
-		            </li>
-		            <li class="appointcar-wrap hidelable" id="gcid">
-		                
-		
-		<div class="appointcar-box">
-		        <div class="appointcar-list">
-		            <input name="cartype"  data-gcid="421" value=""  type="radio"/>
-		            <div class="appointcar-name">大众朗逸/自动三厢/1.6L</div>
-		        </div>
-		        <div class="appointcar-list">
-		            <input name="cartype"  data-gcid="143" value=""  type="radio"/>
-		            <div class="appointcar-name">大众斯柯达明锐/自动三厢/1.6L</div>
-		        </div>
-		        <div class="appointcar-list">
-		            <input name="cartype"  data-gcid="217" value=""  type="radio"/>
-		            <div class="appointcar-name">现代朗动/自动三厢/1.6L</div>
-		        </div>
-		        <div class="appointcar-list">
-		            <input name="cartype"  data-gcid="656" value=""  type="radio"/>
-		            <div class="appointcar-name">现代领动/自动三厢/1.6L</div>
-		        </div>
-		</div>
-		            </li>
-		
-		                        <li>
-		                            <input name="ServicePrice1"  id="207"  type="checkbox" value="车损免赔" class="ba-analysis" data-ba-action="车损免赔" />
-		                            <div class="service-name">
-		                                车损免赔
-		                            </div>
-		                            <div class="service-price">
-		                                ￥130<span></span>
-		                            </div>
-		                            <div class="service-des">
-		                                客户如在租赁期间内购买车损免赔，则1500元以下本车车辆损伤无需赔偿<a class="link-more" target="_blank" href="http://www.1hai.cn/help/bxfw.aspx">更多详细规则</a>
-		                            </div>
-		                        </li>
-		                        <li>
-		                            <input name=""  id="216" value="增值保障服务" type="checkbox"  class="ba-analysis" data-ba-action="增值保障服务" />
-		                            <div class="service-name">增值保障服务</div>
-		                        </li>
-		                        <li class="insurance-wrap hidelable" id="bxList">
-		                            <div class="insurance-box">
-		                                    <div class="insurance-list">
-		                                        <input name="lat" type="radio" id="la" checked=checked  value="216" />
-		                                        <div class="insurance-name">三者责任增加至50万</div>
-		                                        <div class="insurance-price">￥50</div>
-		                                        <div class="insurance-des">
-		                                            <p>三者责任增加至50万</p>
-		                                        </div>
-		                                    </div>
-		                                    <div class="insurance-list">
-		                                        <input name="lat" type="radio" id="ula"   value="217" />
-		                                        <div class="insurance-name">三者责任增加至100万</div>
-		                                        <div class="insurance-price">￥100</div>
-		                                        <div class="insurance-des">
-		                                            <p>三者责任增加至100万</p>
-		                                        </div>
-		                                    </div>
-		                                    <div class="insurance-list">
-		                                        <input name="lat" type="radio" id="ula"   value="223" />
-		                                        <div class="insurance-name">三者责任增加至150万</div>
-		                                        <div class="insurance-price">￥150</div>
-		                                        <div class="insurance-des">
-		                                            <p>三者责任增加至150万</p>
-		                                        </div>
-		                                    </div>
-		                            </div>                
-		                        </li>
-		                        <li>
-		                            <input name="ServicePrice1"  id="215"  type="checkbox" value="乘客座位保障" class="ba-analysis" data-ba-action="乘客座位保障" />
-		                            <div class="service-name">
-		                                乘客座位保障
-		                            </div>
-		                            <div class="service-price">
-		                                ￥50<span></span>
-		                            </div>
-		                            <div class="service-des">
-		                                车辆发生事故，致使乘客遭受人身伤亡造成的费用损失，以及为减少损失而支付的必要合理的施救、保护费用，赔付标准以保险公司核定为准且赔付上限不超过5万元/人/座。同时，在租赁期间，提供道路救援服务。
-		                            </div>
-		                        </li>
-		
-		        </ul>
-		    </div>
-		</div>
+			        <!--step2 车型门店信息 end-->
+			    
+			        <div class="payment-box">
+			            <div class="title">
+			                支付方式
+			            </div>
+			            <div class="payment-list" id="orderPaymentList">
+			            	<div class="layui-input-block" style="margin-left: -19px;">
+						      <input type="radio"  value="门店支付" title="门店支付" checked>
+						    </div>
+			                
+			            </div>
+			        </div>
+         
+			        <!--step2 支付方式 end-->
+			        <!--step2 增值服务 start-->
+		       
+					<div class="service-box">
+					    <div class="title">
+					        其他服务
+					    </div>
+					    <div class="service-list ">
+					       
+							<div class="layui-input-block">
+								<div class="service-name">
+				                    <input name="myservice1" lay-filter="myservice1"  lay-skin="primary" type="checkbox" class="ba-analysis" title="指定车型" checked>
+				                </div>
+				                <div class="service-price">
+				                    ￥10<i>/天</i>
+				                </div>
+							</div>
+							
+							<div class="layui-input-block">
+								<div class="service-name">
+	                                <input name="myservice2" lay-filter="myservice2" lay-skin="primary" type="checkbox" class="ba-analysis" title="车损免赔" checked>
+	                            </div>
+	                            <div class="service-price">
+	                                ￥130<span></span>
+	                            </div>
+	                            <div class="service-des">
+                                		客户如在租赁期间内购买车损免赔，则1500元以下本车车辆损伤无需赔偿
+	                            </div>
+							</div>
+					                
+					        <div class="layui-input-block">
+					        	<div class="service-name">
+	                            	 <input name="myservice3" lay-filter="myservice3"  lay-skin="primary" type="checkbox" class="ba-analysis" title="增值保障服务" checked>
+	                            </div>
+	                            <div class="service-price">
+	                                ￥50<span></span>
+	                            </div>
+	                            <div class="service-des">
+                                		三者责任增加至50万
+	                            </div>
+					        </div>  
+					        
+					        <div class="layui-input-block">
+					        	 <div class="service-name">
+	                                <input name="myservice4" lay-filter="myservice4" lay-skin="primary" type="checkbox" class="ba-analysis" title="乘客座位保障" checked>
+	                            </div>
+	                            <div class="service-price">
+	                                ￥50<span></span>
+	                            </div>
+	                            <div class="service-des">
+	                               		车辆发生事故，致使乘客遭受人身伤亡造成的费用损失，以及为减少损失而支付的必要合理的施救、保护费用，赔付标准以保险公司核定为准且赔付上限不超过5万元/人/座。同时，在租赁期间，提供道路救援服务。
+	                            </div>
+					        </div>  
+                   
+					    </div>
+					</div>
 		
 		            <!--step2 增值服务 end-->
 		
 		        </div>
+		        
+		        </form>	
 		        <!--step2left end -->
 		        <!--step2right start -->
 		        <div class="step2-box-right" id="priceall">
 		            
 		
-		<div class="price-detail">
-		    <div class="title">
-		        费用明细
-		    </div>
-		    <ul>
-		        <li class="line-clear" id="baseRatePrice">
-		                
-		
-		
-		    <em class="price-mid ">
-		        ￥136<i class="price-drop-open"></i><i class="price-drop-close"></i>
-		    </em>车辆租赁费及门店服务费
-		
-		
-		        <div class="price-drop-box" id="baseRateDetail">
-		                <span>
-		                    <p>
-		                        05/07 周一
-		                    </p>
-		                    <p class="orange">
-		                        ￥34
-		                    </p>
-		                </span>
-		                <span>
-		                    <p>
-		                        05/08 周二
-		                    </p>
-		                    <p class="orange">
-		                        ￥68
-		                    </p>
-		                </span>
-		                <span>
-		                    <p>
-		                        05/09 周三
-		                    </p>
-		                    <p class="orange">
-		                        ￥34
-		                    </p>
-		                </span>
-		        </div>
-		
-		        </li>
-		
-		
-		        <!--基本保障服务费-->
-		                <li>
-		                    <em class="price-mid ">￥80</em>基本保障服务费
-		
-		                    <span >基本保障服务费40.0元 * 2.0天</span>
-		                </li>
-		
-		
-		        <li id="servicePriceList">
-		            
-		
-		<em class="price-drop">
-		    ￥20
-		    <i class="price-drop-open"></i><i class="price-drop-close"></i>
-		</em>其他服务费
-		
-		    <div class="price-drop-box" id="serviceList">
-		                <span>
-		                <p class="orange">
-		                    ￥20
-		                </p>
-		                <p>
-		                    手续费
-		                </p>
-		            </span>
-		    </div>
-		
-		        </li>
-		        <li id="promotionPriceList">
-		                
-		        </li>
-		
-		    </ul>
-		    <div class="deposit_box">
-		        <p>预授权<em>（可退）</em><span>￥3000</span></p>
-		        <p>违章押金<em>（可退）</em><span>￥2000</span></p>
-		    </div>
-		    <div class="price-box" id="totalAmount">
-		        <span class="sub-load hidelable" id="priceloading"></span>
-		<span class="price-txt"
-		    id="priceTitle">总计:</span><span class="price-total" id="priceTotal"><em>￥</em>236</span>
-		    </div>
-		    <div class="price-btnbox">
-		        <a href="javascript:void(0);" title="提交订单" id="btnSubmit">提交订单</a> <span class="sub-load hidelable" id="loading"></span>
-		    </div>
-		
-		    <div class="price-help">
-		
-		        <p style="display:none; border-bottom: 1px dashed #EB5A01; padding-bottom: 5px; margin-bottom: 5px;"><b>此单可参加周年庆返现活动，您需支付整单金额，返还金额（基本租车费的50%）将在还车后3-5个工作日退还至您的一卡行账户</b></p>
-		            
-		                首次租车请使用本人信用卡，本人二代有效身份证，本人有效地方驾驶证正副本。<br />
-		            
-		
-		        <p>本订单仅为客户租车预约登记，提交该订单后，客户需要到门店办理具体租车手续，具体权利义务以签署的合同为准。</p>
-		    </div>
-		
-		    <div id="LimitRemind" style="border-top:1px solid #ccc; color: #EB5A01; background: #FFFCD2; padding: 15px; line-height:20px;display:none;"></div>
-		
-		</div>
-		
-		
+					<div class="price-detail">
+					    <div class="title">
+					        费用明细
+					    </div>
+					    <ul>
+					        <li class="line-clear" id="baseRatePrice">						
+							    <em class="price-mid">￥136</em>车辆租赁费及门店服务费					
+					        </li>	
+					        <!--基本保障服务费-->
+			                <li>
+			                    <em class="price-mid">￥80</em>基本保障服务费
+			
+			                    <span >基本保障服务费40.0元 * 2.0天</span>
+			                </li>
+									
+					        <li id="servicePriceList">
+					            
+					
+								<em id="otherservice" class="price-drop">
+								    ￥20 
+								</em>其他服务费
+					
+							    <div class="price-drop-box" id="serviceList">
+							            <span> 
+							             	<p class="orange">￥20</p>
+							                <p>手续费</p>
+							            </span>
+							            <span>
+							                <p class="orange"> ￥20</p>
+							                <p>车型指定费</p>
+							            </span>
+							            <span>
+							                <p class="orange">￥130</p>
+							                <p>车损免赔</p>
+							            </span>
+							            <span>
+							                <p class="orange">￥50</p>
+							                <p>三者责任增加至50万</p>
+							            </span>
+							            <span>
+							                <p class="orange">￥50</p>
+							                <p>乘客座位保障</p>
+							            </span>
+							    </div>
+					
+					        </li>
+					        
+					    </ul>
+					    <div class="deposit_box">
+					        <p>预授权<em>（可退）</em><span>￥3000</span></p>
+					        <p>违章押金<em>（可退）</em><span>￥2000</span></p>
+					    </div>
+					    <div class="price-box" id="totalAmount">
+					        <span class="sub-load hidelable" id="priceloading"></span>
+					<span class="price-txt"
+					    id="priceTitle">总计:</span><span class="price-total" id="priceTotal"><em>￥</em>236</span>
+					    </div>
+					    <div >
+					        <button id="submitForm" class="layui-btn layui-btn-fluid">提交订单</button>
+					    </div>
+					
+					    <div class="price-help" style="margin-top: 10px;">
+					
+					        <p style="display:none; border-bottom: 1px dashed #EB5A01; padding-bottom: 5px; margin-bottom: 5px;"><b>此单可参加周年庆返现活动，您需支付整单金额，返还金额（基本租车费的50%）将在还车后3-5个工作日退还至您的一卡行账户</b></p>
+					            
+					                首次租车请使用本人信用卡，本人二代有效身份证，本人有效地方驾驶证正副本。<br />
+					            
+					
+					        <p>本订单仅为客户租车预约登记，提交该订单后，客户需要到门店办理具体租车手续，具体权利义务以签署的合同为准。</p>
+					    </div>
+					
+					    <div id="LimitRemind" style="border-top:1px solid #ccc; color: #EB5A01; background: #FFFCD2; padding: 15px; line-height:20px;display:none;"></div>
+					
+					</div>
 		
 		
 		        </div>
 		        <!--step2right end -->
 		    </div>
+		   
 		</div>
+	   
+	   
+	   
+	   <script>
 
+		layui.use(['form','layer'], function(){
+		  form = layui.form,layer = layui.layer;
+		  	  
+		  $("#gz").click(function(){
+		  	 //示范一个公告层
+		      layer.open({
+		        type: 1
+		        ,title: false //不显示标题栏
+		        ,closeBtn: false
+		        ,area: '500px;'
+		        ,shade: 0.8
+		        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+		        ,btn: ['我知道了']
+		        ,btnAlign: 'c'
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,content: $("#tggz").html()
+		       
+		      });
+		  })
+            $(function(){
+                $(".car-image-box span em").html($.cookie("myday"));
+                $("#serviceList span p.orange").eq(1).html("￥"+(parseInt($.cookie("myday"))*10));
+                changePrice();
+            })
+
+
+		    $("#submitForm").click(function(){
+		        if($.cookie("myuser")==undefined)
+				{
+				    layer.msg("请先登录，再进行操作")
+				}
+				else{
+                    console.log($("#priceTotal").html().substring(10))
+				}
+
+		    })
+		    
+		    function changePrice(){
+		    	var ss=$("#myform").serialize()
+		     	var price1=parseInt($(".price-mid").html().substring(1));
+		     	var price2=parseInt($(".price-mid").eq(1).html().substring(1));
+		     	var price=price1+price2;
+		     	var otherservice=20;
+		     	if(ss.search("myservice1")!=-1)
+		     	{
+		     		var days=parseInt($.cookie("myday"));
+                    otherservice+=days*10;
+		     	}
+		     	if(ss.search("myservice2")!=-1)
+                    otherservice+=130;
+		     	if(ss.search("myservice3")!=-1)
+                    otherservice+=50;
+		     	if(ss.search("myservice4")!=-1)
+                    otherservice+=50;
+		     	price+=otherservice;
+		     	$("#otherservice").html("￥"+otherservice);
+		     	$("#priceTotal").html("<em>￥</em>"+price);
+		    }
+		   form.on('checkbox(myservice1)', function(data){  
+			  if(data.elem.checked)
+			  	 $("#serviceList span").eq(1).removeClass('layui-hide');
+			  else
+			  	 $("#serviceList span").eq(1).addClass('layui-hide');
+
+			  changePrice();
+			});    
+		    form.on('checkbox(myservice2)', function(data){  
+			  if(data.elem.checked)
+			  	 $("#serviceList span").eq(2).removeClass('layui-hide');
+			  else
+			  	 $("#serviceList span").eq(2).addClass('layui-hide');
+
+                changePrice();
+			});
+			form.on('checkbox(myservice3)', function(data){  
+			  if(data.elem.checked)
+			  	 $("#serviceList span").eq(3).removeClass('layui-hide');
+			  else
+			  	 $("#serviceList span").eq(3).addClass('layui-hide');
+
+                changePrice();
+			});
+			form.on('checkbox(myservice4)', function(data){  
+			  if(data.elem.checked)
+			  	 $("#serviceList span").eq(4).removeClass('layui-hide');
+			  else
+			  	 $("#serviceList span").eq(4).addClass('layui-hide');
+
+                changePrice();
+			});
+		  
+		});
+	</script>
 	</body>
 </html>

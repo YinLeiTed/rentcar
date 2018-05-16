@@ -60,15 +60,22 @@ body {font-size: 12px;color: #666;font-family:Tahoma, "����";}
 body{ color:#666 !important;}
 /*STEP2 LAYOUT*/
 .step2-progress-box{ width:1180px; height:8px; background:#999; margin:15px auto 60px; position:relative;}
+.step2-progress-box2{ width:1140px; height:8px; background:#999; margin:15px auto 60px; position:relative;}
 .progress-percent { width:674px; background:#23b7b7; height:8px; position:absolute; top: 0; left:0;}
+.progress-percent2 { width:344px; background:#23b7b7; height:8px; position:absolute; top: 0; left:0;}
+.progress-percent3 { width:1140px; background:#23b7b7; height:8px; position:absolute; top: 0; left:0;}
 .progress-icon span{ width:34px; height:34px; line-height:34px; text-align:center; color:#fff; margin-top:-13px; border-radius:34px; -moz-border-radius:34px; -webkit-border-radius:34px; position:absolute;}
 .progress-firsticon{ left:320px; background:#23b7b7;}
 .progress-secondicon{ left: 674px; background:#23b7b7;}
+.progress-secondicon2{ left: 674px; background:#999;}
 .progress-thirdicon{ left:1028px; background:#999;}
+.progress-thirdicon3{ left:1028px; background:#23b7b7;}
 .progress-text span{  position:absolute; top:24px; font-size: 14px;}
 .progress-firsttext { left:310px; color:#23b7b7;}
 .progress-secondtext { left:645px; color:#23b7b7;}
+.progress-secondtext2 { left:645px; color:#333;}
 .progress-thirdtext { left:1015px; color:#333;}
+.progress-thirdtext3 { left:1015px; color:#23b7b7;}
 .step2-wrap{ width:100%; margin-bottom:30px;}
 .step2-box{ width:1180px;  overflow:hidden; zoom:1; margin:auto; margin-top:20px;}
 .step2-box-left{ width:880px; border:1px solid #ccc; float:left;}
@@ -195,16 +202,16 @@ body{ color:#666 !important;}
 /*��ֵ����*/
 .service-box{overflow:hidden; zoom:1;}
 .service-box .title{ height:43px; border-top:1px solid #ccc; border-bottom:1px solid #ccc; background:#EFEFEF; line-height:42px; font-size:16px; font-weight:bolder; text-indent:1em;}
-.service-list{ padding:20px 30px;}
-.service-list li{ font-size:14px; font-weight:bolder; position:relative;}
+.service-list{ padding:20px 30px 30px 30px;}
+.service-list { font-size:14px; font-weight:bolder; position:relative;}
 .service-list li input{ height:42px; display:inline-block;}
-.service-list li .service-name{line-height:16px;position:absolute; left:25px; top:13px; font-size:14px; width:140px; font-weight:bolder;}
-.service-list li .service-price{line-height:16px;position:absolute; left:170px; top:13px; font-size:14px; width:90px; color:#E55900; font-weight:bolder; font-family: "\5fae\8f6f\96c5\9ed1";}
-.service-list li .service-des{ position:absolute; right:20px; top:13px; font-size:14px; width:530px; font-size:12px; color:#999; font-weight:normal; line-height:16px;}
-.service-list li .service-des a{ color:#23b7b7 !important; display:inline-block;}
-.service-list li .service-des a:hover{ text-decoration:underline !important;}
-.service-list li .service-price span{ font-weight:normal; color:#666; font-size:12px;}
-.service-list li .service-price i{ font-style:normal;}
+.service-list  .service-name{margin-left: -150px; line-height:16px;position:absolute; left:25px; top:13px; font-size:14px; width:140px; font-weight:bolder;}
+.service-list  .service-price{margin-left: -110px;line-height:16px;position:absolute; left:170px; top:13px; font-size:14px; width:90px; color:#E55900; font-weight:bolder; font-family: "\5fae\8f6f\96c5\9ed1";}
+.service-list  .service-des{padding-bottom: 10px; position:absolute; right:20px; top:13px; font-size:14px; width:530px; font-size:12px; color:#999; font-weight:normal; line-height:16px;}
+.service-list  .service-des a{ color:#23b7b7 !important; display:inline-block;}
+.service-list  .service-des a:hover{ text-decoration:underline !important;}
+.service-list  .service-price span{ font-weight:normal; color:#666; font-size:12px;}
+.service-list  .service-price i{ font-style:normal;}
 
 /*ʹ�õ���*/
 .item-box{overflow:hidden; zoom:1;}
@@ -333,8 +340,8 @@ _position: absolute; _top: expression(documentElement.scrollTop+documentElement.
 .price-detail li{ padding:11px; padding-left:10px; font-size:14px; font-weight:bolder; position:relative;} 
 .price-detail li em{ color:#666; font-style:normal; font-weight:bolder; position:absolute; width:120px; text-align:right; padding-right:25px; right:0; display:inline-block; font-family: "\5fae\8f6f\96c5\9ed1";}
 .price-detail li em .display-fix{ display:inline-block !important;}
-.price-detail li em .price-drop-open{ width:11px; height:8px;  vertical-align:middle; margin-right:-15px; margin-left:3px; cursor:pointer;}
-.price-detail li em .price-drop-close{ display:none; width:11px; height:8px;  vertical-align:middle; margin-right:-15px; margin-left:3px; cursor:pointer;}
+.price-detail li em .price-drop-open{     background: url(../img/price_drop_open.png) no-repeat;width:11px; height:8px;  vertical-align:middle; margin-right:-15px; margin-left:3px; cursor:pointer;}
+.price-detail li em .price-drop-close{background: url(../img/price_drop_close.png) no-repeat; display:none; width:11px; height:8px;  vertical-align:middle; margin-right:-15px; margin-left:3px; cursor:pointer;}
 .price-detail li span{ font-size:12px; color:#999; display:block; font-weight:normal;}
 .price-detail .line-clear{ background:none;}
 #pointDesc{ color:#EB5A01;}
@@ -369,7 +376,7 @@ _position: absolute; _top: expression(documentElement.scrollTop+documentElement.
 
 
 /*������ϸ�б�����*/
-.price-drop-box{ display:none; padding:10px 0; overflow:hidden; zoom:1;}
+.price-drop-box{  padding:10px 0; overflow:hidden; zoom:1;}
 .price-drop-box span{float: left; padding:4px 8px; background:#EFEFEF; line-height:20px; margin-right:6px; margin-bottom:10px;}
 #serviceList span{}
 #promotionList span{}
@@ -583,7 +590,7 @@ img.fnone{float:none !important}
 .book-rule h3 { font-size: 18px; color: #e65901; padding-top: 20px; }
 .book-rule h4 { font-size: 14px; color: #eb5c00;}
 .ruleinfo ul li {padding-top: 20px;}
-.ruleinfo ul li p.rule-lgbt { font-size: 14px; color: #333; font-weight: bold; padding-bottom: 2px;}
+.ruleinfo ul li p.rule-lgbt { font-size: 14px; color: #fff; font-weight: bold; padding-bottom: 2px;}
 .ruleinfo ul li ol li { padding-top: 2px;}
 
 /*��ƷE��ʹ�ù���*/
