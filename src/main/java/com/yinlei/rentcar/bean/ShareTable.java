@@ -9,6 +9,7 @@ import java.util.Objects;
 public class ShareTable {
     private int idShare;
     private Integer idUserShare;
+    private Integer idOrderShare;
     private String contentShare;
     private String imagesShare;
     private Date timeShare;
@@ -32,6 +33,16 @@ public class ShareTable {
 
     public void setIdUserShare(Integer idUserShare) {
         this.idUserShare = idUserShare;
+    }
+
+    @Basic
+    @Column(name = "id_order_share", nullable = true)
+    public Integer getIdOrderShare() {
+        return idOrderShare;
+    }
+
+    public void setIdOrderShare(Integer idOrderShare) {
+        this.idOrderShare = idOrderShare;
     }
 
     @Basic
