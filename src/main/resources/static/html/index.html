@@ -43,7 +43,7 @@
 			  <li class="layui-nav-item"><a id="main3">营业网点</a></li>
 			  <li class="layui-nav-item"><a id="main4">体验分享</a></li>
 			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide"  style="margin-right: 40px;">
-			    <a href="#"><img src="../img/vip3.png" style="width: 25px;height: 25px">我门</a>
+			    <a href="#"><img src="../img/vip1.png" style="width: 25px;height: 25px">123456</a>
 			    <dl class="layui-nav-child">
 			      <dd><a href="javascript:;">修改信息</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
@@ -179,7 +179,7 @@
         <script>
 			//注意：导航 依赖 element 模块，否则无法进行功能性操作
 			layui.use(['element','layer'], function(){
-			  var element = layui.element;
+			  element = layui.element,layer=layui.layer;
 			  	$("#quit").click(function(){	
 					$("#loginAndRegister").removeClass('layui-hide');
 					$("#my").addClass('layui-hide')
@@ -293,8 +293,34 @@
 							var myuser=$.cookie("myuser");
 							if(myuser!=undefined)
 							{
+                                layer.msg("登录成功！")
+
 								$("#my").removeClass('layui-hide');
 								$("#loginAndRegister").addClass('layui-hide')
+                                $("#my>a").html(getUserContent(myuser));
+								//更新nav渲染
+                                element.render('nav');
+							}
+                        	var mycode=$.cookie("mycode");
+							if(mycode!=undefined)
+							{
+                                $.cookie("mycode", null, { expires: -1,path:'/'});
+                                layer.msg("密码重置成功！")
+                                if(myuser!=undefined)
+                                {
+                                    layer.msg("密码重置成功,请重新登录吧！")
+                                    $("#loginAndRegister").removeClass('layui-hide');
+                                    $("#my").addClass('layui-hide')
+
+                                    //退出登录
+                                    $.cookie("myuser", null, { expires: -1,path:'/'});
+                                }
+							}
+							var myregistercode=$.cookie("myregistercode");
+							if(myregistercode!=undefined)
+							{
+								$.cookie("myregistercode", null, { expires: -1,path:'/'});
+								layer.msg("账号注册成功！")
 							}
 					  }
 					  ,zIndex: layer.zIndex //重点1
@@ -307,10 +333,27 @@
                 var myuser=$.cookie("myuser");
                 if(myuser!=undefined)
                 {
+                    $("#my>a").html(getUserContent(myuser));
                     $("#my").removeClass('layui-hide');
                     $("#loginAndRegister").addClass('layui-hide')
                 }
             })
+			function getUserContent(myuser) {
+                myuser=JSON.parse(myuser);
+                var amount=parseInt(myuser.amountUser);
+                var content;
+                if(amount<5000) {
+                    content='<img src="../img/vip1.png" style="width: 25px;height: 25px">';
+                }else if(amount<20000){
+                    content='<img src="../img/vip2.png" style="width: 25px;height: 25px">';
+                }else if(amount<50000){
+                    content='<img src="../img/vip3.png" style="width: 25px;height: 25px">';
+                }else {
+                    content='<img src="../img/vip4.png" style="width: 25px;height: 25px">';
+                }
+                content+=myuser.phoneUser;
+                return content;
+            }
 		</script>
 	</body>
 </html>

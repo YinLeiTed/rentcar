@@ -25,4 +25,18 @@ function myajax(myaddress,mytype){
     });
     return mydata;
 }
+//跨域请求
+function myajax3(myaddress,mytype){
+    var mydata;
+    $.ajax({
+        type: mytype,
+        url: myaddress,
+        dataType: "jsonp",
+        crossDomain: true,
+        success: function(data){
+            mydata=data;
+        }
+    });
+    return mydata;
+}
 	
