@@ -6,3 +6,4 @@ document.write("<script language='javascript' src='../js/myajax.js'></script>");
 document.write("<script language='javascript' src='../js/JSONToExcelConvertor.js'></script>");
 document.write("<script language='javascript' src='../js/jquery.cookie.js'></script>");
 document.write("<script language='javascript' src='../layui/layui.js'></script>");
+document.write("<script language='javascript' src='../js/string.js'></script>");

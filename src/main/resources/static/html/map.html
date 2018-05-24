@@ -141,11 +141,11 @@
 						                }
 						            });
 						        marker.content = '<div class="info-title">'+result.all[i].nameCarStore+'</div><div class="info-content">' +
-									            '<img style="height: 100px;" src="'+result.all[i].imageCarStore+'">' +
+									            '<img style="width: 318px;" src="'+result.all[i].imageCarStore+'">' +
 									            '地址：'+result.all[i].addressCarStore+'<br/>' +
 									            '电话：'+result.all[i].phoneCarStore+'<br/>' +
 									            '时间：'+result.all[i].startWorkCarStore+':00-'+result.all[i].endWorkCarStore+':00' +
-									            '<a target="_blank" href = "http://mobile.amap.com/" style="margin-left: 155px;color: #0d81e8;text-decoration: underline;">进入店铺</a></div>';
+									            '<a target="_blank" onclick="enterCar('+result.all[i].idCarStore+')" style="margin-left: 155px;color: #0d81e8;text-decoration: underline;">进入店铺</a></div>';
 						        marker.on('click', markerClick);
 						        marker.emit('click', {target: marker});
 						    }
@@ -154,7 +154,10 @@
 				
 				
 		  	});
-		  	
+			function enterCar(id) {
+                $.cookie("mymap", id, { expires: 1,path:'/'});
+				location.href="./cars.html";
+            }
 		  	function setContent(aim,contents)
 		  	{
 		  		aim.empty();
@@ -163,7 +166,7 @@
 					var j=i;
 		  			aim.append('<li class="poibox" onclick="openOPI('+(i)+')">'
 		    					+'<div class="amap_lib_placeSearch_poi poibox-icon">'+(++j)+'</div>'
-		    					+'<div class="poi-img"><img style="height: 100px;" src="'+contents[i].imageCarStore+'"></div>'
+		    					+'<div class="poi-img"><img style="width: 318px;" src="'+contents[i].imageCarStore+'"></div>'
 		    					+'<h3 class="poi-title">'
 		    					+	'<span class="poi-name">'+contents[i].nameCarStore+'</span>'
 		    					+'</h3>'
@@ -177,9 +180,14 @@
 		  		}
 		  	}
 		  	//根据位置打开不同坐标
-		  	function openOPI(number){
-		  		
-		  		infoWindow.open(map, lnglats[number]);
+		  	function openOPI(i){
+                infoWindow.setContent('<div class="info-title">'+result.all[i].nameCarStore+'</div><div class="info-content">' +
+                    '<img style="width: 318px;" src="'+result.all[i].imageCarStore+'">' +
+                    '地址：'+result.all[i].addressCarStore+'<br/>' +
+                    '电话：'+result.all[i].phoneCarStore+'<br/>' +
+                    '时间：'+result.all[i].startWorkCarStore+':00-'+result.all[i].endWorkCarStore+':00' +
+                    '<a target="_blank" onclick="enterCar('+result.all[i].idCarStore+')" style="margin-left: 155px;color: #0d81e8;text-decoration: underline;">进入店铺</a></div>');
+		  		infoWindow.open(map, lnglats[i]);
 		  		//console.log(number+"---"+lnglats[number])
 		  	}
 		  	
@@ -197,9 +205,8 @@
 		    var infoWindow = new AMap.AdvancedInfoWindow({offset: new AMap.Pixel(0, 0)});
 		    //初始化地图对象，加载地图
 		    
-		    function markerClick(e) {
+		    function markerClick(e,number) {
 		        infoWindow.setContent(e.target.content);
-		        //infoWindow.setContent(content);
 		        infoWindow.open(map, e.target.getPosition());
 		    }
 		    map.setFitView();

@@ -62,4 +62,9 @@ public class CarStoreTableService {
         map.put("all",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%"));
         return map;
     }
+    public Map getCarStores(String address) {
+        HashMap<String, Object> map=new HashMap<>();
+        map.put("all",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%"));
+        return map;
+    }
 }

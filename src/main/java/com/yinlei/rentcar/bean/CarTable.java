@@ -123,7 +123,7 @@ public class CarTable {
     }
 
     @Basic
-    @Column(name = "img_car", nullable = true, length = 100)
+    @Column(name = "img_car", nullable = true, length = 255)
     public String getImgCar() {
         return imgCar;
     }

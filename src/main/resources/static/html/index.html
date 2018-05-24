@@ -222,6 +222,20 @@
                         area: ['400px', '100px'] //自定义文本域宽高
                     }, function(value, index, elem){
                         layer.msg(value); //得到value
+                        var myuser=$.cookie("myuser");
+                        if(myuser==undefined){
+                            layer.msg("请先登录");
+						}
+						else{
+                            //var json=[];
+                            var row={};
+                            row.idUserAdvise=JSON.parse(myuser).idUser;
+                            row.contentAdvise=value;
+							myajax2("../AdviseTable/insert","post",row);
+                            //json.push(row);
+                            //console.log(json);
+                            layer.msg("提交成功");
+						}
                         layer.close(index);
                     });
 

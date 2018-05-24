@@ -28,8 +28,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="../js/area.js" ></script>
 <script type="text/javascript" src="../js/iframe.js" ></script>
 	<script type="text/javascript" src='../js/jquery.cookie.js'></script>
+	<script type="text/javascript" src='../js/myajax.js'></script>
 	<link rel="stylesheet" href="../css/order.css" />
   <style>
+	#city+.layui-form-select dl dd,#city2+.layui-form-select dl dd{
+		padding: 0 10px;
+		line-height: 36px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 100%;
+		float: left;
+	}
   	.layui-form-select dl dd{
   		padding: 0 10px;
 	    line-height: 36px;
@@ -127,15 +137,12 @@ var elem=$('#container ul');
 		<div class="layui-form-item">
 		    <label class="layui-form-label" style="width: 90px;">取车地点</label>
 		    <div class="layui-input-inline" style="width: 320px;">
-		      <select id="province" name="province" required lay-verify="required" lay-search>
+		      <select id="province" name="province" lay-filter="province" required lay-verify="required" lay-search>
 		        	
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
-		      <select id="city" name="city"  required lay-verify="required" lay-search>
-		      	  <option value="">取车门店</option>
-				  <option value="1">极速租车（大学城店）</option>
-				  <option value="1">极速租车（陈家桥店）</option>
+		      <select id="city" name="city" lay-filter="city"  required  lay-verify="required" lay-search>
 		      </select>
 		    </div>
 		    
@@ -149,21 +156,18 @@ var elem=$('#container ul');
 		<div class="layui-form-item">   
 		    <label class="layui-form-label" style="width: 90px;">还车地点</label>
 		    <div class="layui-input-inline" style="width: 320px;">
-		      <select id="province2" name="province" required lay-verify="required" lay-search>
+		      <select id="province2" name="province2" lay-filter="province2" required lay-verify="required" lay-search>
 		        	
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
-		      <select id="city2" name="city2"  required lay-verify="required" lay-search>
-		      	<option value="">还车门店</option>
-				  <option value="1">极速租车（大学城店）</option>
-				  <option value="1">极速租车（陈家桥店）</option>
+		      <select id="city2" name="city2" lay-filter="city2"  required lay-verify="required" lay-search>
 		      </select>
 		    </div>
 		    
-		     <!--<div class="layui-input-inline left">
-		      <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 30px;">查询</button>
-		    </div>-->
+		     <div class="layui-input-inline left layui-hide">
+		       	<button id="mysubmit" class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left: 30px;">查询</button>
+		     </div>
 		</div>
 		
 		
@@ -171,25 +175,184 @@ var elem=$('#container ul');
     </div>
 	
 	<script>
+        function enterOrder(id)
+        {
+            console.log(id);
+            $("#mysubmit").click();
+        }
+        function carSearch() {
+            if(mycarresult==null)
+                layer.msg("请先选择租车城市和租车门店！");
+            else if(mycarresult.length!=0){
+                var range=$("#amount").val().split(" - ");
+                var price1=parseInt(range[0].substr(1));
+                var price2=parseInt(range[1].substr(1));
+                var brand=$("#brandCar").val();
 
+                var mycarlist=$("#mycarlist");
+                mycarlist.empty();
+                var mycity=$("#city option:selected").html();
+                for(var i in mycarresult)
+                {
+					if((mycarresult[i].brandTypeCar==brand||brand=="所有品牌")&&mycarresult[i].dailyRentCar>=price1&&mycarresult[i].dailyRentCar<=price2)
+					{
+                        mycarlist.append('<a onclick="enterOrder('+mycarresult[i].idCar+')">\n' +
+                            '                <li>\n' +
+                            '                <img src="'+mycarresult[i].imgCar+'" title="" alt="" />\n' +
+                            '                <section class="list-left">\n' +
+                            '                <h5 class="title">'+mycarresult[i].nameCar+'</h5>\n' +
+                            '                <span class="cityname">'+mycarresult[i].describeCar+'</span>\n' +
+                            '            <p class="catpath">'+mycarresult[i].carTypeCar+'&nbsp;&nbsp;'+mycity+'</p>\n' +
+                            '            </section>\n' +
+                            '            <section class="list-right">\n' +
+                            '                <span class="adprice">￥'+mycarresult[i].dailyRentCar+'/天</span>\n' +
+                            '                <span class="adprice">￥'+mycarresult[i].weeklyRentCar+'/周</span>\n' +
+                            '                <span class="adprice">￥'+mycarresult[i].monthlyRentCar+'/月</span>\n' +
+                            '                </section>\n' +
+                            '                <div class="clearfix"></div>\n' +
+                            '                </li>\n' +
+                            '\n' +
+                            '                </a>');
+					}
+
+
+                }
+			}
+
+        }
+        var mycarresult=null;
+        //获取门店汽车信息
+        function getCars(id){
+
+			var result=myajax("../CarTable/getCar/"+id,"get");
+			mycarresult=result;
+			var mycarlist=$("#mycarlist");
+			mycarlist.empty();
+
+			var mycity=$("#city option:selected").html();
+			//console.log(result);
+            //console.log("mycity:"+mycity);
+			if(result.length==0)
+			    mycarlist.append("<h3 align='center'>本门店暂无车辆可以租赁！！！</h3>")
+			for(var i in result)
+			{
+			    mycarlist.append('<a onclick="enterOrder('+result[i].idCar+')">\n' +
+                    '                <li>\n' +
+                    '                <img src="'+result[i].imgCar+'" title="" alt="" />\n' +
+                    '                <section class="list-left">\n' +
+                    '                <h5 class="title">'+result[i].nameCar+'</h5>\n' +
+                    '                <span class="cityname">'+result[i].describeCar+'</span>\n' +
+                    '            <p class="catpath">'+result[i].carTypeCar+'&nbsp;&nbsp;'+mycity+'</p>\n' +
+                    '            </section>\n' +
+                    '            <section class="list-right">\n' +
+                    '                <span class="adprice">￥'+result[i].dailyRentCar+'/天</span>\n' +
+                    '                <span class="adprice">￥'+result[i].weeklyRentCar+'/周</span>\n' +
+                    '                <span class="adprice">￥'+result[i].monthlyRentCar+'/月</span>\n' +
+                    '                </section>\n' +
+                    '                <div class="clearfix"></div>\n' +
+                    '                </li>\n' +
+                    '\n' +
+                    '                </a>');
+
+			}
+		}
 		layui.use(['form','laydate','layer'], function(){
 		  form = layui.form,laydate = layui.laydate,layer=layui.layer;
 
+
+		  $(function () {
+		      //初始化省市区
+              area_init($("#province"));
+              area_init($("#province2"));
+			  //初始化汽车品牌
+              var mybrandcar=myajax("../BrandCarTable/getBrandCar/","get");
+              var brandcar=$("#brandCar");
+              brandcar.empty();
+              for(var i in mybrandcar.all)
+              {
+                  brandcar.append("<option data-tokens=\""+mybrandcar.all[i].brandBrandCar+"\">"+mybrandcar.all[i].brandBrandCar+"</option>");
+              }
+			  //营业网点中的   【进入店铺】功能
+		      var mymap=$.cookie("mymap");
+			  //console.log("mymap:",$.cookie("mymap"))
+			  if(mymap!=undefined){
+
+                  var result=myajax("../CarStoreTable//getCarStore/"+mymap,"get");
+
+				  var city=$("#city");
+				  city.empty();
+				  for(var i in result.all)
+				  {
+                      city.append("<option value='"+result.all[i].idCarStore+"'>"+result.all[i].nameCarStore+"</option>");
+				  }
+
+				  city.val(mymap);
+                  $("#province").val(""+result.all[0].addressCarStore);
+
+                  form.render();
+                  //加载门店汽车
+                  getCars(mymap);
+                  $.cookie("mymap", null, { expires: -1,path:'/'});
+			  }
+
+          })
 			layer.msg('注意事项<br><br>1.查询相关车型时，可以选择取车门店；<br>2.点击汽车进行租车时，请填写取车地点<br>、还车地点、取车时间等相关信息；', {
 				time: 20000, //20s后自动关闭
 				btn: [ '知道了'],
                 btnAlign: 'c'
 			});
-		  area_init($("#province"));
-		  area_init($("#province2"));
+			
+
 		  
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
 		    layer.msg(JSON.stringify(data.field));
+		    console.log(JSON.stringify(data.field));
+		    location.href="../html/order.html";
 		    return false;
 		  });
-		  
-		  //日期时间范围
+            form.on('select(city)', function(data){
+                //console.log("city:"+data.value); //得到被选中的值
+                //加载门店汽车
+                getCars(data.value);
+            });
+            form.on('select(province)', function(data){
+                //console.log(data.value.split("-")[2]); //得到被选中的值
+                var result=myajax("../CarStoreTable/getCarStoreTable/"+data.value.split("-")[2],"get");
+
+                var city=$("#city");
+                city.empty();
+
+                if(result.all.length==0)
+                    city.append("<option value=''>无门店，请选择其他城市</option>");
+                else{
+                    for(var i in result.all)
+                    {
+                        city.append("<option value='"+result.all[i].idCarStore+"'>"+result.all[i].nameCarStore+"</option>");
+                    }
+                    form.render();
+
+                    getCars(result.all[0].idCarStore);
+				}
+
+
+            });
+            form.on('select(province2)', function(data){
+                //console.log(data.value.split("-")[2]); //得到被选中的值
+                var result=myajax("../CarStoreTable/getCarStoreTable/"+data.value.split("-")[2],"get");
+                var city=$("#city2");
+                city.empty();
+
+                if(result.all.length==0)
+                    city.append("<option value=''>无门店，请选择其他城市</option>");
+
+                for(var i in result.all)
+                {
+                    city.append("<option value='"+result.all[i].idCarStore+"'>"+result.all[i].nameCarStore+"</option>");
+                }
+                form.render();
+            });
+            //日期时间范围
 		  laydate.render({
 		    elem: '#time'
 		    ,type: 'datetime'
@@ -224,7 +387,7 @@ var elem=$('#container ul');
 					
 				
 				<div class="range">
-					<h3 class="sear-head">价格范围</h3>
+					<h3 class="sear-head">价格范围 /天</h3>
 							<ul class="dropdown-menu6">
 								<li>
 									                
@@ -239,8 +402,8 @@ var elem=$('#container ul');
 							 $( "#slider-range" ).slider({
 										range: true,
 										min: 0,
-										max: 9000,
-										values: [ 0, 9000 ],
+										max: 1000,
+										values: [ 0, 1000 ],
 										slide: function( event, ui ) {
 										    $( "#amount" ).val( "￥" + ui.values[ 0 ] + " - ￥" + ui.values[ 1 ] );
 										}
@@ -254,8 +417,8 @@ var elem=$('#container ul');
 				</div>
 				<div class="brand-select">
 					<h3 class="sear-head">汽车品牌</h3>
-					<select class="selectpicker" data-live-search="true">
-						<option data-tokens="All">所有品牌-ALL</option>
+					<select id="brandCar" class="selectpicker" data-live-search="true">
+						<option data-tokens="所有">所有品牌-ALL</option>
 						<option data-tokens="Audi">奥迪-Audi</option>
 						<option data-tokens="Bentley">宾利-Bentley</option>
 						<option data-tokens="BMW">宝马-BMW</option>
@@ -264,7 +427,7 @@ var elem=$('#container ul');
 				</div>
 
 				<div class="brand-select">
-					<button class="layui-btn layui-btn-fluid">查询相关车型</button>
+					<button onclick="carSearch()" class="layui-btn layui-btn-fluid">查询相关车型</button>
 				</div>
 				<div class="featured-ads">
 				</div>
@@ -284,8 +447,8 @@ var elem=$('#container ul');
 								</div>
 								
 								<div class="clearfix"></div>
-							<ul class="list">
-								<a href="order.html">
+							<ul id="mycarlist" class="list">
+								<!--<a onclick="enterOrder(1)">
 									<li>
 									<img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" title="" alt="" />
 									<section class="list-left">
@@ -302,7 +465,7 @@ var elem=$('#container ul');
 									</li> 
 									
 								</a>
-								<a href="order.html">
+								<a onclick="enterOrder(1)">
 									<li>
 										<img src="https://image.1hai.cn/images/cartype/20170818/2d1c3c37-a73d-43a0-b44b-558b04c4eccd.jpg?v=478e07969b59431bb9c6251bfef193af" title="" alt="" />
 										<section class="list-left">
@@ -318,7 +481,7 @@ var elem=$('#container ul');
 										<div class="clearfix"></div>
 									</li>
 
-								</a>
+								</a>-->
 								
 								
 								

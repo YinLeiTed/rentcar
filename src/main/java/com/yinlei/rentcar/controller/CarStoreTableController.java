@@ -1,10 +1,7 @@
 package com.yinlei.rentcar.controller;
 
-import com.yinlei.rentcar.bean.CarStoreTable;
 import com.yinlei.rentcar.service.CarStoreTableService;
-import com.yinlei.rentcar.tools.MyUUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,5 +21,13 @@ public class CarStoreTableController {
         return service.getLocations(address);
     }
 
+    @RequestMapping(value = "/getCarStore/{id}",method = RequestMethod.GET)
+    public Map getLocations(@PathVariable("id") Integer id){
+        return service.getCarStores(service.getById(id).getAddressCarStore());
+    }
 
+    @RequestMapping(value = "/getCarStoreTable/{address}",method = RequestMethod.GET)
+    public Map getCarStore(@PathVariable("address") String address){
+        return service.getCarStores(address);
+    }
 }

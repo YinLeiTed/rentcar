@@ -67,4 +67,14 @@ public class AdviseTable {
 
         return Objects.hash(idAdvise, idUserAdvise, contentAdvise, replyAdvise);
     }
+
+    @Override
+    public String toString() {
+        return "AdviseTable{" +
+                "idAdvise=" + idAdvise +
+                ", idUserAdvise=" + idUserAdvise +
+                ", contentAdvise='" + contentAdvise + '\'' +
+                ", replyAdvise='" + replyAdvise + '\'' +
+                '}';
+    }
 }

@@ -10,6 +10,7 @@ public class OrderTable {
     private int idOrder;
     private String orderIdOrder;
     private Integer idUserOrder;
+    private Integer idCarOrder;
     private String idActivityOrder;
     private String idOtherServiceOrder;
     private Timestamp getCarTimeOrder;
@@ -47,6 +48,16 @@ public class OrderTable {
 
     public void setIdUserOrder(Integer idUserOrder) {
         this.idUserOrder = idUserOrder;
+    }
+
+    @Basic
+    @Column(name = "id_car_order", nullable = true)
+    public Integer getIdCarOrder() {
+        return idCarOrder;
+    }
+
+    public void setIdCarOrder(Integer idCarOrder) {
+        this.idCarOrder = idCarOrder;
     }
 
     @Basic

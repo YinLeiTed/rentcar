@@ -4,3 +4,4 @@ document.write("<script language='javascript' src='../js/jquery-3.3.1.min.js'></
 document.write("<script language='javascript' src='../layui/layui.js'></script>");
 document.write("<script language='javascript' src='../js/myajax.js'></script>");
 document.write("<script language='javascript' src='../js/jquery.cookie.js'></script>");
+document.write("<script language='javascript' src='../js/string.js'></script>");

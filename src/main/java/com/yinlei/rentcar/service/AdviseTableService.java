@@ -1,8 +1,8 @@
 package com.yinlei.rentcar.service;
 
 
-import com.yinlei.rentcar.bean.CarTable;
-import com.yinlei.rentcar.repository.CarTableRepository;
+import com.yinlei.rentcar.bean.AdviseTable;
+import com.yinlei.rentcar.repository.AdviseTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,21 +10,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class CarTableService {
+public class AdviseTableService {
     @Autowired
-    private CarTableRepository dao;
-    private Optional<CarTable> u;
+    private AdviseTableRepository dao;
+    private Optional<AdviseTable> u;
 
     public Long getCount(){
         return dao.count();
     }
 
-    public void insert(CarTable u) {
+    public void insert(AdviseTable u) {
         dao.save(u);
     }
 
@@ -32,7 +31,7 @@ public class CarTableService {
         dao.deleteById(id);
     }
 
-    public CarTable getById(Integer id) {
+    public AdviseTable getById(Integer id) {
         u = dao.findById(id);
         if(u.isPresent())
         {
@@ -41,16 +40,12 @@ public class CarTableService {
         return null;
     }
 
-    public List<CarTable> getByIdCarStore(Integer id) {
-        return dao.findAllByIdCarStoreCar(id);
-    }
-
-    public Page<CarTable> getByPage(int page, int limit) {
+    public Page<AdviseTable> getByPage(int page, int limit) {
         Pageable p=PageRequest.of(page,limit);
         return dao.findAll(p);
     }
 
-    public void update(CarTable u) {
+    public void update(AdviseTable u) {
         dao.save(u);
     }
 }
