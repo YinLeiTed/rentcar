@@ -1,30 +1,30 @@
 package com.yinlei.rentcar.service;
 
 
-import com.yinlei.rentcar.bean.CarTable;
-import com.yinlei.rentcar.repository.CarTableRepository;
+import com.yinlei.rentcar.bean.OrderTable;
+import com.yinlei.rentcar.repository.OrderTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class CarTableService {
+public class OrderTableService {
     @Autowired
-    private CarTableRepository dao;
-    private Optional<CarTable> u;
+    private OrderTableRepository dao;
+    private Optional<OrderTable> u;
 
     public Long getCount(){
         return dao.count();
     }
 
-    public void insert(CarTable u) {
+    public void insert(OrderTable u) {
         dao.save(u);
     }
 
@@ -32,7 +32,7 @@ public class CarTableService {
         dao.deleteById(id);
     }
 
-    public CarTable getById(Integer id) {
+    public OrderTable getById(Integer id) {
         u = dao.findById(id);
         if(u.isPresent())
         {
@@ -41,20 +41,16 @@ public class CarTableService {
         return null;
     }
 
-    public List<CarTable> getByIdCarStore(Integer id) {
-        return dao.findAllByIdCarStoreCarAndUsingCar(id,0);
-    }
-
-    public Page<CarTable> getByPage(int page, int limit) {
+    public Page<OrderTable> getByPage(int page, int limit) {
         Pageable p=PageRequest.of(page,limit);
         return dao.findAll(p);
     }
 
-    public void update(CarTable u) {
+    public void update(OrderTable u) {
         dao.save(u);
     }
 
-    public void updateState(Integer state,Integer id){
-        dao.updateUsingState(state,id);
+    public Iterable<OrderTable> getAll() {
+        return dao.findAll(new Sort(Sort.Direction.ASC,"achieveOrder"));
     }
 }

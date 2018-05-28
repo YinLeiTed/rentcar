@@ -3,11 +3,12 @@ package com.yinlei.rentcar.controller;
 import com.yinlei.rentcar.bean.UserTable;
 import com.yinlei.rentcar.service.UserTableService;
 import com.yinlei.rentcar.tools.EmailUtils;
-import com.yinlei.rentcar.tools.MyUUID;
+import com.yinlei.rentcar.tools.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -69,13 +70,16 @@ public class UserTableController {
         Map<String, Object> map=new HashMap<>();
         if(length==0)
         {
-            map.put("code",MyUUID.getUUID(6));
+            if(service.existPhone(phoneUser)==1)
+                map.put("msg","手机号已注册。");
+            else
+                map.put("code",PhoneUtils.sendPhoneCode(phoneUser,6));
         }
         else{
             if(service.existPhone(phoneUser)==0)
                 map.put("msg","手机号不存在，请先注册。");
             else
-                map.put("code",MyUUID.getUUID(length));
+                map.put("code",PhoneUtils.sendPhoneCode(phoneUser,6));
         }
         return map;
     }
@@ -92,5 +96,15 @@ public class UserTableController {
         u.setPasswordUser((String)map.get("mypassword1"));
         service.update(u);
         //Sout.print("user",u);
+    }
+
+    @RequestMapping(value = "/getAllTableColumnName",method = RequestMethod.GET)
+    public List<String> findAllTableColumnName(String tableName){
+        return service.findAllTableColumnName(tableName,"rent_car");
+    }
+
+    @RequestMapping(value = "/getAllTableName",method = RequestMethod.GET)
+    public List<String> findAllTableName(){
+        return service.findAllTableName("rent_car");
     }
 }

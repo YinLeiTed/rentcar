@@ -73,4 +73,11 @@ public class UserTableService {
         return dao.findAllByPhoneUserAndPhoneUserIsNotNullOrEmailUserAndEmailUserIsNotNullOrIdcardUserAndIdcardUserIsNotNull(u.getPhoneUser(),u.getEmailUser(),u.getIdcardUser()).get(0);
     }
 
+    public List<String> findAllTableColumnName(String tablename,String schema){
+        return dao.findAllTableColumnName(tablename,schema);
+    }
+
+    public List<String> findAllTableName(String schema){
+        return dao.findAllTableName(schema);
+    }
 }

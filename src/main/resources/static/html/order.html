@@ -5,8 +5,18 @@
 		<title></title>
 		<link rel="stylesheet" href="../css/order.css" />
 		<script type="text/javascript" src="../js/main2.js" ></script>
+		<style>
+			.layui-disabled, .layui-disabled:hover {
+				color: #999!important;
+				cursor: not-allowed!important;
+			}
+            .layui-radio-disbaled>i {
+                color: #5FB878!important;
+            }
+
+		</style>
 	</head>
-	<body>
+	<body onload="IFrameResize('myframe')">
 		<!--step2 progress-->
 		<div class="step2-progress-box">
 		    <div class="progress-percent"></div>
@@ -34,7 +44,7 @@
 		                
 					<div class="order-info-box">
 					    <div class="car-image-box">
-					        <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" alt="大众朗逸" />
+					        <img id="myimg" src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" alt="大众朗逸" />
 					        <span>租 期：<em>2</em>天</span>
 					    </div>
 					    <div class="store-info-box">
@@ -42,15 +52,15 @@
 					
 					            <a href="#" onclick="javascript :history.back(-1);" title="返回修改">返回修改</a>
 					
-					            大众朗逸或同组车型            <em onmouseover="javascript :$('.carmodel-box').removeClass('layui-hide')" onmouseleave="$('.carmodel-box').addClass('layui-hide')" class="sp-box sp-carmodel">车辆说明</em>
+					            <label id="nameCar">大众朗逸或同组车型</label>           <em onmouseover="javascript :$('.carmodel-box').removeClass('layui-hide')" onmouseleave="$('.carmodel-box').addClass('layui-hide')" class="sp-box sp-carmodel">车辆说明</em>
 					
 					        </div>
 					        <ul>
 					
 					            <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span></li>
-					            <li><span>取车门店：极速租车（大学城店）</span><span>还车门店：极速租车（大学城店）</span></li>
-					            <li><span>取车时间：2018-05-07 00:00:00</span><span>还车时间：2018-05-09 00:00:00</span></li>
-					            <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span></li>
+					            <li><span id="city">取车门店：极速租车（大学城店）</span><span id="city2">还车门店：极速租车（大学城店）</span></li>
+					            <li><span id="time">取车时间：2018-05-07 00:00:00</span><span id="time2">还车时间：2018-05-09 00:00:00</span></li>
+					            <li><span id="province">取车地址：重庆市-重庆市-沙坪坝区</span><span id="province2">还车地址：重庆市-重庆市-沙坪坝区</span></li>
 					            <li style="padding-top: 5px;"><span class="store-title">订单说明：</span></li>
 					            <li class="rule-toggle"><a data-method="notice" id="gz">退改规则</a>不限公里数，超时费按车辆租赁费及门店服务费均价÷6收取实际超期小时费 (部分0元活动订单，按照40元/小时进行收取)。</li>
 					                
@@ -149,12 +159,25 @@
 			            </div>
 			            <div class="payment-list" id="orderPaymentList">
 			            	<div class="layui-input-block" style="margin-left: -19px;">
-						      <input type="radio"  value="门店支付" title="门店支付" checked>
+						      <input type="radio" name="payMethodOrder"  value="门店支付" title="门店支付" checked>
 						    </div>
 			                
 			            </div>
 			        </div>
-         
+
+					<div class="payment-box">
+						<div class="title">
+							精彩活动
+						</div>
+						<div class="payment-list" id="activityPaymentList">
+							<!--<div class="layui-input-block" style="margin-left: -19px;">
+								<input type="radio" alt="123" name="idActivityOrder"  value="门店支付" title="门店支付" checked>
+							</div>
+							<div class="layui-input-block" style="margin-left: -19px;">
+								<input type="radio" alt="456"  name="idActivityOrder" value="门店支付2" title="门店支付2" checked>
+							</div>-->
+						</div>
+					</div>
 			        <!--step2 支付方式 end-->
 			        <!--step2 增值服务 start-->
 		       
@@ -162,9 +185,9 @@
 					    <div class="title">
 					        其他服务
 					    </div>
-					    <div class="service-list ">
+					    <div class="service-list">
 					       
-							<div class="layui-input-block">
+							<!--<div class="layui-input-block">
 								<div class="service-name">
 				                    <input name="myservice1" lay-filter="myservice1"  lay-skin="primary" type="checkbox" class="ba-analysis" title="指定车型" checked>
 				                </div>
@@ -172,7 +195,7 @@
 				                    ￥10<i>/天</i>
 				                </div>
 							</div>
-							
+
 							<div class="layui-input-block">
 								<div class="service-name">
 	                                <input name="myservice2" lay-filter="myservice2" lay-skin="primary" type="checkbox" class="ba-analysis" title="车损免赔" checked>
@@ -184,7 +207,7 @@
                                 		客户如在租赁期间内购买车损免赔，则1500元以下本车车辆损伤无需赔偿
 	                            </div>
 							</div>
-					                
+
 					        <div class="layui-input-block">
 					        	<div class="service-name">
 	                            	 <input name="myservice3" lay-filter="myservice3"  lay-skin="primary" type="checkbox" class="ba-analysis" title="增值保障服务" checked>
@@ -195,8 +218,8 @@
 	                            <div class="service-des">
                                 		三者责任增加至50万
 	                            </div>
-					        </div>  
-					        
+					        </div>
+
 					        <div class="layui-input-block">
 					        	 <div class="service-name">
 	                                <input name="myservice4" lay-filter="myservice4" lay-skin="primary" type="checkbox" class="ba-analysis" title="乘客座位保障" checked>
@@ -207,7 +230,7 @@
 	                            <div class="service-des">
 	                               		车辆发生事故，致使乘客遭受人身伤亡造成的费用损失，以及为减少损失而支付的必要合理的施救、保护费用，赔付标准以保险公司核定为准且赔付上限不超过5万元/人/座。同时，在租赁期间，提供道路救援服务。
 	                            </div>
-					        </div>  
+					        </div>  -->
                    
 					    </div>
 					</div>
@@ -234,9 +257,14 @@
 			                <li>
 			                    <em class="price-mid">￥80</em>基本保障服务费
 			
-			                    <span >基本保障服务费40.0元 * 2.0天</span>
+			                    <span >基本保障服务费40.0元 / 天</span>
 			                </li>
-									
+
+							<li id="myActivitySub">
+								<em class="price-mid">￥80</em>满减活动
+								<span >基本保障服务费40.0元 / 天</span>
+							</li>
+
 					        <li id="servicePriceList">
 					            
 					
@@ -268,7 +296,7 @@
 							    </div>
 					
 					        </li>
-					        
+
 					    </ul>
 					    <div class="deposit_box">
 					        <p>预授权<em>（可退）</em><span>￥3000</span></p>
@@ -307,6 +335,13 @@
 	   
 	   
 	   <script>
+		var myorder=null;
+		var myservice=null;
+		var myactivity=null;
+        function service(id){
+            layer.msg("service:"+id);
+            console.log(id);
+        }
 
 		layui.use(['form','layer'], function(){
 		  form = layui.form,layer = layui.layer;
@@ -328,20 +363,122 @@
 		       
 		      });
 		  })
+
+
             $(function(){
-                $(".car-image-box span em").html($.cookie("myday"));
-                $("#serviceList span p.orange").eq(1).html("￥"+(parseInt($.cookie("myday"))*10));
+
+
+                myorder=JSON.parse($.cookie("myorder"));
+                //console.log(myorder);
+
+                //将订单数据显示出来
+				$(".car-image-box span em").html(myorder["dayOrder"]);
+                $("#serviceList span p.orange").eq(1).html("￥"+(parseInt(myorder["dayOrder"])*10));
+                $("#nameCar").html(myorder["nameCar"]);
+                $("#city").html("取车门店："+myorder["city"]);
+                $("#city2").html("还车门店："+myorder["city2"]);
+                $("#time").html("取车时间："+myorder["getCarTimeOrder"])
+                $("#time2").html("还车时间："+myorder["returnCarTimeOrder"])
+				$("#province").html("取车地址："+myorder["province"])
+				$("#province2").html("还车地址："+myorder["province2"])
+				$("#myimg").attr("src",myorder["url"]);
+				//基本保障服务费
+                $(".price-mid").eq(1).html("￥"+40*myorder["dayOrder"]);
+                //显示服务信息
+                myservice=myajax("../OtherServiceTable/getOtherService","get");
+                //console.log(myservice);
+				var otherservice1=$(".service-list");
+				otherservice1.empty();
+
+				var otherservice2=$("#serviceList");
+				otherservice2.empty();
+				otherservice2.append('<span> \n' +
+                    '\t\t\t\t\t\t\t             \t<p class="orange">￥20</p>\n' +
+                    '\t\t\t\t\t\t\t                <p>手续费</p>\n' +
+                    '\t\t\t\t\t\t\t            </span>');
+                for(var i in myservice){
+
+                    if(myservice[i].describeOtherService==null||myservice[i].describeOtherService=="")
+					{
+                        otherservice2.append('<span> \n' +
+                            '\t\t\t\t\t\t\t             \t<p class="orange">￥'+myservice[i].priceOtherService*myorder["dayOrder"]+'</p>\n' +
+                            '\t\t\t\t\t\t\t                <p>'+myservice[i].nameOtherService+'</p>\n' +
+                            '\t\t\t\t\t\t\t            </span>');
+                        otherservice1.append('<div class="layui-input-block">\n' +
+                            '\t\t\t\t\t\t\t\t<div class="service-name">\n' +
+                            '\t\t\t\t                    <input  name="idOtherServiceOrder" alt="'+i+'" lay-filter="myservice'+i+'" lay-skin="primary" type="checkbox" class="ba-analysis" value="'+myservice[i].nameOtherService+'" title="'+myservice[i].nameOtherService+'" checked>\n' +
+                            '\t\t\t\t                </div>\n' +
+                            '\t\t\t\t                <div class="service-price">\n' +
+                            '\t\t\t\t                    ￥'+myservice[i].priceOtherService+'<i>/天</i>\n' +
+                            '\t\t\t\t                </div>\n' +
+                            '\t\t\t\t\t\t\t</div>');
+					}else{
+                        otherservice2.append('<span> \n' +
+                            '\t\t\t\t\t\t\t             \t<p class="orange">￥'+myservice[i].priceOtherService+'</p>\n' +
+                            '\t\t\t\t\t\t\t                <p>'+myservice[i].nameOtherService+'</p>\n' +
+                            '\t\t\t\t\t\t\t            </span>');
+                        otherservice1.append('<div class="layui-input-block">\n' +
+                            '\t\t\t\t\t\t\t\t<div class="service-name">\n' +
+                            '\t                                <input  name="idOtherServiceOrder" alt="'+i+'" lay-filter="myservice'+i+'" lay-skin="primary" type="checkbox" class="ba-analysis" value="'+myservice[i].nameOtherService+'" title="'+myservice[i].nameOtherService+'" checked>\n' +
+                            '\t                            </div>\n' +
+                            '\t                            <div class="service-price">\n' +
+                            '\t                                ￥'+myservice[i].priceOtherService+'<span></span>\n' +
+                            '\t                            </div>\n' +
+                            '\t                            <div class="service-des">\n' +myservice[i].describeOtherService+
+                            '\t                            </div>\n' +
+                            '\t\t\t\t\t\t\t</div>');
+					}
+
+                    form.on('checkbox(myservice'+i+')', function(data){
+                        var myi=data.elem.alt;
+                        if(data.elem.checked)
+                            $("#serviceList span").eq(++myi).removeClass('layui-hide');
+                        else
+                            $("#serviceList span").eq(++myi).addClass('layui-hide');
+                        changePrice();
+                    });
+                    //form.render();
+				}
+
+
+				//显示活动信息
+                myactivity=myajax("../ActivityTable/getActivity","get");
+                var activityservice=$("#activityPaymentList");
+                activityservice.empty();
+
+                for(var i in myactivity){
+                    var content=myactivity[i].nameActivity+'满'+myactivity[i].achieveActivity+'减'+myactivity[i].subActivity;
+                    activityservice.append('<div class="layui-input-block" style="margin-left: -19px;">\n' +
+                        '\t\t\t\t\t\t\t\t<input type="radio" disabled alt="'+myactivity[i].idActivity+'"  name="idActivityOrder"  value="'+content+'" title="'+content+'">\n' +
+                        '\t\t\t\t\t\t\t</div>');
+				}
                 changePrice();
+				form.render();
+                IFrameResize('myframe')
             })
 
-
-		    $("#submitForm").click(function(){
+            $("#submitForm").click(function(){
 		        if($.cookie("myuser")==undefined)
 				{
 				    layer.msg("请先登录，再进行操作")
 				}
 				else{
-                    console.log($("#priceTotal").html().substring(10))
+                    var mydate=$("#myform").serializeArray();
+                    mydate=alterSerializeArrayToJson(mydate);
+                    mydate["idActivityOrder"]=$("input[name='idActivityOrder']").val();
+                    mydate["priceOrder"]=$("#priceTotal").html().substring(10);
+                    mydate["idOtherServiceOrder"]=mydate["idOtherServiceOrder"].join(",");
+                    mydate["idUserOrder"]=JSON.parse($.cookie("myuser")).idUser;
+                    mydate["stateOrder"]="待支付";
+                    $.extend(mydate, myorder);
+
+                    //console.log(mydate)
+                    //console.log($("#priceTotal").html().substring(10))
+
+                    var result=myajax2("../OrderTable/saveOrder","post",mydate);
+                    layer.msg("订单提交成功，订单编号为"+result.uuid+"<br>详情请在我的订单中查看！")
+
+                    countDown(3,"../html/cars.html");
 				}
 
 		    })
@@ -351,54 +488,32 @@
 		     	var price1=parseInt($(".price-mid").html().substring(1));
 		     	var price2=parseInt($(".price-mid").eq(1).html().substring(1));
 		     	var price=price1+price2;
-		     	var otherservice=20;
-		     	if(ss.search("myservice1")!=-1)
-		     	{
-		     		var days=parseInt($.cookie("myday"));
-                    otherservice+=days*10;
-		     	}
-		     	if(ss.search("myservice2")!=-1)
-                    otherservice+=130;
-		     	if(ss.search("myservice3")!=-1)
-                    otherservice+=50;
-		     	if(ss.search("myservice4")!=-1)
-                    otherservice+=50;
+		     	var otherservice=0;
+                var myservicelist=$("#serviceList span[class!=layui-hide]");
+				for(var i=0;i<myservicelist.length;i++)
+				{
+				    //.split("￥")[1].split("</p>")
+				    //console.log(myservicelist.eq(i).html().split("￥")[1].split("</p>")[0])
+					otherservice+=parseInt(myservicelist.eq(i).html().split("￥")[1].split("</p>")[0]);
+				}
 		     	price+=otherservice;
-		     	$("#otherservice").html("￥"+otherservice);
-		     	$("#priceTotal").html("<em>￥</em>"+price);
+
+
+                for(var i=myactivity.length-1;i>=0;i--){
+					if(price>=myactivity[i].achieveActivity){
+					    //console.log(price+"  "+myactivity[i].achieveActivity);
+                        price-=myactivity[i].subActivity;
+                        $("input[alt='"+myactivity[i].idActivity+"'][name='idActivityOrder']").prop("checked","checked");
+						$("#myActivitySub em").html("￥-"+myactivity[i].subActivity);
+                        $("#myActivitySub span").html(myactivity[i].nameActivity+'满'+myactivity[i].achieveActivity+'减'+myactivity[i].subActivity);
+                        form.render();
+                        break;
+					}
+                }
+                $("#otherservice").html("￥"+otherservice);
+                $("#priceTotal").html("<em>￥</em>"+price);
 		    }
-		   form.on('checkbox(myservice1)', function(data){  
-			  if(data.elem.checked)
-			  	 $("#serviceList span").eq(1).removeClass('layui-hide');
-			  else
-			  	 $("#serviceList span").eq(1).addClass('layui-hide');
 
-			  changePrice();
-			});    
-		    form.on('checkbox(myservice2)', function(data){  
-			  if(data.elem.checked)
-			  	 $("#serviceList span").eq(2).removeClass('layui-hide');
-			  else
-			  	 $("#serviceList span").eq(2).addClass('layui-hide');
-
-                changePrice();
-			});
-			form.on('checkbox(myservice3)', function(data){  
-			  if(data.elem.checked)
-			  	 $("#serviceList span").eq(3).removeClass('layui-hide');
-			  else
-			  	 $("#serviceList span").eq(3).addClass('layui-hide');
-
-                changePrice();
-			});
-			form.on('checkbox(myservice4)', function(data){  
-			  if(data.elem.checked)
-			  	 $("#serviceList span").eq(4).removeClass('layui-hide');
-			  else
-			  	 $("#serviceList span").eq(4).addClass('layui-hide');
-
-                changePrice();
-			});
 		  
 		});
 	</script>

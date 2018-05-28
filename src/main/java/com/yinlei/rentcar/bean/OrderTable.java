@@ -19,6 +19,8 @@ public class OrderTable {
     private Integer idReturnCarOrder;
     private String stateOrder;
     private String payMethodOrder;
+    private Integer dayOrder;
+    private Integer priceOrder;
 
     @Id
     @Column(name = "id_order", nullable = false)
@@ -140,27 +142,70 @@ public class OrderTable {
         this.payMethodOrder = payMethodOrder;
     }
 
+    @Basic
+    @Column(name = "day_order", nullable = true)
+    public Integer getDayOrder() {
+        return dayOrder;
+    }
+
+    public void setDayOrder(Integer dayOrder) {
+        this.dayOrder = dayOrder;
+    }
+
+    @Basic
+    @Column(name = "price_order", nullable = true)
+    public Integer getPriceOrder() {
+        return priceOrder;
+    }
+
+    public void setPriceOrder(Integer priceOrder) {
+        this.priceOrder = priceOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof OrderTable)) return false;
         OrderTable that = (OrderTable) o;
-        return idOrder == that.idOrder &&
-                Objects.equals(orderIdOrder, that.orderIdOrder) &&
-                Objects.equals(idUserOrder, that.idUserOrder) &&
-                Objects.equals(idActivityOrder, that.idActivityOrder) &&
-                Objects.equals(idOtherServiceOrder, that.idOtherServiceOrder) &&
-                Objects.equals(getCarTimeOrder, that.getCarTimeOrder) &&
-                Objects.equals(returnCarTimeOrder, that.returnCarTimeOrder) &&
-                Objects.equals(idGetCarOrder, that.idGetCarOrder) &&
-                Objects.equals(idReturnCarOrder, that.idReturnCarOrder) &&
-                Objects.equals(stateOrder, that.stateOrder) &&
-                Objects.equals(payMethodOrder, that.payMethodOrder);
+        return getIdOrder() == that.getIdOrder() &&
+                Objects.equals(getOrderIdOrder(), that.getOrderIdOrder()) &&
+                Objects.equals(getIdUserOrder(), that.getIdUserOrder()) &&
+                Objects.equals(getIdCarOrder(), that.getIdCarOrder()) &&
+                Objects.equals(getIdActivityOrder(), that.getIdActivityOrder()) &&
+                Objects.equals(getIdOtherServiceOrder(), that.getIdOtherServiceOrder()) &&
+                Objects.equals(getGetCarTimeOrder(), that.getGetCarTimeOrder()) &&
+                Objects.equals(getReturnCarTimeOrder(), that.getReturnCarTimeOrder()) &&
+                Objects.equals(getIdGetCarOrder(), that.getIdGetCarOrder()) &&
+                Objects.equals(getIdReturnCarOrder(), that.getIdReturnCarOrder()) &&
+                Objects.equals(getStateOrder(), that.getStateOrder()) &&
+                Objects.equals(getPayMethodOrder(), that.getPayMethodOrder()) &&
+                Objects.equals(getDayOrder(), that.getDayOrder()) &&
+                Objects.equals(getPriceOrder(), that.getPriceOrder());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idOrder, orderIdOrder, idUserOrder, idActivityOrder, idOtherServiceOrder, getCarTimeOrder, returnCarTimeOrder, idGetCarOrder, idReturnCarOrder, stateOrder, payMethodOrder);
+        return Objects.hash(getIdOrder(), getOrderIdOrder(), getIdUserOrder(), getIdCarOrder(), getIdActivityOrder(), getIdOtherServiceOrder(), getGetCarTimeOrder(), getReturnCarTimeOrder(), getIdGetCarOrder(), getIdReturnCarOrder(), getStateOrder(), getPayMethodOrder(), getDayOrder(), getPriceOrder());
+    }
+
+    @Override
+    public String toString() {
+        return "OrderTable{" +
+                "idOrder=" + idOrder +
+                ", orderIdOrder='" + orderIdOrder + '\'' +
+                ", idUserOrder=" + idUserOrder +
+                ", idCarOrder=" + idCarOrder +
+                ", idActivityOrder='" + idActivityOrder + '\'' +
+                ", idOtherServiceOrder='" + idOtherServiceOrder + '\'' +
+                ", getCarTimeOrder=" + getCarTimeOrder +
+                ", returnCarTimeOrder=" + returnCarTimeOrder +
+                ", idGetCarOrder=" + idGetCarOrder +
+                ", idReturnCarOrder=" + idReturnCarOrder +
+                ", stateOrder='" + stateOrder + '\'' +
+                ", payMethodOrder='" + payMethodOrder + '\'' +
+                ", dayOrder=" + dayOrder +
+                ", priceOrder=" + priceOrder +
+                '}';
     }
 }

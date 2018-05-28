@@ -142,7 +142,7 @@ var elem=$('#container ul');
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
-		      <select id="city" name="city" lay-filter="city"  required  lay-verify="required" lay-search>
+		      <select id="city" name="idGetCarOrder" lay-filter="city"  required  lay-verify="required" lay-search>
 		      </select>
 		    </div>
 		    
@@ -161,7 +161,7 @@ var elem=$('#container ul');
 		      </select>     
 		    </div>
 		    <div class="layui-input-inline">
-		      <select id="city2" name="city2" lay-filter="city2"  required lay-verify="required" lay-search>
+		      <select id="city2" name="idReturnCarOrder" lay-filter="city2"  required lay-verify="required" lay-search>
 		      </select>
 		    </div>
 		    
@@ -175,9 +175,15 @@ var elem=$('#container ul');
     </div>
 	
 	<script>
-        function enterOrder(id)
+		var idCarOrder=null;
+		var nameCar=null;
+		var urlCar=null;
+        var mycarresult=null;
+        function enterOrder(id,name,url)
         {
-            console.log(id);
+            idCarOrder=id;
+            nameCar=name;
+            urlCar=url;
             $("#mysubmit").click();
         }
         function carSearch() {
@@ -220,7 +226,7 @@ var elem=$('#container ul');
 			}
 
         }
-        var mycarresult=null;
+
         //获取门店汽车信息
         function getCars(id){
 
@@ -236,7 +242,7 @@ var elem=$('#container ul');
 			    mycarlist.append("<h3 align='center'>本门店暂无车辆可以租赁！！！</h3>")
 			for(var i in result)
 			{
-			    mycarlist.append('<a onclick="enterOrder('+result[i].idCar+')">\n' +
+			    mycarlist.append('<a onclick="enterOrder('+result[i].idCar+',\''+result[i].nameCar+'\',\''+result[i].imgCar+'\')">\n' +
                     '                <li>\n' +
                     '                <img src="'+result[i].imgCar+'" title="" alt="" />\n' +
                     '                <section class="list-left">\n' +
@@ -306,9 +312,30 @@ var elem=$('#container ul');
 		  
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    console.log(JSON.stringify(data.field));
-		    location.href="../html/order.html";
+		    //layer.msg(JSON.stringify(data.field));
+		    var myorder=data.field;
+		    myorder["idCarOrder"]=idCarOrder;
+		    myorder["city"]=$("#city option:selected").html();
+		    myorder["city2"]=$("#city2 option:selected").html();
+		    myorder["nameCar"]=nameCar;
+		    myorder["url"]=urlCar;
+		    var mytime=myorder["time"].split(" ~ ");
+		    myorder["getCarTimeOrder"]=mytime[0];
+            myorder["returnCarTimeOrder"]=mytime[1];
+            if($.cookie("myday")==undefined)
+			{
+			    layer.msg("取车时间和还车时间不能相同");
+			}
+			else {
+                myorder["dayOrder"]=$.cookie("myday");
+                $.cookie("myday", null, { expires: -1,path:'/'});
+
+                //console.log(JSON.stringify(myorder));
+                $.cookie("myorder", JSON.stringify(myorder), { expires: 1,path:'/'});
+                location.href="../html/order.html";
+			}
+
+
 		    return false;
 		  });
             form.on('select(city)', function(data){
