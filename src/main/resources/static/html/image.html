@@ -217,12 +217,12 @@
                         var mypage=obj.curr-1;
                         mycontent=myajax("../ShareTable//getShare0/"+mypage,"get");
                         //console.log(mycontent.all.content)
-						setContent($("#content"),mycontent.all.content);
+						setContent($("#content"),mycontent.all.content,mycontent.cars);
                         IFrameResize('myframe');
                     }
                 });
 			});
-            function setContent(aim,contents)
+            function setContent(aim,contents,cars)
             {
                 aim.empty();
                 for(var i in contents)
@@ -230,7 +230,7 @@
                     var s1='<li class="layui-timeline-item">'
                         +'<i class="layui-icon layui-timeline-axis">&#xe63f;</i>'
                         +'<div class="layui-timeline-content layui-text">'
-                        +'<h3 class="layui-timeline-title">'+contents[i].timeShare+'&nbsp;<em>——'+contents[i].phoneShare.replace(/^(\d{4})\d{4}(\d+)/,"$1****$2")+'【斯柯达】</em><img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg" title="" alt="" /></h3>'
+                        +'<h3 class="layui-timeline-title">'+contents[i].timeShare+'&nbsp;<em>——'+contents[i].phoneShare.replace(/^(\d{4})\d{4}(\d+)/,"$1****$2")+'【'+cars[i].brandTypeCar+'】</em><img src="'+cars[i].imgCar+'" title="" alt="" /></h3>'
                         +'<p>'+contents[i].contentShare.replace(/(\r\n)|(\n)/g,'<br>')+'</p>';
 					var s2='';
                     var s3='</div></li>';

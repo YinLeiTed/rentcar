@@ -308,4 +308,34 @@ public class CarTable {
 
         return Objects.hash(idCar, nameCar, describeCar, licenseCar, carTypeCar, brandTypeCar, dailyRentCar, weeklyRentCar, monthlyRentCar, imgCar, idCarStoreCar, idLocationCar, usingCar, usePropertyCar, ownerCar, purchaseTimeCar, buyingUnitCar, engineDisplacementCar, fuelTankCapacityCar, colorCar, totalWeightCar, transmissionTypeCar, turboCar, maintenanceCycleCar);
     }
+
+    @Override
+    public String toString() {
+        return "CarTable{" +
+                "idCar=" + idCar +
+                ", nameCar='" + nameCar + '\'' +
+                ", describeCar='" + describeCar + '\'' +
+                ", licenseCar='" + licenseCar + '\'' +
+                ", carTypeCar='" + carTypeCar + '\'' +
+                ", brandTypeCar='" + brandTypeCar + '\'' +
+                ", dailyRentCar=" + dailyRentCar +
+                ", weeklyRentCar=" + weeklyRentCar +
+                ", monthlyRentCar=" + monthlyRentCar +
+                ", imgCar='" + imgCar + '\'' +
+                ", idCarStoreCar=" + idCarStoreCar +
+                ", idLocationCar=" + idLocationCar +
+                ", usingCar=" + usingCar +
+                ", usePropertyCar='" + usePropertyCar + '\'' +
+                ", ownerCar='" + ownerCar + '\'' +
+                ", purchaseTimeCar=" + purchaseTimeCar +
+                ", buyingUnitCar='" + buyingUnitCar + '\'' +
+                ", engineDisplacementCar=" + engineDisplacementCar +
+                ", fuelTankCapacityCar=" + fuelTankCapacityCar +
+                ", colorCar='" + colorCar + '\'' +
+                ", totalWeightCar=" + totalWeightCar +
+                ", transmissionTypeCar='" + transmissionTypeCar + '\'' +
+                ", turboCar='" + turboCar + '\'' +
+                ", maintenanceCycleCar=" + maintenanceCycleCar +
+                '}';
+    }
 }

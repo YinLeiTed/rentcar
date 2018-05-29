@@ -2,11 +2,13 @@ package com.yinlei.rentcar.controller;
 
 
 import com.yinlei.rentcar.bean.ShareTable;
+import com.yinlei.rentcar.service.CarTableService;
 import com.yinlei.rentcar.service.ShareTableService;
 import com.yinlei.rentcar.tools.MyImage;
 import com.yinlei.rentcar.tools.MyUUID;
 import com.yinlei.rentcar.tools.Sout;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -24,6 +27,9 @@ import java.util.Map;
 public class ShareTableController {
     @Autowired
     private ShareTableService service;
+
+    @Autowired
+    private CarTableService carService;
 
     private static List<String> filenames=new ArrayList<>();
     @RequestMapping(value = "/addShare",method = RequestMethod.POST)
@@ -45,13 +51,19 @@ public class ShareTableController {
     @RequestMapping(value = "/getShare{id}/{page}",method = RequestMethod.GET)
     public Map getShares(@PathVariable("id") Integer userid,@PathVariable("page")Integer page){
         Map<String, Object> map=new HashMap<>();
+        Page<ShareTable> allByPage =null;
         if(userid==0)
         {
-            map.put("all",service.getAllByPage(page,5));
+            allByPage = service.getAllByPage(page, 5);
         }
         else {
-            map.put("user",service.getAllByPageAndUserId(page,5,userid));
+            allByPage=service.getAllByPageAndUserId(page,5,userid);
         }
+        map.put("all",allByPage);
+        //获取分享表中的订单列
+        List<Integer> collect = allByPage.getContent().stream().map(ShareTable::getIdOrderShare).collect(Collectors.toList());
+
+        map.put("cars",carService.findCarByOrder(collect));
         return map;
     }
 

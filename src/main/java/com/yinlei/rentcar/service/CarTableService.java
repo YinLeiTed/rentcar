@@ -57,4 +57,8 @@ public class CarTableService {
     public void updateState(Integer state,Integer id){
         dao.updateUsingState(state,id);
     }
+
+    public List<CarTable> findCarByOrder(List<Integer> idOrderShare){
+        return dao.findCarByOrder(idOrderShare);
+    }
 }

@@ -68,7 +68,7 @@ function countDown(secs,surl){
 //将user_table改为驼峰命名规则
 function alterTableColumnName(s1) {
     for(var i in s1)
-    {
+    {6
         s1[i] = s1[i].replace(/_(\w)/g, function(all, letter){
             return letter.toUpperCase();});
     }

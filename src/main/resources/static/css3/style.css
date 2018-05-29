@@ -2766,7 +2766,7 @@ span.cityname{
 }
 #container .grid li img{text-align:center;width:100%;}
 #container .grid li p{display:none;}
-#container .grid li .list-left{text-align:left;font-size:24px;margin-left: 10px;margin-top:10px;}
+#container .grid li .list-left{text-align:left;font-size:24px;margin-left: 10px;margin-top:10px;height: 110px;}
 #container .grid li .icon-group-btn{font-size:14px;}
 #container .grid li .list-right{    display: block;
     margin-left: 10px;
@@ -2778,7 +2778,7 @@ span.cityname{
     color: #404040;
     font-weight: 400;}
 #container .grid{
-width: 100%;
+	width: 100%;
 }
 h5.title {
     overflow: hidden;

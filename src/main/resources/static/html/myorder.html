@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/main2.js" ></script>
+    <link href="../css/order.css" rel="stylesheet">
+    <style>
+        .order-info-box>span {
+            font-size: 30px;
+            color: #eb5b00;
+            float: right;
+            width: 7%;
+            margin-top: 70px;
+            margin-right: 10px;
+
+        }
+        .store-info-box .car-name em {
+            float: right;
+            margin-right: 30px;
+        }
+        .mystyle{
+            color: #a3a3a1;
+        }
+        .store-info-box .car-name {
+            margin-top: 0px;
+        }
+        #mypage{
+            margin: 10px;
+        }
+        .store-info-box {
+            float: left;
+            width: 70%;
+            overflow: hidden;
+            zoom: 1;
+            margin-top: 10px;
+        }
+        .car-image-box {
+            float: left;
+            width: 15%;
+            height: 159.2px;
+        }
+        .store-info-box ul li span:nth-child(1) {
+            vertical-align: top;
+            width: 25%;
+            display: inline-block;
+            line-height: 25px;
+        }
+        .store-info-box ul li span:nth-child(2) {
+            vertical-align: top;
+            width: 30%;
+            display: inline-block;
+            line-height: 25px;
+        }
+       .store-info-box ul li span:nth-child(3) {
+            vertical-align: top;
+            width: 40%;
+            display: inline-block;
+            line-height: 25px;
+        }
+        .order-info-box {
+            overflow: hidden;
+            zoom: 1;
+            padding-bottom: 0px;
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+
+        .order-info-box .mybutton{
+            float: right;
+            width: 4%;
+            height: 180px;
+            background-color: #FF5722;
+            border: none;
+        }
+        .car-image-box img {
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <div class="order-info-box">
+            <div class="car-image-box">
+                <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg"/>
+                <span>租 期：<em>2</em>天</span>
+            </div>
+            <div class="store-info-box">
+                <div class="car-name">
+                    <label>大众朗逸或同组车型</label>
+                    <em>订单编号：60e06a087d874e1785f018b409500f5c</em>
+                </div>
+                <ul>
+
+                    <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span><span class="store-title">其他信息</span></li>
+                    <li><span>取车门店：极速租车（大学城店）</span><span>还车门店：极速租车（大学城店）</span><span>支付方式：门店支付</span></li>
+                    <li><span>取车时间：2018-05-07 00:00:00</span><span>还车时间：2018-05-09 00:00:00</span><span>支付状态：未支付</span></li>
+                    <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span><span class="mystyle">参与活动:【儿童节】满减活动1满196减10</span></li>
+                    <li><span></span><span></span><span class="mystyle">其他服务：指定车型,车损免赔,增值保障服务,乘客座位保障,车损免赔</span></li>
+                </ul>
+            </div>
+
+            <button class="mybutton">
+                <i class="layui-icon" style="font-size: 30px; color: #ffffff;">&#xe640;</i>
+            </button>
+            <span>￥5000</span>
+        </div>
+
+        <div class="order-info-box">
+            <div class="car-image-box">
+                <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg"/>
+                <span>租 期：<em>2</em>天</span>
+            </div>
+            <div class="store-info-box">
+                <div class="car-name">
+                    <label>大众朗逸或同组车型</label>
+                    <em>订单编号：60e06a087d874e1785f018b409500f5c</em>
+                </div>
+                <ul>
+
+                    <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span><span class="store-title">其他信息</span></li>
+                    <li><span>取车门店：极速租车（大学城店）</span><span>还车门店：极速租车（大学城店）</span><span>支付方式：门店支付</span></li>
+                    <li><span>取车时间：2018-05-07 00:00:00</span><span>还车时间：2018-05-09 00:00:00</span><span>支付状态：未支付</span></li>
+                    <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span><span class="mystyle">参与活动:【儿童节】满减活动1满196减10</span></li>
+                    <li><span></span><span></span><span class="mystyle">其他服务：指定车型,车损免赔,增值保障服务,乘客座位保障,车损免赔</span></li>
+                </ul>
+            </div>
+
+            <button class="mybutton">
+                <i class="layui-icon" style="font-size: 30px; color: #ffffff;">&#xe640;</i>
+            </button>
+            <span>￥5000</span>
+        </div>
+    </div>
+    <div id="mypage"></div>
+    <script>
+        var myuser=JSON.parse($.cookie("myuser"));
+        var mycontent=null;
+        $(function(){
+            mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page=1&limit=5',"get");
+        })
+        layui.use(['laypage','layer'], function(){
+            laypage = layui.laypage,layer=layui.layer;
+
+
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'mypage'
+                ,count: mycontent.counts
+                ,limit: 5
+                ,layout: ['prev', 'page', 'next','skip','count']
+                ,jump: function(obj){
+                    var mypage=obj.curr;
+                    mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page='+mypage+'&limit=5',"get");
+                    //setContent($("#demo"),mycontent.data);
+                }
+            });
+        });
+
+        function setContent(aim,contents)
+        {
+            aim.empty();
+            for(var i in contents)
+            {
+
+                //aim.append(s1+s2+s3);
+            }
+        }
+    </script>
+</body>
+</html>
