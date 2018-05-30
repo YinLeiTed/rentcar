@@ -40,6 +40,15 @@ public class OrderController {
         map.put("uuid",my);
         return map;
     }
+    @RequestMapping(value = "/deleteOrder/{id}",method = RequestMethod.DELETE)
+    public Map deleteOrder(@PathVariable("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+        OrderTable order = service.getById(id);
+        order.setStateOrder("已删除");
+        service.update(order);
+        map.put("msg","订单已删除");
+        return map;
+    }
 
     @RequestMapping(value = "/getUserOrder/{userid}",method = RequestMethod.GET)
     public Map getUserOrder(@PathVariable("userid") Integer userid,Integer page,Integer limit){

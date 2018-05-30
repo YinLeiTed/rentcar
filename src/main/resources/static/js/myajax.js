@@ -27,17 +27,16 @@ function myajax(myaddress,mytype){
 }
 //跨域请求
 function myajax3(myaddress,mytype){
-    var mydata;
     $.ajax({
         type: mytype,
         url: myaddress,
         dataType: "jsonp",
         crossDomain: true,
+        async:false,
         success: function(data){
-            mydata=data;
+
         }
     });
-    return mydata;
 }
 //将SerializeArray数据转为JSON
 function alterSerializeArrayToJson(a)
@@ -55,7 +54,12 @@ function alterSerializeArrayToJson(a)
     });
     return o;
 };
-//倒计时跳转页面
+//时间显示问题
+function alterTimeFormat(time){
+    var d=new Date(time);
+    return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + (d.getHours()<10?'0'+d.getHours():d.getHours()) + ':' + (d.getMinutes()<10?'0'+d.getMinutes():d.getMinutes()) + ':' + (d.getSeconds()<10?'0'+d.getSeconds():d.getSeconds());
+}
+//倒计时跳转页面(子页面)
 function countDown(secs,surl){
     if(--secs>0){
         setTimeout("countDown("+secs+",'"+surl+"')",1000);
@@ -64,7 +68,15 @@ function countDown(secs,surl){
         location.href=surl;
     }
 }
-
+//倒计时跳转（父页面）
+function countDownParent(secs,surl){
+    if(--secs>0){
+        setTimeout("countDownParent("+secs+",'"+surl+"')",1000);
+    }
+    else{
+        window.parent.location.href=surl;
+    }
+}
 //将user_table改为驼峰命名规则
 function alterTableColumnName(s1) {
     for(var i in s1)

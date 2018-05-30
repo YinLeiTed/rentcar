@@ -51,19 +51,39 @@ public class UserTableController {
         }
         return map;
     }
-    @RequestMapping(value = "/email",method = RequestMethod.POST)
-    public Map email(String emailUser){
-        //Sout.print("email",emailUser);
+    @RequestMapping(value = "/identity",method = RequestMethod.GET)
+    public Map identity(String idcardUser){
+        //0代表注册，其他为修改
         Map<String, Object> map=new HashMap<>();
-        if(service.existEmail(emailUser)==0)
-            map.put("msg","邮箱不存在，请先注册。");
-        else{
-            String code=EmailUtils.sendEmail(emailUser);
-            map.put("code",code);
+
+        if(service.existIdcard(idcardUser)==1)
+            map.put("msg","身份证已注册。");
+
+        return map;
+    }
+    @RequestMapping(value = "/email/{length}",method = RequestMethod.GET)
+    public Map email(@PathVariable("length")Integer length,String emailUser){
+        //0代表注册，其他为修改
+        Map<String, Object> map=new HashMap<>();
+        if(length==0)
+        {
+            if(service.existEmail(emailUser)==1)
+                map.put("msg","邮箱已注册。");
+            else{
+                String code=EmailUtils.sendEmail(emailUser);
+                map.put("code",code);
+            }
+        }else{
+            if(service.existEmail(emailUser)==0)
+                map.put("msg","邮箱不存在，请先注册。");
+            else{
+                String code=EmailUtils.sendEmail(emailUser);
+                map.put("code",code);
+            }
         }
         return map;
     }
-    @RequestMapping(value = "/phone/{length}",method = RequestMethod.POST)
+    @RequestMapping(value = "/phone/{length}",method = RequestMethod.GET)
     public Map phone(@PathVariable("length")Integer length,String phoneUser){
         //Sout.print("phone",emailUser);
         //如果length为0，代表注册请求
@@ -84,9 +104,8 @@ public class UserTableController {
         return map;
     }
 
-    @RequestMapping(value = "/resetPassword",method = RequestMethod.POST)
+    @RequestMapping(value = "/resetPassword",method = RequestMethod.PUT)
     public void resetPassword(@RequestParam Map<String, Object> map){
-
         //Sout.print("map",map);
         UserTable u=new UserTable();
         u.setPhoneUser((String)map.get("phone"));
@@ -96,6 +115,11 @@ public class UserTableController {
         u.setPasswordUser((String)map.get("mypassword1"));
         service.update(u);
         //Sout.print("user",u);
+    }
+    @RequestMapping(value = "/alterUser",method = RequestMethod.PUT)
+    public void alterUser(UserTable u){
+        //Sout.print("u",u);
+        service.update(u);
     }
 
     @RequestMapping(value = "/getAllTableColumnName",method = RequestMethod.GET)

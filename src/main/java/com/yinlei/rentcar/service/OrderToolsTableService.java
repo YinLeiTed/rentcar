@@ -56,6 +56,6 @@ public class OrderToolsTableService {
 
     public Page<OrderToolsTable> findAllByIdUserOrderOrderByIdOrderDesc(Integer userid, int page, int limit){
         Pageable p=PageRequest.of(page,limit,new Sort(Sort.Direction.DESC,"idOrder"));
-        return dao.findAllByIdUserOrderOrderByIdOrderDesc(userid,p);
+        return dao.findAllByIdUserOrderAndStateOrderIsNotOrderByIdOrderDesc(userid,"已删除",p);
     }
 }

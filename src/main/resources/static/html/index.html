@@ -45,11 +45,11 @@
 			  <li id="my" class="layui-nav-item  layui-layout-right layui-hide"  style="margin-right: 40px;">
 			    <a href="#"><img src="../img/vip1.png" style="width: 25px;height: 25px">123456</a>
 			    <dl class="layui-nav-child">
-			      <dd><a href="javascript:;">修改信息</a></dd>
+			      <dd><a id="mymain1">修改信息</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
-			      <dd><a href="javascript:;">我的订单</a></dd>
+			      <dd><a id="mymain2">我的订单</a></dd>
 			      <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
-				  <dd><a href="javascript:;">我的分享</a></dd>
+				  <dd><a id="mymain3">我的分享</a></dd>
 				  <dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
 			      <dd><a id="quit">退了</a></dd>
 			    </dl>
@@ -82,8 +82,15 @@
 			$("#main4").click(function() {
 				$("#myframe").attr("src", "image.html")
 			})
-		
-			
+            $("#mymain1").click(function() {
+                $("#myframe").attr("src", "myinformation.html")
+            })
+            $("#mymain2").click(function() {
+                $("#myframe").attr("src", "myorder.html")
+            })
+            $("#mymain3").click(function() {
+                $("#myframe").attr("src", "myshare.html")
+            })
 		</script>
 	    	
 	  		

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+
+		<script type="text/javascript" src="../js/main2.js" ></script>
+		<style>
+			.layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+			.layui-timeline-title em{
+				font-size: 15px;
+			}
+            .layui-timeline-title img {
+                height: 50px;
+                max-width: 150px;
+                margin-top: -25px;
+            }
+			.layui-timeline-content>img{
+				height: 100px;
+				max-width: 300px;
+			}
+            .layui-timeline-content {
+                padding-left: 25px;
+                margin-bottom: 20px;
+                margin-top: 10px;
+            }
+			.layui-elem-quote{
+				margin: 5px 5px 10px 5px;
+			}
+			.layui-elem-quote p{
+				font-size: 15px;
+			}
+			.layui-timeline-item i{
+				font-size: 25px;
+			}
+		</style>
+	</head>
+	<body onload="IFrameResize('myframe')">
+
+		<div class="layui-elem-quote">
+		  <p>我的评论</p>
+		</div>
+	        <ul class="layui-timeline" id="content" style="padding: 5px;">
+
+			</ul>
+		<div id="mypage"></div>
+		
+		<script>
+            var mycontent=null;
+            var myuser=JSON.parse($.cookie("myuser"));
+            $(function(){
+                mycontent=myajax("../ShareTable/getShare"+myuser.idUser+"/0","get");
+                //console.log(mycontent)
+            })
+
+            function deleteShare(id){
+                myorderstate=1;
+                layer.confirm('确定删除该评论?', {icon: 3, title:'提示'}, function(index){
+                    result=myajax('../ShareTable/deleteShare/'+id,"delete");
+                    layer.msg(result.msg);
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'mypage'
+                        ,count: mycontent.all.totalElements-1
+                        ,limit:mycontent.all.size
+                        ,layout: ['prev', 'page', 'next','skip','count']
+                        ,jump: function(obj){
+                            var mypage=obj.curr-1;
+                            mycontent=myajax("../ShareTable/getShare"+myuser.idUser+"/"+mypage,"get");
+                            //console.log(mycontent.all.content)
+                            setContent($("#content"),mycontent.all.content,mycontent.cars);
+                            IFrameResize('myframe');
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+			layui.use(['laypage','layer'], function(){
+			  layer=layui.layer
+			  ,laypage = layui.laypage;
+
+                //执行一个laypage实例
+                laypage.render({
+                    elem: 'mypage'
+                    ,count: mycontent.all.totalElements
+					,limit:mycontent.all.size
+                    ,layout: ['prev', 'page', 'next','skip','count']
+                    ,jump: function(obj){
+                        var mypage=obj.curr-1;
+                        mycontent=myajax("../ShareTable/getShare"+myuser.idUser+"/"+mypage,"get");
+                        //console.log(mycontent.all.content)
+						setContent($("#content"),mycontent.all.content,mycontent.cars);
+                        IFrameResize('myframe');
+                    }
+                });
+			});
+            function setContent(aim,contents,cars)
+            {
+                aim.empty();
+                for(var i in contents)
+                {
+                    var s1='<li class="layui-timeline-item">'
+                        +'<i onclick="deleteShare('+contents[i].idShare+')" class="layui-icon layui-timeline-axis">&#xe639;</i>'
+                        +'<div class="layui-timeline-content layui-text">'
+                        +'<h3 class="layui-timeline-title">'+contents[i].timeShare+'&nbsp;<em>——'+contents[i].phoneShare.replace(/^(\d{4})\d{4}(\d+)/,"$1****$2")+'【'+cars[i].brandTypeCar+'】</em><img src="'+cars[i].imgCar+'" title="" alt="" /></h3>'
+                        +'<p>'+contents[i].contentShare.replace(/(\r\n)|(\n)/g,'<br>')+'</p>';
+					var s2='';
+                    var s3='</div></li>';
+                    if(contents[i].imagesShare!="") {
+						var images=contents[i].imagesShare.split(" ");
+						for (var i in images)
+						{
+						    s2+='<img src="'+images[i]+'"/>';
+						}
+					}
+					aim.append(s1+s2+s3);
+                }
+            }
+			</script>
+	</body>
+</html>

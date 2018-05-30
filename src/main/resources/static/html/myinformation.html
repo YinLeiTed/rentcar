@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+
+		<script type="text/javascript" src="../js/main2.js" ></script>
+
+		<style>
+			.layui-form-item .layui-input-inline {
+				width: 250px;
+				margin-right: 0px;
+			}
+			.layui-form-item .layui-input-inline button {
+				background-color: #5FB878;
+			}
+			body{
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body onload="IFrameResize('myframe')">
+
+		<div class="layui-elem-quote">
+		  <p>修改手机号</p>
+		</div>
+		<form class="layui-form layui-form-pane">
+			<div class="layui-form-item">
+				<label class="layui-form-label">手机号</label>
+				<div class="layui-input-inline">
+					<input type="text" name="phoneUser" required lay-verify="required|phone|number"  autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<button id="myphone" class="layui-btn" lay-submit lay-filter="phone">绑定手机</button>
+				</div>
+			</div>
+		</form>
+		<div class="layui-elem-quote">
+			<p>修改邮箱</p>
+		</div>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">邮箱</label>
+				<div class="layui-input-inline">
+					<input type="text" name="emailUser" required lay-verify="required|email"  autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<button id="myemail" class="layui-btn" lay-submit lay-filter="email">绑定邮箱</button>
+				</div>
+			</div>
+		</form>
+		<div class="layui-elem-quote">
+			<p>修改身份证</p>
+		</div>
+		<form class="layui-form layui-form-pane">
+			<div class="layui-form-item">
+				<label class="layui-form-label">身份证</label>
+				<div class="layui-input-inline">
+					<input type="text" name="idcardUser" required lay-verify="required|identity"  autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<button id="myidentity" class="layui-btn" lay-submit lay-filter="identity">绑定身份证</button>
+				</div>
+			</div>
+		</form>
+
+		<script>
+            var myuser=JSON.parse($.cookie("myuser"));
+
+            $(function () {
+                $("input[name='phoneUser']").val(myuser.phoneUser);
+                $("input[name='emailUser']").val(myuser.emailUser);
+                $("input[name='idcardUser']").val(myuser.idcardUser);
+            })
+
+			function alterPhone(data) {
+                var result=myajax2("../UserTable/phone/0","get",data);
+                if(result.code==undefined) {
+                    layer.msg(result.msg);
+                }else {
+                    setCode($("#myphone"),result.code);
+
+                    layer.prompt({
+                        formType: 0,
+                        title: '【新手机号】验证码',
+                    }, function(value, index, elem){
+                        var mycode=window.pwdString.decrypt($.cookie("myaltercode"));
+                        if(mycode==value){
+                            layer.msg("手机号已更改,请重新登录！")
+
+                            //将修改的信息覆盖到原来的user对象中
+                            $.extend( myuser, data );
+                            myajax2("../UserTable/alterUser","put",myuser);
+
+                            $.cookie("myaltercode", null, { expires: -1,path:'/'});
+                            $.cookie("myuser", null, { expires: -1,path:'/'});
+
+                            countDownParent(2,"index.html");
+                            layer.close(index);
+                        }else {
+                            layer.msg("验证码错误");
+                        }
+                    });
+                }
+            }
+            function alterEmail(data) {
+                var result=myajax2("../UserTable/email/0","get",data);
+                if(result.code==undefined) {
+                    layer.msg(result.msg);
+                }else {
+                    setCode($("#myidentity"),null);
+
+                    layer.prompt({
+                        formType: 0,
+                        title: '【新邮箱】验证码',
+                    }, function(value, index, elem){
+                        var mycode=window.pwdString.decrypt($.cookie("myaltercode"));
+                        if(mycode==value){
+                            layer.msg("邮箱已更改,请重新登录！")
+
+							//将修改的信息覆盖到原来的user对象中
+                            $.extend( myuser, data );
+                            myajax2("../UserTable/alterUser","put",myuser);
+
+                            $.cookie("myaltercode", null, { expires: -1,path:'/'});
+                            $.cookie("myuser", null, { expires: -1,path:'/'});
+
+                            countDownParent(2,"index.html");
+                            layer.close(index);
+                        }else {
+                            layer.msg("验证码错误");
+                        }
+                    });
+                }
+            }
+            function alterIdentity(data) {
+                var result=myajax2("../UserTable/identity","get",data);
+                if(result.msg!=undefined) {
+                    layer.msg(result.msg);
+                }else {
+                    setCode($("#myidentity"),result.code);
+                    console.log(data.idcardUser)
+					result=myajax3("http://api.jisuapi.com/idcard/query?appkey=e72629ac6bb44f25&idcard="+data.idcardUser,"get");
+					console.log(result);
+                    layer.msg("身份证已改变！");
+					//将修改的信息覆盖到原来的user对象中
+					$.extend(myuser,data);
+					myajax2("../UserTable/alterUser","put",myuser);
+
+					$.cookie("myuser", JSON.stringify(myuser), { expires: 1,path:'/'});
+
+                }
+            }
+			function setCode(obj,mycode){
+                layer.msg("验证码已发送");
+                var endTime = new Date().getTime()+119000 //假设为结束日期
+                    ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                obj.attr("disabled","disabled");
+                util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                    var str = date[2]*60+date[3] ;
+                    obj.html('重新发送('+ str+ ')');
+                    if(str==0)
+                    {
+                        obj.html("发送验证码");
+                        obj.removeAttr("disabled");
+                    }
+                });
+
+                //设置30分钟有效时间
+                var expire= new Date();
+                expire.setTime(expire.getTime() + (30 * 60 * 1000));
+                //加密验证码
+				if(mycode){
+                    var code=window.pwdString.encrypt(mycode);
+                    $.cookie("myaltercode",code, { expires: expire,path:'/'});
+				}
+			}
+			layui.use(['form','layer','util'], function(){
+			  layer=layui.layer
+			  ,form = layui.form
+			  ,util=layui.util;
+
+                form.on('submit(phone)', function(data){
+                    if(data.field.phoneUser==myuser.phoneUser)
+					{
+					    layer.msg("手机号未改变");
+					    return false;
+					}
+                    if(myuser.phoneUser!=null){
+                        var myold={};
+                        myold["phoneUser"]=myuser.phoneUser;
+                        var result=myajax2("../UserTable/phone/6","get",myold);
+                        setCode($("#myphone"),result.code);
+                        layer.prompt({
+                            formType: 0,
+                            title: '【原手机号】验证码',
+                        }, function(value, index, elem){
+                            var mycode=window.pwdString.decrypt($.cookie("myaltercode"));
+                            if(mycode==value){
+                                layer.close(index);
+                                alterPhone(data.field);
+                            }else {
+                                layer.msg("验证码错误");
+                            }
+                        });
+					}else{
+					   alterPhone(data.field);
+					}
+
+                    return false;
+                });
+
+                form.on('submit(email)', function(data){
+                    if(data.field.emailUser==myuser.emailUser)
+                    {
+                        layer.msg("邮箱未改变");
+                        return false;
+                    }
+                    if(myuser.emailUser!=null){
+                        var myold={};
+                        myold["emailUser"]=myuser.emailUser;
+                        var result=myajax2("../UserTable/email/6","get",myold);
+                        setCode($("#myemail"),result.code);
+                        layer.prompt({
+                            formType: 0,
+                            title: '【原邮箱】验证码',
+                        }, function(value, index, elem){
+                            var mycode=window.pwdString.decrypt($.cookie("myaltercode"));
+                            if(mycode==value){
+                                layer.close(index);
+                                alterEmail(data.field);
+                            }else {
+                                layer.msg("验证码错误");
+                            }
+                        });
+                    }else{
+                        alterEmail(data.field);
+                    }
+                    return false;
+                });
+
+
+
+				form.on('submit(identity)', function(data){
+					if(data.field.idcardUser==myuser.idcardUser)
+					{
+						layer.msg("身份证未改变");
+						return false;
+					}
+					alterIdentity(data.field);
+					return false;
+				});
+
+            });
+			</script>
+	</body>
+</html>

@@ -48,6 +48,13 @@ public class ShareTableController {
         return map;
     }
 
+    @RequestMapping(value = "/deleteShare/{id}",method = RequestMethod.DELETE)
+    public Map deleteShare(@PathVariable("id")Integer id){
+        Map<String,Object> map=new HashMap<>();
+        service.delete(id);
+        map.put("msg","评论已删除");
+        return map;
+    }
     @RequestMapping(value = "/getShare{id}/{page}",method = RequestMethod.GET)
     public Map getShares(@PathVariable("id") Integer userid,@PathVariable("page")Integer page){
         Map<String, Object> map=new HashMap<>();

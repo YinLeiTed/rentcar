@@ -6,18 +6,17 @@
     <script type="text/javascript" src="../js/main2.js" ></script>
     <link href="../css/order.css" rel="stylesheet">
     <style>
-        .order-info-box>span {
+        .store-info-box>span {
             font-size: 30px;
             color: #eb5b00;
             float: right;
-            width: 7%;
-            margin-top: 70px;
+            width: 10%;
+            margin-top: -50px;
             margin-right: 10px;
-
         }
         .store-info-box .car-name em {
             float: right;
-            margin-right: 30px;
+            margin-right: 20px;
         }
         .mystyle{
             color: #a3a3a1;
@@ -30,7 +29,7 @@
         }
         .store-info-box {
             float: left;
-            width: 70%;
+            width: 78%;
             overflow: hidden;
             zoom: 1;
             margin-top: 10px;
@@ -48,13 +47,13 @@
         }
         .store-info-box ul li span:nth-child(2) {
             vertical-align: top;
-            width: 30%;
+            width: 25%;
             display: inline-block;
             line-height: 25px;
         }
        .store-info-box ul li span:nth-child(3) {
             vertical-align: top;
-            width: 40%;
+            width: 35%;
             display: inline-block;
             line-height: 25px;
         }
@@ -62,10 +61,12 @@
             overflow: hidden;
             zoom: 1;
             padding-bottom: 0px;
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
             margin: 10px;
         }
-
+        .order-info-box:hover{
+            border: 2px solid #ff0707;
+        }
         .order-info-box .mybutton{
             float: right;
             width: 4%;
@@ -76,11 +77,20 @@
         .car-image-box img {
             margin-top: 0px;
         }
+        .layui-elem-quote{
+            margin: 10px;
+        }
+        .layui-elem-quote p{
+            font-size: 15px;
+        }
     </style>
 </head>
-<body>
+<body onload="IFrameResize('myframe')">
+    <div class="layui-elem-quote">
+        <p>我的订单</p>
+    </div>
     <div id="demo">
-        <div class="order-info-box">
+        <!--<div class="order-info-box" onclick="enterShare(this,1,'支付')">
             <div class="car-image-box">
                 <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg"/>
                 <span>租 期：<em>2</em>天</span>
@@ -98,47 +108,56 @@
                     <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span><span class="mystyle">参与活动:【儿童节】满减活动1满196减10</span></li>
                     <li><span></span><span></span><span class="mystyle">其他服务：指定车型,车损免赔,增值保障服务,乘客座位保障,车损免赔</span></li>
                 </ul>
+                <span>￥5000</span>
             </div>
 
             <button class="mybutton">
                 <i class="layui-icon" style="font-size: 30px; color: #ffffff;">&#xe640;</i>
             </button>
-            <span>￥5000</span>
-        </div>
 
-        <div class="order-info-box">
-            <div class="car-image-box">
-                <img src="https://image.1hai.cn/front/activity/20160909/lavida.jpg"/>
-                <span>租 期：<em>2</em>天</span>
-            </div>
-            <div class="store-info-box">
-                <div class="car-name">
-                    <label>大众朗逸或同组车型</label>
-                    <em>订单编号：60e06a087d874e1785f018b409500f5c</em>
-                </div>
-                <ul>
+        </div>-->
 
-                    <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span><span class="store-title">其他信息</span></li>
-                    <li><span>取车门店：极速租车（大学城店）</span><span>还车门店：极速租车（大学城店）</span><span>支付方式：门店支付</span></li>
-                    <li><span>取车时间：2018-05-07 00:00:00</span><span>还车时间：2018-05-09 00:00:00</span><span>支付状态：未支付</span></li>
-                    <li><span>取车地址：重庆市-重庆市-沙坪坝区</span><span>还车地址：重庆市-重庆市-沙坪坝区</span><span class="mystyle">参与活动:【儿童节】满减活动1满196减10</span></li>
-                    <li><span></span><span></span><span class="mystyle">其他服务：指定车型,车损免赔,增值保障服务,乘客座位保障,车损免赔</span></li>
-                </ul>
-            </div>
-
-            <button class="mybutton">
-                <i class="layui-icon" style="font-size: 30px; color: #ffffff;">&#xe640;</i>
-            </button>
-            <span>￥5000</span>
-        </div>
     </div>
     <div id="mypage"></div>
     <script>
         var myuser=JSON.parse($.cookie("myuser"));
         var mycontent=null;
+        //防止删除点击时，外层div点击事件  也启动
+        var myorderstate=0;
         $(function(){
-            mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page=1&limit=5',"get");
+            mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page=1&limit=3',"get");
         })
+        function enterShare(obj,id,state){
+            if(myorderstate==0){
+                if(state=='待支付')
+                    layer.msg("请在实体店完成订单支付后，进行评论！");
+                else {
+                    layer.msg("即将进入精彩评论");
+                    countDown(3,"image.html");
+                }
+            }else{
+                myorderstate=0;
+            }
+        }
+        function deleteOrder(id){
+            myorderstate=1;
+            layer.confirm('确定删除该订单?', {icon: 3, title:'提示'}, function(index){
+                result=myajax('../OrderTable/deleteOrder/'+id,"delete");
+                layer.msg(result.msg);
+                laypage.render({
+                    elem: 'mypage'
+                    ,count: mycontent.counts-1
+                    ,limit: 3
+                    ,layout: ['prev', 'page', 'next','skip','count']
+                    ,jump: function(obj){
+                        var mypage=obj.curr;
+                        mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page='+mypage+'&limit=3',"get");
+                        setContent($("#demo"),mycontent.data);
+                    }
+                });
+                layer.close(index);
+            });
+        }
         layui.use(['laypage','layer'], function(){
             laypage = layui.laypage,layer=layui.layer;
 
@@ -147,12 +166,12 @@
             laypage.render({
                 elem: 'mypage'
                 ,count: mycontent.counts
-                ,limit: 5
+                ,limit: 3
                 ,layout: ['prev', 'page', 'next','skip','count']
                 ,jump: function(obj){
                     var mypage=obj.curr;
-                    mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page='+mypage+'&limit=5',"get");
-                    //setContent($("#demo"),mycontent.data);
+                    mycontent=myajax('../OrderTable/getUserOrder/'+myuser.idUser+'?page='+mypage+'&limit=3',"get");
+                    setContent($("#demo"),mycontent.data);
                 }
             });
         });
@@ -160,11 +179,38 @@
         function setContent(aim,contents)
         {
             aim.empty();
+            if(contents.length==0)
+                aim.append("<h3 align='center'>暂无订单信息！！！</h3>");
             for(var i in contents)
             {
-
-                //aim.append(s1+s2+s3);
+                aim.append('<div class="order-info-box" onclick="enterShare(this,'+contents[i].idOrder+',\''+contents[i].stateOrder+'\')">\n' +
+                    '            <div class="car-image-box">\n' +
+                    '                <img src="'+contents[i].idCarOrder.imgCar+'"/>\n' +
+                    '                <span>租 期：<em>'+contents[i].dayOrder+'</em>天</span>\n' +
+                    '            </div>\n' +
+                    '            <div class="store-info-box">\n' +
+                    '                <div class="car-name">\n' +
+                    '                    <label>'+contents[i].idCarOrder.nameCar+'</label>\n' +
+                    '                    <em>订单编号：'+contents[i].orderIdOrder+'</em>\n' +
+                    '                </div>\n' +
+                    '                <ul>\n' +
+                    '\n' +
+                    '                    <li><span class="store-title">取车地点</span><span class="store-title">还车地点</span><span class="store-title">其他信息</span></li>\n' +
+                    '                    <li><span>取车门店：'+contents[i].idGetCarOrder.nameCarStore+'</span><span>还车门店：'+contents[i].idReturnCarOrder.nameCarStore+'</span><span>支付方式：'+contents[i].payMethodOrder+'</span></li>\n' +
+                    '                    <li><span>取车时间：'+alterTimeFormat(contents[i].getCarTimeOrder)+'</span><span>还车时间：'+alterTimeFormat(contents[i].returnCarTimeOrder)+'</span><span>支付状态：'+contents[i].stateOrder+'</span></li>\n' +
+                    '                    <li><span>取车地址：'+contents[i].idGetCarOrder.addressCarStore+'</span><span>还车地址：'+contents[i].idReturnCarOrder.addressCarStore+'</span><span class="mystyle">参与活动:'+contents[i].idActivityOrder+'</span></li>\n' +
+                    '                    <li><span></span><span></span><span class="mystyle">其他服务：'+contents[i].idOtherServiceOrder+'</span></li>\n' +
+                    '                </ul>\n' +
+                    '                <span>￥'+contents[i].priceOrder+'</span>\n' +
+                    '            </div>\n' +
+                    '\n' +
+                    '            <button class="mybutton" onclick="deleteOrder('+contents[i].idOrder+')">\n' +
+                    '                <i class="layui-icon" style="font-size: 30px; color: #ffffff;">&#xe640;</i>\n' +
+                    '            </button>\n' +
+                    '\n' +
+                    '        </div>');
             }
+            IFrameResize('myframe')
         }
     </script>
 </body>

@@ -7,5 +7,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 
 public interface OrderToolsTableRepository extends PagingAndSortingRepository<OrderToolsTable,Integer> {
-    Page<OrderToolsTable> findAllByIdUserOrderOrderByIdOrderDesc(Integer userid, Pageable pageable);
+    Page<OrderToolsTable> findAllByIdUserOrderAndStateOrderIsNotOrderByIdOrderDesc(Integer userid,String state,Pageable pageable);
 }
