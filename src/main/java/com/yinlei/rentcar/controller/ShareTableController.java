@@ -55,16 +55,25 @@ public class ShareTableController {
         map.put("msg","评论已删除");
         return map;
     }
+
+    @RequestMapping(value = "/existShare/{id}",method = RequestMethod.GET)
+    public Map existShare(@PathVariable("id")Integer orderid){
+        Map<String,Object> map=new HashMap<>();
+        if(service.findAllByIdOrderShare(orderid))
+            map.put("msg","该订单已评论。");
+        return map;
+    }
+
     @RequestMapping(value = "/getShare{id}/{page}",method = RequestMethod.GET)
     public Map getShares(@PathVariable("id") Integer userid,@PathVariable("page")Integer page){
         Map<String, Object> map=new HashMap<>();
         Page<ShareTable> allByPage =null;
         if(userid==0)
         {
-            allByPage = service.getAllByPage(page, 5);
+            allByPage = service.getAllByPage(page, 3);
         }
         else {
-            allByPage=service.getAllByPageAndUserId(page,5,userid);
+            allByPage=service.getAllByPageAndUserId(page,3,userid);
         }
         map.put("all",allByPage);
         //获取分享表中的订单列

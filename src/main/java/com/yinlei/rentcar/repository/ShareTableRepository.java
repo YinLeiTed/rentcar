@@ -11,4 +11,5 @@ import java.util.List;
 public interface ShareTableRepository extends PagingAndSortingRepository<ShareTable,Integer> {
     List<ShareTable> findAllByIdUserShare(Integer idShare);
     Page<ShareTable> findAllByIdUserShare(Integer idUserShare,Pageable pageable);
+    List<ShareTable> findAllByIdOrderShare(Integer orderid);
 }

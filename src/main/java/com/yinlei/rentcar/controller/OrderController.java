@@ -2,9 +2,11 @@ package com.yinlei.rentcar.controller;
 
 import com.yinlei.rentcar.bean.OrderTable;
 import com.yinlei.rentcar.bean.OrderToolsTable;
+import com.yinlei.rentcar.bean.UserTable;
 import com.yinlei.rentcar.service.CarTableService;
 import com.yinlei.rentcar.service.OrderTableService;
 import com.yinlei.rentcar.service.OrderToolsTableService;
+import com.yinlei.rentcar.service.UserTableService;
 import com.yinlei.rentcar.tools.MyUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,9 @@ public class OrderController {
     private CarTableService carService;
 
     @Autowired
+    private UserTableService userService;
+
+    @Autowired
     private OrderToolsTableService tools;
 
     @RequestMapping(value = "/saveOrder",method = RequestMethod.POST)
@@ -36,6 +41,12 @@ public class OrderController {
         order.setOrderIdOrder(my);
         service.insert(order);
         carService.updateState(1,order.getIdCarOrder());
+
+        //更新用户总金额
+        UserTable user=userService.getById(order.getIdUserOrder());
+        user.setAmountUser(user.getAmountUser()+order.getPriceOrder());
+        userService.update(user);
+
         //Sout.print("order",order);
         map.put("uuid",my);
         return map;

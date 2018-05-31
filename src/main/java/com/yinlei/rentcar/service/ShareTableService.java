@@ -11,8 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,5 +52,12 @@ public class ShareTableService {
 
     public void update(ShareTable u) {
         dao.save(u);
+    }
+
+    public Boolean findAllByIdOrderShare(Integer orderid){
+        //Sout.print("orderid",dao.findAllByIdOrderShare(orderid));
+        if(dao.findAllByIdOrderShare(orderid).size()>0)
+            return true;
+        return false;
     }
 }

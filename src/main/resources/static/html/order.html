@@ -13,7 +13,9 @@
             .layui-radio-disbaled>i {
                 color: #5FB878!important;
             }
-
+			.car-image-box img {
+				margin-top: 30px;
+			}
 		</style>
 	</head>
 	<body onload="IFrameResize('myframe')">
@@ -367,7 +369,6 @@
 
             $(function(){
 
-
                 myorder=JSON.parse($.cookie("myorder"));
                 //console.log(myorder);
 
@@ -383,7 +384,8 @@
 				$("#province2").html("还车地址："+myorder["province2"])
 				$("#myimg").attr("src",myorder["url"]);
 				//基本保障服务费
-                $(".price-mid").eq(1).html("￥"+40*myorder["dayOrder"]);
+                $(".price-mid").eq(1).html("￥"+myorder["price"]*myorder["dayOrder"]);
+                $(".price-detail li span").html("基本保障服务费"+myorder["price"]+"元 / 天");
                 //显示服务信息
                 myservice=myajax("../OtherServiceTable/getOtherService","get");
                 //console.log(myservice);
@@ -477,7 +479,7 @@
 
                     var result=myajax2("../OrderTable/saveOrder","post",mydate);
                     layer.msg("订单提交成功，订单编号为"+result.uuid+"<br>详情请在我的订单中查看！")
-
+                    $.cookie("myorder", null, { expires: -1,path:'/'});
                     countDown(3,"../html/cars.html");
 				}
 
@@ -511,7 +513,9 @@
 					}
                 }
                 $("#otherservice").html("￥"+otherservice);
-                $("#priceTotal").html("<em>￥</em>"+price);
+                //console.log(JSON.parse($.cookie("myuser")))
+                var count=JSON.parse($.cookie("myuser")).count;
+                $("#priceTotal").html("<em>"+price+"（"+count+"折)</em>"+Math.ceil(price*count));
 		    }
 
 		  

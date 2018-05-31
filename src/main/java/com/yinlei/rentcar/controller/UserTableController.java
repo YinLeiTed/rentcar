@@ -3,6 +3,7 @@ package com.yinlei.rentcar.controller;
 import com.yinlei.rentcar.bean.UserTable;
 import com.yinlei.rentcar.service.UserTableService;
 import com.yinlei.rentcar.tools.EmailUtils;
+import com.yinlei.rentcar.tools.MyUrl;
 import com.yinlei.rentcar.tools.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/UserTable")
@@ -58,7 +58,13 @@ public class UserTableController {
 
         if(service.existIdcard(idcardUser)==1)
             map.put("msg","身份证已注册。");
-
+        else{
+            String result=MyUrl.getUrlContent("http://api.jisuapi.com/idcard/query?appkey=e72629ac6bb44f25&idcard="+idcardUser);
+            if(result=="")
+                map.put("msg","身份证不存在。");
+            else
+                map.put("data",result);
+        }
         return map;
     }
     @RequestMapping(value = "/email/{length}",method = RequestMethod.GET)

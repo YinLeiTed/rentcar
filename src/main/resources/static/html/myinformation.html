@@ -108,7 +108,7 @@
                 if(result.code==undefined) {
                     layer.msg(result.msg);
                 }else {
-                    setCode($("#myidentity"),null);
+                    setCode($("#myemail"),result.code);
 
                     layer.prompt({
                         formType: 0,
@@ -129,19 +129,25 @@
                             layer.close(index);
                         }else {
                             layer.msg("验证码错误");
+                            //console.log("mycode:"+mycode);
                         }
                     });
                 }
             }
             function alterIdentity(data) {
                 var result=myajax2("../UserTable/identity","get",data);
-                if(result.msg!=undefined) {
+				if(result.msg!=undefined) {
                     layer.msg(result.msg);
                 }else {
                     setCode($("#myidentity"),result.code);
-                    console.log(data.idcardUser)
-					result=myajax3("http://api.jisuapi.com/idcard/query?appkey=e72629ac6bb44f25&idcard="+data.idcardUser,"get");
-					console.log(result);
+
+					var myresult=JSON.parse(result.data).result;
+					data["sexUser"]=myresult.sex;
+                    data["birthdayUser"]=myresult.birth.replace(/[\u4e00-\u9fa5]/g,"-").substring(0,10);
+                    data["provicneUser"]=myresult.province;
+                    data["cityUser"]=myresult.city;
+                    data["townUser"]=myresult.town;
+                    data["areaUser"]=myresult.area;
                     layer.msg("身份证已改变！");
 					//将修改的信息覆盖到原来的user对象中
 					$.extend(myuser,data);

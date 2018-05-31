@@ -23,7 +23,7 @@ public class EmailUtils {
             // 发送服务器需要身份验证
             props.setProperty("mail.smtp.auth", "true");
             // 设置邮件服务器主机名
-            props.setProperty("mail.host", "smtp.qq.com");
+            props.setProperty("mail.host", "smtp.163.com");
             // 发送邮件协议名称
             props.setProperty("mail.transport.protocol", "smtp");
 
@@ -41,17 +41,16 @@ public class EmailUtils {
             builder.append("\n30分钟内有效。");
             builder.append("\n如果你未使用极速租车，请忽略此邮件。");
             msg.setText(builder.toString());
-            msg.setFrom(new InternetAddress("1305193403@qq.com"));
+            msg.setFrom(new InternetAddress("15736267103@163.com"));
 
             Transport transport = session.getTransport();
-            transport.connect("smtp.qq.com", "1305193403@qq.com", "cpgfwhsjdsxdgdbh");
+            transport.connect("smtp.163.com", "15736267103@163.com", "ted1234");
 
             transport.sendMessage(msg, new Address[] { new InternetAddress(email) });
             transport.close();
         }catch (Exception e){
 	        e.printStackTrace();
         }
-
 
 		return code;
 	}

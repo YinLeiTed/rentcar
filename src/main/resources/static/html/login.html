@@ -93,8 +93,19 @@
 		  form.on('submit(formDemo)', function(data){
 		    //layer.msg(JSON.stringify(data.field));
 		    var result=myajax2("../UserTable/login","post",data.field);
-		    if(result==undefined||result.msg==undefined){
+
+		    if(result.msg==undefined){
 		    	//储存用户cookie
+				var amount=result.user.amountUser;
+                if(amount<5000) {
+                    result.user["count"]=1;
+                }else if(amount<20000){
+                    result.user["count"]=0.9;
+                }else if(amount<50000){
+                    result.user["count"]=0.8;
+                }else {
+                    result.user["count"]=0.7;
+                }
 		    	$.cookie("myuser", JSON.stringify(result.user), { expires: 1,path:'/'});
 		    	
 		    	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

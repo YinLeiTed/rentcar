@@ -114,11 +114,8 @@
             //监听提交
             form.on('submit(mydemo)', function(data){
 
-
-
                 var result=myajax2("../UserTable/phone/0","get",data.field);
-                /*if(result.code!=undefined)
-                    myajax3("http://api.jisuapi.com/sms/send?mobile="+data.field.phoneUser+"&content=您的手机验证码为"+result.code+"，30分钟内有效。请不要把此验证码泄露给任何人。【极速租车】&appkey=e72629ac6bb44f25","post");*/
+
                 if(result.code==undefined) {
                     layer.msg(result.msg);
                 }else {
@@ -149,7 +146,7 @@
             });
 		  //监听提交
 		  form.on('submit(formDemo)', function(data){
-              var mydate=data.field;
+				data=data.field;
               var mycode=$.cookie("myregistercode");
 
               if(mycode==undefined)
@@ -158,19 +155,33 @@
               }
               else {
                   mycode=window.pwdString.decrypt(mycode);
-                  if (mydate.mycode != mycode) {
+                  if (data.mycode != mycode) {
                       layer.msg("验证码错误！");
                   }
                   else {
-                      mydate["phoneUser"] = $("input[name='phoneUser']").val();
-                      var result = myajax2("../UserTable/register", "post", mydate);
-                      if (result == undefined || result.msg == undefined) {
-                          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                          parent.layer.close(index); //再执行关闭
+                      data["phoneUser"] = $("input[name='phoneUser']").val();
+                      var result2=myajax2("../UserTable/identity","get",data);
+                      if(result2.msg!=undefined) {
+                          layer.msg(result2.msg);
                       }
-                      else {
-                          layer.msg(result.msg);
-                      }
+                      else{
+                          var myresult=JSON.parse(result2.data).result;
+                          data["sexUser"]=myresult.sex;
+                          data["birthdayUser"]=myresult.birth.replace(/[\u4e00-\u9fa5]/g,"-").substring(0,10);
+                          data["provicneUser"]=myresult.province;
+                          data["cityUser"]=myresult.city;
+                          data["townUser"]=myresult.town;
+                          data["areaUser"]=myresult.area;
+                          var result = myajax2("../UserTable/register", "post", data);
+                          if (result == undefined || result.msg == undefined) {
+                              var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                              parent.layer.close(index); //再执行关闭
+                          }
+                          else {
+                              layer.msg(result.msg);
+                          }
+					  }
+
                   }
               }
 			

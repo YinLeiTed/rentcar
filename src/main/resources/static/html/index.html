@@ -122,7 +122,7 @@
 							<ul>
 								<li><a id="myregisternewuser">注册新用户</a></li>
 								<li><a id="myordering">预订演示</a></li>
-								<li><a id="myalterorder">取消或修改订单</a></li>
+								<li><a id="myalterorder">取消订单</a></li>
 							</ul>
 						</div>
 						<div class="col-md-2 footer-grid">
@@ -220,6 +220,34 @@
                         '<img src="../img/vip3.png" style="width: 18px;height: 18px" >金卡折扣0.8，累计消费金额达到20000元。<br>' +
                         '<img src="../img/vip4.png" style="width: 20px;height: 20px" >钻卡折扣0.7，累计消费金额达到50000元。<br></div>'
                     });
+                })
+                $("#myservice").click(function () {
+                    layer.msg("接送服务，正在开发中！")
+                })
+                $("#myrentcarprocess").click(function () {
+                    layer.open({
+                        type: 1
+                        ,title: '租车流程'
+                        ,closeBtn: false
+                        ,area: '350px;'
+                        ,shade: 0.8
+                        ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                        ,btn: ['OK']
+                        ,btnAlign: 'c'
+                        ,moveType: 1 //拖拽模式，0或者1
+                        ,content: '<div style="padding: 20px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">1.请用户先注册登录<br><br>2.进入自主租车，选择车型，填写相关信息。<br><br>3.点击车辆，进入订单<br><br>4.在我的订单中选择【已支付】订单后，才可以进行订单评价。<br>' +
+
+                        '</div>'
+                    });
+                })
+                $("#myregisternewuser").click(function () {
+                    layer.msg("请在右上角点击  登录 / 注册 中的注册");
+                })
+                $("#myordering").click(function () {
+                    layer.msg("自主租车-->填写信息-->选择车辆-->进入订单");
+                })
+                $("#myalterorder").click(function () {
+                    layer.msg("登录后【我的订单】中点击删除按钮");
                 })
 				$("#myadvise").click(function () {
                     layer.prompt({

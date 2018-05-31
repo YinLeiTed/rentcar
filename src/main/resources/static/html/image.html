@@ -13,7 +13,7 @@
             .layui-timeline-title img {
                 height: 50px;
                 max-width: 150px;
-                margin-top: -25px;
+                margin-top: 0px;
             }
 			.layui-timeline-content>img{
 				height: 100px;
@@ -185,25 +185,40 @@
 			  form.on('submit(demo2)', function(data){
 			    //layer.msg(JSON.stringify(data.field));
                   var myuser=$.cookie("myuser");
+                  var myorder=$.cookie("myshareorder");
 					mydate=data.field;
-                  if(myuser==undefined)
+                  if(myuser==undefined||myuser==null)
                   {
 					  layer.msg("请先登录，再进行操作");
-                  }else {
-                      var mylength=$('#demo22 img').length;
-                      mydate["idUserShare"]=JSON.parse(myuser).idUser;
-                      mydate["phoneShare"]=JSON.parse(myuser).phoneUser;
-                      if(mylength==0){
-                          myresult=myajax2("../ShareTable/addShare","post",mydate);
-                      }else{
-                          uploadListIns.upload();
-                      }
+                  }else if(myorder==undefined||myorder==null){
+                      layer.msg("请在我的订单中，选择【已支付】的订单，然后进行评论！");
+				  }else {
+
+                      var existShare=myajax("../ShareTable/existShare/"+myorder,"get");
+                      if(existShare.msg!=undefined){
+						  layer.msg(existShare.msg);
+					  }else{
+                          var mylength=$('#demo22 img').length;
+                          mydate["idUserShare"]=JSON.parse(myuser).idUser;
+                          mydate["phoneShare"]=JSON.parse(myuser).phoneUser;
+                          mydate["idOrderShare"]=myorder;
+
+                          if(mylength==0){
+                              myresult=myajax2("../ShareTable/addShare","post",mydate);
+                          }else{
+                              uploadListIns.upload();
+                          }
+
+
+						  layer.msg("分享提交成功");
+						  $("#myform textarea[name='contentShare']").val("");
+						  //删除订单编号
+						  $.cookie("myshareorder", null, { expires: -1,path:'/'});
+
+					  }
+
 				  }
-					if(myresult.msg=="success")
-					{
-                        layer.msg("分享提交成功");
-					    $("#myform textarea[name='contentShare']").val("");
-					}
+
                   return false;
 			  });
 
@@ -215,7 +230,7 @@
                     ,layout: ['prev', 'page', 'next','skip','count']
                     ,jump: function(obj){
                         var mypage=obj.curr-1;
-                        mycontent=myajax("../ShareTable//getShare0/"+mypage,"get");
+                        mycontent=myajax("../ShareTable/getShare0/"+mypage,"get");
                         //console.log(mycontent.all.content)
 						setContent($("#content"),mycontent.all.content,mycontent.cars);
                         IFrameResize('myframe');

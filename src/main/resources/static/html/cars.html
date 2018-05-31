@@ -178,9 +178,17 @@ var elem=$('#container ul');
 		var idCarOrder=null;
 		var nameCar=null;
 		var urlCar=null;
+		var price=null;
         var mycarresult=null;
-        function enterOrder(id,name,url)
+        function enterOrder(day,week,month,id,name,url)
         {
+            var days=$.cookie("myday");
+            if(days>=30)
+                price=month;
+            else if(days>=7)
+                price=week;
+            else
+                price=day;
             idCarOrder=id;
             nameCar=name;
             urlCar=url;
@@ -202,7 +210,7 @@ var elem=$('#container ul');
                 {
 					if((mycarresult[i].brandTypeCar==brand||brand=="所有品牌")&&mycarresult[i].dailyRentCar>=price1&&mycarresult[i].dailyRentCar<=price2)
 					{
-                        mycarlist.append('<a onclick="enterOrder('+mycarresult[i].idCar+')">\n' +
+                        mycarlist.append('<a onclick="enterOrder('+mycarresult[i].dailyRentCar+','+mycarresult[i].weeklyRentCar+','+mycarresult[i].monthlyRentCar+','+mycarresult[i].idCar+',\''+mycarresult[i].nameCar+'\',\''+mycarresult[i].imgCar+'\')">\n' +
                             '                <li>\n' +
                             '                <img src="'+mycarresult[i].imgCar+'" title="" alt="" />\n' +
                             '                <section class="list-left">\n' +
@@ -242,7 +250,7 @@ var elem=$('#container ul');
 			    mycarlist.append("<h3 align='center'>本门店暂无车辆可以租赁！！！</h3>")
 			for(var i in result)
 			{
-			    mycarlist.append('<a onclick="enterOrder('+result[i].idCar+',\''+result[i].nameCar+'\',\''+result[i].imgCar+'\')">\n' +
+			    mycarlist.append('<a onclick="enterOrder('+result[i].dailyRentCar+','+result[i].weeklyRentCar+','+result[i].monthlyRentCar+','+result[i].idCar+',\''+result[i].nameCar+'\',\''+result[i].imgCar+'\')">\n' +
                     '                <li>\n' +
                     '                <img src="'+result[i].imgCar+'" title="" alt="" />\n' +
                     '                <section class="list-left">\n' +
@@ -332,6 +340,7 @@ var elem=$('#container ul');
 			}
 			else {
                 myorder["dayOrder"]=$.cookie("myday");
+                myorder["price"]=price;
                 $.cookie("myday", null, { expires: -1,path:'/'});
 
                 //console.log(JSON.stringify(myorder));
