@@ -182,17 +182,22 @@ var elem=$('#container ul');
         var mycarresult=null;
         function enterOrder(day,week,month,id,name,url)
         {
-            var days=$.cookie("myday");
-            if(days>=30)
-                price=month;
-            else if(days>=7)
-                price=week;
-            else
-                price=day;
-            idCarOrder=id;
-            nameCar=name;
-            urlCar=url;
-            $("#mysubmit").click();
+            if($.cookie("myuser")==undefined)
+            {
+                layer.msg("请先登录，再进行操作")
+            }else{
+                var days=$.cookie("myday");
+                if(days>=30)
+                    price=month;
+                else if(days>=7)
+                    price=week;
+                else
+                    price=day;
+                idCarOrder=id;
+                nameCar=name;
+                urlCar=url;
+                $("#mysubmit").click();
+			}
         }
         function carSearch() {
             if(mycarresult==null)

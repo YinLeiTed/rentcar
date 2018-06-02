@@ -51,7 +51,7 @@ public class EmailUtils {
         }catch (Exception e){
 	        e.printStackTrace();
         }
-
+        Sout.print(email,"邮件已发送");
 		return code;
 	}
 
