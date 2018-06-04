@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +46,7 @@ public class BrandCarTableService {
     }
 
     public Page<BrandCarTable> getByPage(int page, int limit) {
-        Pageable p=PageRequest.of(page,limit);
+        Pageable p=PageRequest.of(page-1,limit,new Sort(Sort.Direction.DESC,"idBrandCar"));
         return dao.findAll(p);
     }
 

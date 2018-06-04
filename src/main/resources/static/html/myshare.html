@@ -97,6 +97,8 @@
             function setContent(aim,contents,cars)
             {
                 aim.empty();
+                if(contents.length==0)
+                    aim.append("<h3 align='center'>暂无评论信息！！！</h3>");
                 for(var i in contents)
                 {
                     var s1='<li class="layui-timeline-item">'

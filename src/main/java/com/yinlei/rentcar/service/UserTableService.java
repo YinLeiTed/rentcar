@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +43,7 @@ public class UserTableService {
     }
 
     public Page<UserTable> getByPage(int page, int limit) {
-        Pageable p=PageRequest.of(page,limit);
+        Pageable p=PageRequest.of(page-1,limit,new Sort(Sort.Direction.DESC,"idUser"));
         return dao.findAll(p);
     }
 
@@ -72,7 +73,9 @@ public class UserTableService {
     public UserTable login(UserTable u) {
         return dao.findAllByPhoneUserAndPhoneUserIsNotNullOrEmailUserAndEmailUserIsNotNullOrIdcardUserAndIdcardUserIsNotNull(u.getPhoneUser(),u.getEmailUser(),u.getIdcardUser()).get(0);
     }
-
+    public List<UserTable> getUser(UserTable u) {
+        return dao.findAllByPhoneUserAndPhoneUserIsNotNullOrEmailUserAndEmailUserIsNotNullOrIdcardUserAndIdcardUserIsNotNull(u.getPhoneUser(),u.getEmailUser(),u.getIdcardUser());
+    }
     public List<String> findAllTableColumnName(String tablename,String schema){
         return dao.findAllTableColumnName(tablename,schema);
     }

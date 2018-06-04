@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -60,6 +61,38 @@ public class OrderController {
         map.put("msg","订单已删除");
         return map;
     }
+
+    @RequestMapping(value = "/deleteOrder2/{id}",method = RequestMethod.DELETE)
+    public void deleteOrder2(@PathVariable("id")Integer id){
+        //Sout.print("u",u);
+        service.delete(id);
+    }
+
+    @RequestMapping(value = "/getOrders",method = RequestMethod.GET)
+    public Map getOrders(Integer page,Integer limit){
+        Map<String, Object> map=new HashMap<>();
+        map.put("code","0");
+        Page<OrderTable> list = service.getByPage(page,limit);
+        map.put("data",list.getContent());
+        map.put("count",list.getTotalElements());
+        return map;
+    }
+
+    @RequestMapping(value = "/queryOrders/{orderid}",method = RequestMethod.GET)
+    public Map queryUsers(@PathVariable("orderid")String orderid){
+        Map<String, Object> map=new HashMap<>();
+        map.put("code","0");
+        List<OrderTable> list = service.findAllByOrderIdOrder(orderid);
+        map.put("data",list);
+        map.put("count",list.size());
+        return map;
+    }
+
+    @RequestMapping(value = "/updateOrder",method = RequestMethod.PUT)
+    public void updateUser(OrderTable u){
+        service.update(u);
+    }
+
 
     @RequestMapping(value = "/getUserOrder/{userid}",method = RequestMethod.GET)
     public Map getUserOrder(@PathVariable("userid") Integer userid,Integer page,Integer limit){

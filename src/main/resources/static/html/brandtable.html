@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>table模块快速使用</title>
+    <script type="text/javascript" src="../js/main.js" ></script>
+</head>
+<body style="padding: 5px;height: 700px;">
+<div class="layui-inline layui-row" style="width: 100%">
+	<div class="layui-input-inline layui-col-md2">
+			<button id="new" class="layui-btn layui-btn-sm layui-btn-radius" style="background-color: #5FB878;">
+			  <i class="layui-icon">&#xe608;</i>&nbsp;新增数据&nbsp;
+			</button>
+			<button id="report" class="layui-btn layui-btn-sm layui-btn-radius" style="background-color: #5FB878;">
+			  <i class="layui-icon">&#xe601;</i>&nbsp;导出数据&nbsp;
+			</button>
+	</div>
+
+</div>
+<div class="alert alert-warning" role="alert" style="padding: 10px 20px 10px 20px;margin-top: 5px;margin-bottom: -5px;">
+    <a href="#" class="alert-link">注意！直接编辑单元格进行修改.</a>
+</div>
+<table id="demo" lay-filter="test">
+	
+</table>
+ <script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+layui.use(['table','layer'], function(){
+  table = layui.table,
+  layer=layui.layer;
+  
+  //第一个实例
+  table.render({
+    elem: '#demo'
+    ,skin: 'row' //行边框风格
+    ,even: true //开启隔行背景
+    //,height: 315
+    ,url: '../BrandCarTable/getBrandCars' //数据接口
+    ,page: true //开启分页
+    ,cellMinWidth: 80
+    ,cols: [[ //表头
+      {field: 'idBrandCar', title: 'ID', width:80, sort: true, fixed: 'left'}
+      ,{field: 'brandBrandCar', title: '品牌名称', edit: 'text', sort: true}
+      ,{fixed: 'right',width:100, align:'center', toolbar: '#barDemo'}
+    ]]
+  });
+  
+  table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+	  var data = obj.data; //获得当前行数据
+	  var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+	  var tr = obj.tr; //获得当前行 tr 的DOM对象
+	 
+	 if(layEvent === 'del'){ //删除
+	    layer.confirm('真的删除行么', function(index){
+	      obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+	      //console.log(data.idBrandCar)
+            layer.msg('[汽车品牌: '+ data.idBrandCar +'] 已删除')
+          myajax("../BrandCarTable/deleteBrandCar/"+data.idBrandCar,"delete");
+	      layer.close(index);
+	    });
+	  }
+	});
+    //监听单元格编辑
+    table.on('edit(test)', function(obj){
+        var value = obj.value //得到修改后的值
+            ,data = obj.data //得到所在行所有键值
+            ,field = obj.field; //得到字段
+        layer.msg('[汽车品牌: '+ data.idBrandCar +'] 已修改');
+        myajax2("../BrandCarTable/updateBrandCar","put",data);
+        //console.log(obj.data)
+    });
+    $(function(){
+        IFrameResize('myframe');
+    })
+});
+
+$("#report").click(function(){
+    var result=myajax("../BrandCarTable/getBrandCars?page=1&limit=1000","get");
+    if(result.data!=undefined)
+        JSONToExcelConvertor(result.data,"report");
+    else
+        layer.msg("无数据不能导出！")
+})
+$("#new").click(function(){
+    layer.prompt({
+        formType: 2,
+        value: '请填写品牌名称',
+        title: '品牌名称',
+        area: ['400px', '100px'] //自定义文本域宽高
+    }, function(value, index, elem){
+        var mydata={};
+        mydata["brandBrandCar"]=value;
+        myajax2("../BrandCarTable/insertBrandCar","post",mydata);
+        window.location.reload();
+        layer.close(index);
+    })
+})
+</script>
+</body>
+</html>

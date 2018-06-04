@@ -340,6 +340,7 @@
 		var myorder=null;
 		var myservice=null;
 		var myactivity=null;
+		var myprice=0;
         function service(id){
             layer.msg("service:"+id);
             //console.log(id);
@@ -468,7 +469,7 @@
                     var mydate=$("#myform").serializeArray();
                     mydate=alterSerializeArrayToJson(mydate);
                     mydate["idActivityOrder"]=$("input[name='idActivityOrder']").val();
-                    mydate["priceOrder"]=$("#priceTotal").html().substring(10);
+                    mydate["priceOrder"]=myprice;
                     mydate["idOtherServiceOrder"]=mydate["idOtherServiceOrder"].join(",");
                     mydate["idUserOrder"]=JSON.parse($.cookie("myuser")).idUser;
                     mydate["stateOrder"]="待支付";
@@ -516,6 +517,7 @@
                 //console.log(JSON.parse($.cookie("myuser")))
                 var count=JSON.parse($.cookie("myuser")).count;
                 $("#priceTotal").html("<em>"+price+"（"+count+"折)</em>"+Math.ceil(price*count));
+                myprice=Math.ceil(price*count);
 		    }
 
 		  

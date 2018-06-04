@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -66,5 +68,12 @@ public class CarStoreTableService {
         HashMap<String, Object> map=new HashMap<>();
         map.put("all",dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%"));
         return map;
+    }
+    public List<CarStoreTable> getCarStores2(String address) {
+        return dao.findAllByAddressCarStoreLikeOrderByIdLocationCarStoreAsc("%"+address+"%");
+    }
+    public Page<CarStoreTable> getByPage2(int page, int limit) {
+        Pageable p=PageRequest.of(page-1,limit,new Sort(Sort.Direction.DESC,"idCarStore"));
+        return dao.findAll(p);
     }
 }

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>layUI表单</title>	
+		<script type="text/javascript" src="../js/main2.js" ></script>
+        <script type="text/javascript" src="../js/area.js" ></script>
+	</head>
+	<body>
+<form class="layui-form" style="margin: 15px 20px 15px -20px;">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">品牌</label>
+    <div class="layui-input-block">
+      <select name="brandTypeCar" lay-verify="required" class="form-control" lay-search>
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-block">
+            <input type="text" name="imgCar" required lay-verify="required" autocomplete="off" class="layui-input form-control" disabled>
+            <button type="button" class="layui-btn" id="test1">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属门店</label>
+        <div class="layui-input-block">
+            <select id="province" name="province" lay-filter="province" required lay-verify="required" lay-search>
+            </select>
+            <select name="idCarStoreCar" required lay-verify="required" class="form-control" lay-search>
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-sm   layui-btn-radius" lay-submit lay-filter="formDemo" style="padding: 0px 17px 0px 17px;">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-sm  layui-btn-radius layui-btn-primary" style="padding: 0px 17px 0px 17px;">重置</button>
+    </div>
+  </div>
+</form>
+
+<script>
+var mydata=JSON.parse($.cookie("altercar"));
+layui.use(['layer', 'form','upload'], function(){
+  layer = layui.layer
+  ,form = layui.form,
+   upload = layui.upload;
+
+  $(function(){
+      area_init($("#province"));
+      //初始化汽车品牌
+      var mybrandcar=myajax("../BrandCarTable/getBrandCar/","get");
+      var brandcar=$("select[name='brandTypeCar']");
+      brandcar.empty();
+      for(var i in mybrandcar.all)
+      {
+          brandcar.append("<option value=\""+mybrandcar.all[i].brandBrandCar+"\">"+mybrandcar.all[i].brandBrandCar+"</option>");
+      }
+
+
+      brandcar.val(mydata.brandTypeCar);
+      $("input[name='imgCar']").val(mydata.imgCar);
+      form.render();
+  })
+
+    form.on('select(province)', function(data){
+        //console.log(data.value.split("-")[2]); //得到被选中的值
+        var result=myajax("../CarStoreTable/getCarStoreTable/"+data.value.split("-")[2],"get");
+
+        var city=$("select[name='idCarStoreCar']");
+        city.empty();
+
+        if(result.all.length==0)
+            city.append("<option value=''>无门店，请选择其他城市</option>");
+        else{
+            for(var i in result.all)
+            {
+                city.append("<option value='"+result.all[i].idCarStore+"'>"+result.all[i].nameCarStore+"</option>");
+            }
+            form.render();
+        }
+    });
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        ,url: '../CarTable/upload/'
+        ,field:'images'
+        ,accept: 'images'
+        ,acceptMime: 'image/*'
+        ,done: function(res){
+            //上传完毕回调
+            if(res.filename!=undefined)
+                $("input[name='imgCar']").val(res.filename);
+            else
+                layer.msg("图片上传失败")
+        }
+        ,error: function(){
+            //请求异常回调
+        }
+    });
+  
+
+
+   //监听提交
+  form.on('submit(formDemo)', function(data){
+
+      $.extend(mydata,data.field);
+      $.cookie("altercar", JSON.stringify(mydata), { expires: 1,path:'/'});
+      delete mydata.purchaseTimeCar;
+      myajax2("../CarTable/updateCar","put",mydata);
+
+	//当你在iframe页面关闭自身时
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.layer.close(index); //再执行关闭
+
+
+
+
+      //console.log(data.field)
+    return false;
+  });
+   form.render();
+});
+
+</script>
+	</body>
+</html>

@@ -54,7 +54,20 @@
 			      <dd><a id="quit">退了</a></dd>
 			    </dl>
 			  </li>
-
+				<li id="mymanager" class="layui-nav-item">
+					<a href="#">信息管理</a>
+					<dl class="layui-nav-child">
+						<dd><a id="usermanager">用户管理</a></dd>
+						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+						<dd><a id="carmanager">汽车管理</a></dd>
+						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+						<dd><a id="ordermanager">订单管理</a></dd>
+						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+						<dd><a id="carstoremanager">门店管理</a></dd>
+						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+						<dd><a id="brandmanager">品牌管理</a></dd>
+					</dl>
+				</li>
 			  <li id="loginAndRegister" class="layui-nav-item layui-layout-right" style="margin-right: 20px;">
 			  	<a id="login">登录</a>&nbsp;|&nbsp;<a id="register">注册</a>
 			  </li>
@@ -90,6 +103,21 @@
             })
             $("#mymain3").click(function() {
                 $("#myframe").attr("src", "myshare.html")
+            })
+            $("#usermanager").click(function() {
+                $("#myframe").attr("src", "usertable.html")
+            })
+            $("#ordermanager").click(function() {
+                $("#myframe").attr("src", "ordertable.html")
+            })
+            $("#carmanager").click(function() {
+                $("#myframe").attr("src", "cartable.html")
+            })
+            $("#carstoremanager").click(function() {
+                $("#myframe").attr("src", "carstoretable.html")
+            })
+            $("#brandmanager").click(function() {
+                $("#myframe").attr("src", "brandtable.html")
             })
 		</script>
 	    	

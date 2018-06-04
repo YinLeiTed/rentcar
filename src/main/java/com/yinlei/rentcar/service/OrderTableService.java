@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,7 @@ public class OrderTableService {
     }
 
     public Page<OrderTable> getByPage(int page, int limit) {
-        Pageable p=PageRequest.of(page,limit);
+        Pageable p=PageRequest.of(page-1,limit,new Sort(Sort.Direction.DESC,"idOrder"));
         return dao.findAll(p);
     }
 
@@ -57,5 +58,9 @@ public class OrderTableService {
     public Page<OrderTable> findAllByIdUserOrderOrderByIdOrderDesc(Integer userid,int page, int limit){
         Pageable p=PageRequest.of(page,limit,new Sort(Sort.Direction.DESC,"idOrder"));
         return dao.findAllByIdUserOrderOrderByIdOrderDesc(userid,p);
+    }
+
+    public List<OrderTable> findAllByOrderIdOrder(String orderid){
+        return dao.findAllByOrderIdOrder(orderid);
     }
 }

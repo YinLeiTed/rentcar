@@ -78,8 +78,8 @@ public class ShareTableController {
         map.put("all",allByPage);
         //获取分享表中的订单列
         List<Integer> collect = allByPage.getContent().stream().map(ShareTable::getIdOrderShare).collect(Collectors.toList());
-
-        map.put("cars",carService.findCarByOrder(collect));
+        if(collect!=null&&collect.size()>0)
+            map.put("cars",carService.findCarByOrder(collect));
         return map;
     }
 

@@ -6,6 +6,7 @@ import com.yinlei.rentcar.tools.EmailUtils;
 import com.yinlei.rentcar.tools.MyUrl;
 import com.yinlei.rentcar.tools.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class UserTableController {
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public Map register(UserTable user){
-        System.out.println("\n\n"+user);
+        //System.out.println("\n\n"+user);
         Map<String, Object> map=new HashMap<>();
         if(service.existUser(user)>0)
         {
@@ -30,6 +31,8 @@ public class UserTableController {
                 map.put("msg","身份证已注册");
         }
         else{
+            user.setAmountUser(0);
+            user.setCrimeUser(1);
             service.insert(user);
         }
         return map;
@@ -122,11 +125,66 @@ public class UserTableController {
         service.update(u);
         //Sout.print("user",u);
     }
+
+    @RequestMapping(value = "/insertUser",method = RequestMethod.POST)
+    public Map insertUser(UserTable user){
+        Map<String, Object> map=new HashMap<>();
+        if(service.existUser(user)>0)
+        {
+            if(service.existPhone(user.getPhoneUser())>0)
+                map.put("msg","手机号已注册");
+            else if(service.existIdcard(user.getIdcardUser())>0)
+                map.put("msg","身份证已注册");
+            else
+                map.put("msg","邮箱已存在");
+        }
+        else{
+            user.setAmountUser(0);
+            user.setCrimeUser(0);
+            service.insert(user);
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/deleteUser/{id}",method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable("id")Integer id){
+        //Sout.print("u",u);
+        service.delete(id);
+    }
+
+    @RequestMapping(value = "/getUsers",method = RequestMethod.GET)
+    public Map getUsers(Integer page,Integer limit){
+        Map<String, Object> map=new HashMap<>();
+        map.put("code","0");
+        Page<UserTable> list = service.getByPage(page,limit);
+        map.put("data",list.getContent());
+        map.put("count",list.getTotalElements());
+        return map;
+    }
+
+    @RequestMapping(value = "/queryUsers",method = RequestMethod.GET)
+    public Map queryUsers(UserTable u){
+        Map<String, Object> map=new HashMap<>();
+        map.put("code","0");
+        List<UserTable> list = service.getUser(u);
+        map.put("data",list);
+        map.put("count",list.size());
+        return map;
+    }
+
+    @RequestMapping(value = "/updateUser",method = RequestMethod.PUT)
+    public void updateUser(UserTable u){
+        service.update(u);
+    }
+
     @RequestMapping(value = "/alterUser",method = RequestMethod.PUT)
     public void alterUser(UserTable u){
         //Sout.print("u",u);
         service.update(u);
     }
+
+
+
 
     @RequestMapping(value = "/getAllTableColumnName",method = RequestMethod.GET)
     public List<String> findAllTableColumnName(String tableName){

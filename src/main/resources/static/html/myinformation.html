@@ -195,11 +195,13 @@
 					}
 					data.field["passwordUser"]=0
                     var loginresult=myajax2("../UserTable/login","post",data.field);
+                    delete data.field.passwordUser;
+
                     if(loginresult.msg!="用户不存在"){
                         layer.msg("手机号已被注册");
                         return false;
                     }
-                    if(myuser.phoneUser!=null){
+                    if(myuser.phoneUser!=null&&myuser.phoneUser!=''){
                         var myold={};
                         myold["phoneUser"]=myuser.phoneUser;
                         var result=myajax2("../UserTable/phone/6","get",myold);
@@ -229,13 +231,14 @@
                         layer.msg("邮箱未改变");
                         return false;
                     }
-                    data.field["passwordUser"]=0
+                    data.field["passwordUser"]=0;
                     var loginresult=myajax2("../UserTable/login","post",data.field);
+                    delete data.field.passwordUser;
                     if(loginresult.msg!="用户不存在"){
                         layer.msg("邮箱已被注册");
                         return false;
                     }
-                    if(myuser.emailUser!=null){
+                    if(myuser.emailUser!=null&&myuser.emailUser!=''){
                         var myold={};
                         myold["emailUser"]=myuser.emailUser;
                         var result=myajax2("../UserTable/email/6","get",myold);

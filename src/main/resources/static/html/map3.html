@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7d6f32689374efcc8e28869ada8480b1</title>
+		<script type="text/javascript" src="../js/main2.js" ></script>
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    	<script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=7d6f32689374efcc8e28869ada8480b1&plugin=AMap.Autocomplete"></script>
+		<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+		 <!-- UI组件库 1.0 -->
+	    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+	    <!-- 预加载iconfont的js -->
+	    <script src="../js/my-iconfont.js"></script>
+
+	</head>
+	<body  style="height: 700px;">
+		<div id="container"></div>
+		<div id="myPageTop">
+			<table>
+				<tr>
+					<td>
+						<label>按关键字搜索：</label>
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<input type="text" placeholder="请输入关键字进行搜索" id="tipinput">
+					</td>
+
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+			layui.use(['layer'], function(){
+		 	 	layer=layui.layer;
+
+		  	});
+
+
+
+
+            var map = new AMap.Map("container", {
+                resizeEnable: true
+            });
+
+            var clickEventListener = map.on('click', function(e) {
+
+                layer.confirm('确定选择这里为门店地址?', function(index){
+					var mydate={}
+					mydate["longitudeLocation"]=e.lnglat.getLng();
+                    mydate["latitudeLocation"]=e.lnglat.getLat();
+                    layer.msg("门店经纬度："+e.lnglat.getLng() + ',' + e.lnglat.getLat());
+                    var result=myajax2("../CarStoreTable/insertCarStoreLocation","post",mydate);
+                    //console.log("门店ID："+result);
+                    $.cookie("carstorelocation", result, { expires: 1,path:'/'});
+                    layer.close(index);
+                });
+
+                //当你在iframe页面关闭自身时
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+            });
+            var auto = new AMap.Autocomplete({
+                input: "tipinput"
+            });
+            AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+            function select(e) {
+                if (e.poi && e.poi.location) {
+                    map.setZoom(15);
+                    map.setCenter(e.poi.location);
+                }
+            }
+		</script>
+	</body>
+</html>
