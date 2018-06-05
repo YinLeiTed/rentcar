@@ -87,6 +87,7 @@ layui.use(['table','layer'], function(){
              type: 2
              ,content: 'altercar.html'
              ,area: ['500px', '600px']
+             ,title:'修改汽车信息'
              ,resize:true
              ,success: function(layero, index){
 
@@ -158,6 +159,7 @@ $("#report").click(function(){
 $("#new").click(function(){
     layer.open({
         type: 2
+        ,title:'新增汽车信息'
         ,content: 'newcar.html'
         ,area: ['500px', '600px']
         ,success: function(layero, index){

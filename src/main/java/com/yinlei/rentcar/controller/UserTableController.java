@@ -47,7 +47,10 @@ public class UserTableController {
         }
         else{
             UserTable u=service.login(user);
-            if(user.getPasswordUser().equals(u.getPasswordUser()))
+            if(u.getCrimeUser()==1) {
+                map.put("msg","用户正在审核中。请稍等。");
+            }
+            else if(user.getPasswordUser().equals(u.getPasswordUser()))
                 map.put("user",service.login(user));
             else
                 map.put("msg","密码错误");

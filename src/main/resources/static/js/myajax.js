@@ -57,7 +57,7 @@ function alterSerializeArrayToJson(a)
 //时间显示问题
 function alterTimeFormat(time){
     var d=new Date(time);
-    return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + (d.getHours()<10?'0'+d.getHours():d.getHours()) + ':' + (d.getMinutes()<10?'0'+d.getMinutes():d.getMinutes()) + ':' + (d.getSeconds()<10?'0'+d.getSeconds():d.getSeconds());
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + (d.getHours()<10?'0'+d.getHours():d.getHours()) + ':' + (d.getMinutes()<10?'0'+d.getMinutes():d.getMinutes()) + ':' + (d.getSeconds()<10?'0'+d.getSeconds():d.getSeconds());
 }
 //倒计时跳转页面(子页面)
 function countDown(secs,surl){

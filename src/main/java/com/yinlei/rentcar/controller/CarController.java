@@ -78,7 +78,7 @@ public class CarController {
         try {
             file.transferTo(dest); //保存文件
             map.put("code",0);
-            map.put("filename","../images/"+fileName2);
+            map.put("filename","../myimages/"+fileName2);
         } catch (IllegalStateException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

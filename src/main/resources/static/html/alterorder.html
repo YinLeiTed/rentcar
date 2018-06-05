@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>layUI表单</title>	
+		<script type="text/javascript" src="../js/main2.js" ></script>
+        <script type="text/javascript" src="../js/area.js" ></script>
+	</head>
+	<body>
+<form class="layui-form" style="margin: 15px 20px 15px -20px;">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单状态</label>
+        <div class="layui-input-block">
+            <select  name="stateOrder" lay-verify="required" class="form-control" lay-search>
+                <option value="已支付">已支付</option>
+                <option value="未支付">未支付</option>
+                <option value="已删除">已删除</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="priceOrder" required lay-verify="required|number" autocomplete="off" class="layui-input form-control" disabled>
+        </div>
+    </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-sm   layui-btn-radius" lay-submit lay-filter="formDemo" style="padding: 0px 17px 0px 17px;">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-sm  layui-btn-radius layui-btn-primary" style="padding: 0px 17px 0px 17px;">重置</button>
+    </div>
+  </div>
+</form>
+
+<script>
+
+layui.use(['layer', 'form','upload'], function(){
+  layer = layui.layer
+  ,form = layui.form;
+
+  var mydate=JSON.parse($.cookie("alterorder"));
+  $(function(){
+      $("input[name='stateOrder']").val(mydate.stateOrder);
+      $("input[name='priceOrder']").val(mydate.priceOrder);
+      form.render()
+  })
+
+
+
+   //监听提交
+  form.on('submit(formDemo)', function(data){
+
+      $.extend(mydate,data.field);
+      $.cookie("alterorder", JSON.stringify(mydate), { expires: 1,path:'/'});
+      mydate.getCarTimeOrder=alterTimeFormat(mydate.getCarTimeOrder);
+      mydate.returnCarTimeOrder=alterTimeFormat(mydate.returnCarTimeOrder);
+      myajax2("../OrderTable/updateOrder","put",mydate);
+
+	//当你在iframe页面关闭自身时
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.layer.close(index); //再执行关闭
+
+
+    return false;
+  });
+   form.render();
+});
+
+</script>
+	</body>
+</html>

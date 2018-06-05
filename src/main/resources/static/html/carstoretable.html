@@ -29,7 +29,7 @@
   </div>
 </div>
 <div class="alert alert-warning" role="alert" style="padding: 10px 20px 10px 20px;margin-top: 5px;margin-bottom: -5px;">
-    <a href="#" class="alert-link">注意！品牌、图片、所属门店请点击右侧修改按钮进行修改。</a>
+    <a href="#" class="alert-link">注意！门店地址、图片、地理位置请点击右侧修改按钮进行修改。</a>
 </div>
 <table id="demo" lay-filter="test">
 	
@@ -90,7 +90,8 @@ layui.use(['table','layer','form'], function(){
          layer.open({
              type: 2
              ,content: 'altercarstore.html'
-             ,area: ['500px', '600px']
+             ,title:'修改门店网点信息'
+             ,area: ['1000px', '500px']
              ,resize:true
              ,success: function(layero, index){
 
@@ -115,7 +116,9 @@ layui.use(['table','layer','form'], function(){
         myajax2("../CarStoreTable/updateCarStore","put",data);
         //console.log(obj.data)
     });
-
+    $(function(){
+        IFrameResize('myframe');
+    })
 });
 
 $("#query").click(function(){
@@ -157,7 +160,8 @@ $("#new").click(function(){
     layer.open({
         type: 2
         ,content: 'newcarstore.html'
-        ,area: ['500px', '600px']
+        ,title:'新增门店网点信息'
+        ,area: ['1000px', '600px']
         ,success: function(layero, index){
 
         }

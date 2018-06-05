@@ -54,7 +54,7 @@
 			      <dd><a id="quit">退了</a></dd>
 			    </dl>
 			  </li>
-				<li id="mymanager" class="layui-nav-item">
+				<li id="mymanager" class="layui-nav-item layui-hide">
 					<a href="#">信息管理</a>
 					<dl class="layui-nav-child">
 						<dd><a id="usermanager">用户管理</a></dd>
@@ -66,6 +66,8 @@
 						<dd><a id="carstoremanager">门店管理</a></dd>
 						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
 						<dd><a id="brandmanager">品牌管理</a></dd>
+						<dd style="margin: -10px 0px -10px 0px;"><hr class="layui-bg-gray" ></dd>
+						<dd><a id="historymanager">汽车轨迹</a></dd>
 					</dl>
 				</li>
 			  <li id="loginAndRegister" class="layui-nav-item layui-layout-right" style="margin-right: 20px;">
@@ -118,6 +120,9 @@
             })
             $("#brandmanager").click(function() {
                 $("#myframe").attr("src", "brandtable.html")
+            })
+            $("#historymanager").click(function() {
+                $("#myframe").attr("src", "map2.html")
             })
 		</script>
 	    	
@@ -218,7 +223,8 @@
 			  	$("#quit").click(function(){	
 					$("#loginAndRegister").removeClass('layui-hide');
 					$("#my").addClass('layui-hide')
-					
+                    $("#mymanager").addClass('layui-hide');
+					window.location.href="index.html";
 					//退出登录
 					$.cookie("myuser", null, { expires: -1,path:'/'});
 				})
@@ -375,6 +381,10 @@
 								$("#my").removeClass('layui-hide');
 								$("#loginAndRegister").addClass('layui-hide')
                                 $("#my>a").html(getUserContent(myuser));
+
+                                var myuser2=JSON.parse(myuser);
+                                if(myuser2.phoneUser=='15736267103')
+                                    $("#mymanager").removeClass('layui-hide');
 								//更新nav渲染
                                 element.render('nav');
 							}
@@ -413,6 +423,10 @@
                     $("#my>a").html(getUserContent(myuser));
                     $("#my").removeClass('layui-hide');
                     $("#loginAndRegister").addClass('layui-hide')
+
+					var myuser2=JSON.parse(myuser);
+                    if(myuser2.phoneUser=='15736267103')
+                        $("#mymanager").removeClass('layui-hide');
                 }
             })
 			function getUserContent(myuser) {

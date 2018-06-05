@@ -8,36 +8,13 @@
 	</head>
 	<body>
 <form class="layui-form" style="margin: 15px 20px 15px -20px;">
-  <div class="layui-form-item">
-    <label class="layui-form-label">名称</label>
-    <div class="layui-input-block">
-      <input type="text" name="nameCarStore" required  lay-verify="required" autocomplete="off" class="layui-input form-control">
-    </div>
-  </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">门店地址</label>
         <div class="layui-input-block">
             <select id="province" name="addressCarStore" lay-verify="required" class="form-control" lay-search>
                 <option value=""></option>
             </select>
-        </div>
-    </div>
-  <div class="layui-form-item">
-    <label class="layui-form-label">联系电话</label>
-    <div class="layui-input-block">
-      <input type="text" name="phoneCarStore" required lay-verify="required" autocomplete="off" class="layui-input form-control">
-    </div>
-  </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">开门时间</label>
-        <div class="layui-input-block">
-            <input type="text" name="startWorkCarStore" required lay-verify="required|number" autocomplete="off" class="layui-input form-control">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">关门时间</label>
-        <div class="layui-input-block">
-            <input type="text" name="endWorkCarStore" required lay-verify="required|number" autocomplete="off" class="layui-input form-control">
         </div>
     </div>
 
@@ -78,8 +55,12 @@ layui.use(['layer', 'form','upload'], function(){
   ,form = layui.form,
    upload = layui.upload;
 
+  var mydate=JSON.parse($.cookie("altercarstore"));
   $(function(){
       area_init($("#province"));
+      $("#province").val(mydate.addressCarStore)
+      $("input[name='idLocationCarStore']").val(mydate.idLocationCarStore);
+      $("input[name='imageCarStore']").val(mydate.imageCarStore);
       form.render()
   })
 
@@ -125,13 +106,15 @@ layui.use(['layer', 'form','upload'], function(){
    //监听提交
   form.on('submit(formDemo)', function(data){
 
+      $.extend(mydate,data.field);
+      $.cookie("altercarstore", JSON.stringify(mydate), { expires: 1,path:'/'});
+
+      myajax2("../CarStoreTable/updateCarStore","put",mydate);
 	//当你在iframe页面关闭自身时
 	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 	parent.layer.close(index); //再执行关闭
 
-      myajax2("../CarStoreTable/insertCarStore","post",data.field);
 
-      //console.log(data.field)
     return false;
   });
    form.render();

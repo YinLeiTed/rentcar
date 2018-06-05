@@ -34,6 +34,7 @@
 	
 </table>
  <script type="text/html" id="barDemo">
+     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
@@ -55,9 +56,9 @@ layui.use(['table','layer','form'], function(){
     ,cols: [[ //表头
       {field: 'idOrder', title: 'ID', width:80, sort: true, fixed: 'left'}
       ,{field: 'orderIdOrder', title: '订单编号', sort: true}
-      ,{field: 'stateOrder', title: '订单状态', edit: 'text'}
+      ,{field: 'stateOrder', title: '订单状态'}
       ,{field: 'priceOrder', title: '订单价格'}
-      ,{fixed: 'right',width:100, align:'center', toolbar: '#barDemo'}
+      ,{fixed: 'right',width:120, align:'center', toolbar: '#barDemo'}
     ]]
   });
   
@@ -74,7 +75,25 @@ layui.use(['table','layer','form'], function(){
           myajax("../OrderTable/deleteOrder2?id="+data.idOrder,"delete");
 	      layer.close(index);
 	    });
-	  }
+	  } else if(layEvent === 'edit'){ //编辑
+         $.cookie("alterorder", JSON.stringify(data), { expires: 1,path:'/'});
+         layer.open({
+             type: 2
+             ,content: 'alterorder.html'
+             ,area: ['500px', '600px']
+             ,title:'修改汽车信息'
+             ,resize:true
+             ,success: function(layero, index){
+
+             }
+             ,end:function(){
+                 var mydata=JSON.parse($.cookie("alterorder"))
+                 obj.update(mydata);
+                 $.cookie("alterorder", null, { expires: -1,path:'/'});
+             }
+
+         });
+     }
 	});
     //监听单元格编辑
     table.on('edit(test)', function(obj){
@@ -82,6 +101,8 @@ layui.use(['table','layer','form'], function(){
             ,data = obj.data //得到所在行所有键值
             ,field = obj.field; //得到字段
         layer.msg('[订单: '+ data.idOrder +'] 已修改');
+        data.getCarTimeOrder=alterTimeFormat(data.getCarTimeOrder);
+        data.returnCarTimeOrder=alterTimeFormat(data.returnCarTimeOrder);
         myajax2("../OrderTable/updateOrder","put",data);
         //console.log(obj.data)
     });
@@ -105,9 +126,9 @@ $("#query").click(function(){
             , cols: [[ //表头
                 {field: 'idOrder', title: 'ID', width: 80, sort: true, fixed: 'left'}
                 , {field: 'orderIdOrder', title: '订单编号', sort: true}
-                , {field: 'stateOrder', title: '订单状态', edit: 'text'}
+                , {field: 'stateOrder', title: '订单状态'}
                 , {field: 'priceOrder', title: '订单价格'}
-                , {fixed: 'right', width: 100, align: 'center', toolbar: '#barDemo'}
+                , {fixed: 'right', width: 120, align: 'center', toolbar: '#barDemo'}
             ]]
         });
     }
